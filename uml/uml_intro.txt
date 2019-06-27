@@ -1,0 +1,99 @@
+UML
+----------
+Unified modeling language
+
+c'est un ensemble de diagramme à disposition
+pour modéliser des systemes (en général informatique)
+	-> c'est un regroupement/compilation des principaux
+diagrammes les plus courant/utile constatés dans l'industrie
+	-> un langage standardiser de construction des ces diagrammes
+
+UML n'est pas utilisé normalement pour modéliser extensivement
+tous les détails d'un systeme
+le but, c'est d'illustrer ce qui n'est pas évident dans le
+systeme
+
+	-> uml comme "documentation" de code/systeme existant
+	-> le code est généré à partir des diagrammes UML
+	
+l'avantage d'uml
+	1) il est standardisé
+	2) une bonne partie des diagrammes est lisible y compris
+	par des personnes non "technique"
+	langage d'echange
+-> le plus important en UML, c'est d'etre clair dans la
+communication avec les divers acteurs d'un projet
+
+-------------------------------------
+principaux diagrammes
+
+un diagramme statique illustre le systeme " a l'arret" 
+sans déroulement dans le temps. décrit des aspect structurels
+
+un diagramme dynamique illustre le systeme en fonctionnement
+avec en général déroulement dans le temps
+décrit le fonctionnement du systeme
+
+	- diagramme de classe
+		le plus connu des diagrammes
+		diagramme statique, modéliser les classes du systeme
+		et les relations entre classes
+		
+	- diagramme de sequence
+	- diagramme de communication
+		ces deux diagrammes sont dynamique
+		diagramme de sequence décrit une suite d'echange
+		de message entre acteurs du systeme, dans un certain
+		ordre temporel
+		met l'accent sur l'enchainement temporel des opérations
+		
+		diagramme de communication décrit le même déroulement
+		mais met en avant quel acteur communique avec quel
+		autre acteurs plutot qu'une fleche temporelle
+		
+	- diagramme d'etats-transition
+		dynamique, décrit les etats possible du systeme et
+		quels sont les transitions possible entre ces états
+		
+	- diagramme d'activité
+		dynamique, représente un ensemble de choix
+		et actions qui se déroule dans un systeme
+		
+	- diagramme de cas d'utilisation
+		un des plus utilisé, il est un peu hybrique
+		permet de modéliser comment un systeme est utilisé
+		stickman diagramme. Il est très utile, en particulier
+		au démarrage, et pour avoir une compréhension commune
+		avec les acteurs metier, techniques, etc...
+		
+	-------------- un peu plus rare
+	
+	- diagramme d'objets (statique)
+		comme un diagramme de classe, mais avec les instances
+		des objets à un instant T
+		
+	- diagramme de composants (statique)
+		comment on regroupe les elements (classes) en
+		module/composant et comment les composants
+		sont reliés entre eux
+		
+	- diagramme de déploiement (statique)
+		quels sont les artifacts déployés et ou sont ils
+		déployés, et comment sont ils reliés
+		artifact: jar, un fichier de conf, etc
+		relation: liaison réseau, machine de déploiement, etc
+		
+	- diagramme ER ( entité-relation) (statique)
+		pour les BDD, modeliser nos objets metier/table
+		et leur relations/associations
+		
+	
+	
+		
+	
+	
+
+
+
+
+
