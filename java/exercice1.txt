@@ -1,0 +1,46 @@
+Exercice 1 en java
+-------------------------
+
+exercice 1A) facile
+demander à l'utilisateur de saisir un certains
+nombre de notes
+
+afficher la moyenne des notes une fois la saisie terminée
+
+exercice 1B) moyen
+en utilisant une boucle
+demander a l'utilisateur de saisir un mot
+
+indiquer si le mot est un palindrome ou pas
+kayak -> palindrome
+toto -> pas palindrome
+anna -> palindromme
+
+exercice 1C) moyen++
+demander à l'utilisateur de saisir une taille entiere
+afficher en caractere un triangle correspondant
+saisie 5
+
+*****
+*--*
+*-*
+**
+*
+
+indice println -> retour a la ligne
+	   print -> pas de retour a la ligne
+commencer par un carré si difficile
+bonus extra difficile
+afficher un losange
+  *
+ *-*
+*---*
+ *-*
+  *
+ 
+
+
+
+
+
+

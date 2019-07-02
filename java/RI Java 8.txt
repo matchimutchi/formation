@@ -1,0 +1,6433 @@
+/**************************************************************************************/
+/********************************** Chapitre 1 ****************************************/
+/**************************************************************************************/
+
+/********* Passage d'arguments à une application Java au moment de l'exécution ********/
+
+/* Déclaration de la classe principale de l'application */ 
+public class MaClasse 
+{
+/* Déclaration de la méthode point d'entrée de l'application*/ 
+public static void main(String args[]) 
+{
+
+/* Affichage des arguments de la ligne de commande */
+
+	for (int i = 0 ; i < args.length; i++) 
+	{
+
+		System.out.printIn("Argument " +i + " = " + args[i]) ;
+
+	}
+
+/* Conversion de deux arguments de la ligne de commande de String vers int, puis addition des valeurs entières, et affichage du résultat */
+
+	int somme;
+	somme=(Integer.parselnt(args[3]))+(Integer.parselnt(args[4]));
+	System.out.println("Argument 3 + Argument 4 = " + somme);
+	}
+}
+
+
+
+/**************************************************************************************/
+/********************************** Chapitre 2 ****************************************/
+/**************************************************************************************/
+
+/********* concaténation de chaînes de caractères ********/
+
+
+public class TestString 
+{
+	public static void main(String[] args) 
+	{
+        long duree;
+        String lievre;
+        String tortue="";
+        long debut, fin;
+        debut = System.currentTimeMillis();
+        for (int i = 0; i <= 10000; i++)
+        {
+            tortue = tortue + " " + i;
+        }
+        fin = System.currentTimeMillis();
+        duree = fin-debut;
+        System.out.println("durée pour la tortue : " + duree + "ms");
+        debut = System.currentTimeMillis();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i <= 10000; i++)
+        {
+            sb.append(" ");
+            sb.append(i);
+        }
+        lievre = sb.toString();
+        fin = System.currentTimeMillis();
+        duree = fin-debut;
+        System.out.println("durée pour le lievre : " + duree + "ms");
+        if (lievre.equals(tortue))
+        {
+            System.out.println("les deux chaines sont identiques");
+        }
+	}
+}
+
+
+/********* structure de boucle ********/
+
+
+import java.io.IOException;
+public class TestStructures 
+{
+	static boolean stop;
+	public static void main(String[] args) 
+	{
+		new Thread()
+		{
+			public void run()
+			{
+				int c;
+				try 
+				{
+					c=System.in.read();
+					stop=true;
+				} 
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+		}.start();
+		long compteur=0;
+		while(true)
+		{
+			compteur++;
+			if (compteur%2==0)
+				continue;
+			if (stop)
+				break;
+			System.out.println(compteur);
+		} 
+}
+} 
+
+/**************************************************************************************/
+/********************************** Exercices du chapitre 2 ****************************************/
+/**************************************************************************************/
+/**********************************  Exercice 1 ***************************************/
+package exercices.chapitre2.exercice1;
+
+public class Principale 
+{
+    static String[] adresses;
+    static String[] listeFournisseurs;
+    static String[] nomsFournisseurs;
+    static int[] nbClient;
+    static int position;
+    static String fournisseur;
+    public static void main(String[] args)
+    {
+        adresses=new String[10];
+        adresses[0]="jpp@sfr.fr";
+        adresses[1]="tom@gmail.com";
+        adresses[2]="fred@sfr.fr";
+        adresses[3]="victor@sfr.fr";
+        adresses[4]="chris@sfr.fr";
+        adresses[5]="robert@orange.fr";
+        adresses[6]="paul@sfr.fr";
+        adresses[7]="lise@gmail.com";
+        adresses[8]="thierry@eni.fr";
+        adresses[9]="marie@eni.fr";
+        
+        listeFournisseurs =new String[10];
+        nomsFournisseurs=new String[10];
+        nbClient=new int[10];
+        for (int i=0;i<adresses.length;i++)
+        {
+            listeFournisseurs[i]=adresses[i].substring(adresses[i].indexOf('@')+1);
+        }
+        for(int i=0;i<listeFournisseurs.length;i++)
+        {
+            int resultat;
+            resultat=rechercheFournisseur(listeFournisseurs[i]);
+            if(resultat==-1)
+            {
+                nomsFournisseurs[position]=listeFournisseurs[i];
+                nbClient[position]++;
+                position++;
+            }   
+            else
+            {
+                nbClient[resultat]++;
+            }
+           
+        }
+        for(int i=0;i<position;i++)
+        {
+            System.out.println(nomsFournisseurs[i] + " : " + (double)nbClient[i]/listeFournisseurs.length*100 + "%");
+        }  
+    }
+    static int rechercheFournisseur(String nom)
+    {
+        for(int i=0;i<nomsFournisseurs.length;i++)
+        {
+            if(nomsFournisseurs[i]!=null && nomsFournisseurs[i].equals(nom))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+/**********************************  Exercice 2 ***************************************/
+
+package exercices.chapitre2.exercice2;
+
+public class Principale 
+{
+    public static void main(String[] args)
+    {
+          int compteur=0;
+          int nb1,nb2,nb3;
+        do
+        {
+        nb1=(int)(Math.random()*1000);
+        nb2=(int)(Math.random()*1000);
+        nb3=(int)(Math.random()*1000);
+        compteur++;
+        System.out.println("nombre 1:" + nb1 + " nombre 2:" + nb2 + " nombre 3:" + nb3);
+        }
+        while(nb1 % 2==1 || nb2 % 2==1 || nb3 % 2==0);
+        System.out.println("Résultat obtenu en " + compteur + " essai(s)");
+        
+    }
+}
+
+/**********************************  Exercice 3 ***************************************/
+
+package exercices.chapitre2.exercice3;
+
+import java.util.Scanner;
+
+public class Principale 
+{
+    public static void main(String[] args)
+    {
+        int nbEssais=0;
+        int nombre;
+        int nbSaisi;
+
+        nombre=(int)(Math.random()*1000);
+        Scanner sc;
+        sc=new Scanner(System.in);
+        do
+        {
+             nbSaisi=sc.nextInt();
+             nbEssais++;
+             if(nbSaisi<nombre)
+             {
+                 System.out.println("c'est plus");
+             }
+             if(nbSaisi>nombre)
+             {
+                 System.out.println("c'est moins");
+             }  
+        } while (nombre!=nbSaisi);
+       System.out.println("Bravo vous avez trouve en " + nbEssais + " essai(s)");
+    }
+}
+
+/**********************************  Exercice 4 ***************************************/
+
+package exercices.chapitre2.exercice4;
+
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.OffsetTime;
+import java.util.Scanner;
+
+public class Principale 
+{
+    public static void main(String[] args)
+    {
+        int nbEssais=0;
+        int nombre;
+        int nbSaisi;
+        OffsetTime debut;
+        OffsetTime fin;
+        Duration temps;
+        nombre=(int)(Math.random()*1000);
+        Scanner sc;
+        sc=new Scanner(System.in);
+        debut=OffsetTime.now();
+        do
+        {
+             nbSaisi=sc.nextInt();
+             nbEssais++;
+             if(nbSaisi<nombre)
+             {
+                 System.out.println("c'est plus");
+             }
+             if(nbSaisi>nombre)
+             {
+                 System.out.println("c'est moins");
+             }  
+        } while (nombre!=nbSaisi);
+        fin=OffsetTime.now();
+        temps=Duration.between(debut,fin);
+        LocalTime duree;
+        duree=LocalTime.ofSecondOfDay(temps.getSeconds());
+        
+       System.out.println("Bravo vous avez trouve en " + nbEssais + 
+               " essai(s) et " + duree.getHour()+" heure(s) " +
+               duree.getMinute() + " minute(s) " +
+               duree.getSecond()+ " seconde(s)");
+    }
+    
+    
+}
+
+/**************************************************************************************/
+/********************************** Chapitre 3 ****************************************/
+/**************************************************************************************/
+
+/********* Classe Personne avec attributs et méthodes ********/
+
+
+
+public class Personne 
+{
+	private String nom;
+	private String prenom;
+	private GregorianCalendar date_nais;
+	
+	public long calculAge()
+	{
+	  long age;
+	  date_nais=new GregorianCalendar(1963,11,29);
+	  age=new GregorianCalendar().getTimeInMillis()-date_nais.getTimeInMillis();
+		age=age/1000/60/60/24/365;
+		return age;
+	}
+	
+	public void affichage()
+	{
+		System.out.println("nom : " + nom);
+		System.out.println("prenom : " + prenom);
+		System.out.println("age : " + calculAge());
+	}
+}
+
+/************** fonction affichage surchargée **************/
+
+public void affichage(boolean francais)
+	{
+		if (francais)
+		{
+			System.out.println("nom : " + nom);
+			System.out.println("prenom : " + prenom);
+			System.out.println("age : " + calculAge());
+		}
+		else
+		{
+			System.out.println("name : " + nom);
+			System.out.println("first name : " + prenom);
+			System.out.println("age : " + calculAge());
+		}
+			
+	}
+
+/************** deuxième fonction affichage surchargée illégale **************/
+
+public void affichage(boolean majuscule)
+	{
+		if (majuscule)
+		{
+			System.out.println("nom : " + nom.toUpperCase());
+			System.out.println("prenom : " + prenom.toUpperCase());
+			System.out.println("age : " + calculAge());
+		}
+		else
+		{
+			System.out.println("nom : " + nom.toLowerCase());
+			System.out.println("prenom : " + prenom.toLowerCase());
+			System.out.println("age : " + calculAge());
+		}
+	}	
+
+/*********** fonction avec un nombre quelconque de paramètres **************/
+
+public void affichage(String...couleurs)
+{
+	  	if (couleurs==null)
+		{
+			System.out.println("pas de couleur");
+			return;
+		}
+		switch (couleurs.length)
+		{
+		case 1:
+			System.out.println("une couleur");
+			break;
+		case 2:
+			System.out.println("deux couleurs");
+			break;
+		case 3:
+			System.out.println("trois couleurs");
+			break;
+		default :
+			System.out.println("plus de trois couleurs");
+		}
+}
+	
+/************** les accesseurs  ***************/
+
+public class Personne 
+{
+	private String nom;
+	private String prenom;
+	private GregorianCalendar date_nais;
+	
+	public String getNom() 
+	{
+		return nom;
+	}
+
+	public void setNom(String n) 
+	{
+		nom = n.toUpperCase();
+	}
+
+	public String getPrenom() 
+	{
+		return prenom;
+	}
+
+	public void setPrenom(String p) 
+	{
+		prenom = p.toLowerCase();
+	}
+}
+
+/************* les accesseurs avec règles de gestion ************/
+
+public class Personne 
+{
+	private String nom;
+	private String prenom;
+	private GregorianCalendar date_nais;
+	// champ privé représentant le numéro de la Personne
+	private int numéro;
+	// champ statique privé représentant le compteur de Personnes
+	private static int nbInstances;
+	
+	public String getNom() 
+	{
+		return nom;
+	}
+
+	public void setNom(String n) 
+	{
+		nom = n.toUpperCase();
+	}
+
+	public String getPrenom() 
+	{
+		return prenom;
+	}
+
+	public void setPrenom(String p) 
+	{
+		prenom = p.toLowerCase();
+	}
+	// méthode d’instance permettant d’obtenir le numéro d’une Personne
+	public int getNuméro() 
+	{
+			return numéro;
+	}
+	// methode statique permettant d’obtenir le nombre d’instances créées
+	public static int getNbInstances() 
+	{
+			return nbInstances;
+	} 
+
+	public Personne()
+	{
+		nom="";
+		prenom="";
+		date_nais=null;
+		//  création d’une nouvelle Personne donc incrémentation du compteur
+		nbInstances++;
+		// affectation à la nouvelle Personne de son numéro
+		numéro=nbInstances;
+	}
+}
+
+/************** champs et méthodes statiques  **************/
+
+import java.util.GregorianCalendar;
+public class Personne 
+{
+	private String nom="nouveauNom";
+	private String prenom="nouveauPrenom";
+	private GregorianCalendar date_nais=new GregorianCalendar(1900,01,01);
+	private int numéro=0;
+	private static int numInstance;
+	public String getNom() 
+	{
+		return nom;
+	}
+
+	public void setNom(String n) 
+	{
+		nom = n.toUpperCase();
+	}
+
+	public String getPrenom() 
+	{
+		return prenom;
+	}
+
+	public void setPrenom(String p) 
+	{
+		prenom = p.toLowerCase();
+	}
+
+	@Override
+	protected void finalize() throws Throwable 
+	{
+		System.out.print("\u2020");
+		super.finalize();
+	}
+	public int getNuméro() 
+	{
+			return numéro;
+	}
+
+	public static int getNbInstances() 
+	{
+			return numInstance;
+	}
+
+	public Personne()
+	{
+		nom="";
+		prenom="";
+		date_nais=null;
+		numInstance++;
+		numéro=numInstance;
+	}
+	public Personne(String n,String p,GregorianCalendar d)
+	{
+		nom=n;
+		prenom=p;
+		date_nais=d;
+		numInstance++;
+		numéro=numInstance;
+	}
+}
+
+
+/************ action du Garbage Collector ******************/
+
+import java.util.GregorianCalendar;
+public class Personne 
+{
+	private String nom="nouveauNom";
+	private String prenom="nouveauPrenom";
+	private GregorianCalendar date_nais=new GregorianCalendar(1900,01,01);
+	private int numéro=0;
+	private static int numInstance;
+	public String getNom() 
+{
+		return nom;
+	}
+
+	public void setNom(String n) 
+{
+		nom = n.toUpperCase();
+	}
+
+	public String getPrenom() 
+{
+		return prenom;
+	}
+
+	public void setPrenom(String p) 
+{
+		prenom = p.toLowerCase();
+	}
+
+	@Override
+	protected void finalize() throws Throwable 
+{
+		System.out.print("\u2020");
+		super.finalize();
+	}
+public int getNuméro() 
+{
+		return numéro;
+}
+
+public static int getNbInstances() 
+{
+		return numInstance;
+}
+
+	public Personne()
+	{
+		nom="";
+		prenom="";
+		date_nais=null;
+		numInstance++;
+		numéro=numInstance;
+	}
+public Personne(String n,String p,GregorianCalendar d)
+	{
+		nom=n;
+		prenom=p;
+		date_nais=d;
+		numInstance++;
+		numéro=numInstance;
+	}
+}
+
+
+
+import java.util.GregorianCalendar;
+
+
+public class GestionMemoire 
+{
+	
+	public static void main(String[] args) throws InterruptedException 
+	{
+		double total;
+		double reste;
+		double pourcentage;
+		
+		for (int j=0;j<1000;j++)
+		{
+			creationTableau();
+			total=Runtime.getRuntime().totalMemory();
+			reste=Runtime.getRuntime().freeMemory();
+			pourcentage=100-(reste/total)*100;
+			System.out.println("creation du " + j + "ieme tableau memoire pleine a : " + pourcentage + "%" );
+			// une petite pause pour pouvoir lire les messages
+			Thread.sleep(1000);
+		}
+	
+}
+	
+public static void creationTableau()
+{
+	// creation d’un tableau de 1000 Personnes dans une variable locale
+	// a la fin de cette fonction les elements du tableau ne sont plus     
+	// accessibles et peuvent être supprimes de la memoire
+		Personne[] tablo;
+		tablo=new Personne[1000];
+		for (int i=0;i<1000;i++)
+		{
+		 tablo[i]=new Personne("Dupont","albert",new GregorianCalendar(1956,12,13));
+		}
+}
+}
+
+
+/************ sans utilisation de this et super  *****************/
+
+public void affichage()
+{
+	System.out.println("nom : " + getNom());
+	System.out.println("prenom : " + getPrenom());
+	System.out.println("age : " + calculAge());
+	switch (type)
+	{
+	case 'P':
+			System.out.println("type de client : Particulier");
+			break;
+	case 'E':
+		System.out.println("type de client : Entreprise");
+		break;
+	case 'A':
+		System.out.println("type de client : Administration");
+		break;
+	default:
+		System.out.println("type de client : Inconnu");
+	break;
+	}
+}
+
+/************ avec utilisation de this et super ***************/
+
+public void affichage()
+{
+	super.affichage();
+	switch (type)
+	{
+	case 'P':
+			System.out.println("type de client : Particulier");
+			break;
+	case 'E':
+		System.out.println("type de client : Entreprise");
+		break;
+	case 'A':
+		System.out.println("type de client : Administration");
+		break;
+	default:
+		System.out.println("type de client : Inconnu");
+	break;
+	}
+}
+
+/************* classe abstraite *****************/
+
+public abstract class EtreVivant 
+{
+	private double taille;
+	private double poids;
+	public double getTaille() 
+	{
+		return taille;
+	}
+	public void setTaille(double taille) 
+	{
+		this.taille = taille;
+	}
+	public double getPoids() 
+	{
+		return poids;
+	}
+	public void setPoids(double poids) 
+	{
+		this.poids = poids;
+	}
+	// cette méthode devra etre implémentée dans les classes dérivées
+	protected abstract void seDeplacer();
+}
+
+/************ Clonage ***************/
+
+public class Commande implements Cloneable
+{
+	Client leClient;
+	LignesDeCommande lesLignes;
+	
+	public Commande()
+	{
+		super();
+		lesLignes=new LignesDeCommande();
+		
+	}
+	public Object clone() throws CloneNotSupportedException
+	{
+		Commande cmd;
+		// création d'une copie de la commande
+		cmd=(Commande)super.clone();
+		// duplication des lignes de la commande
+		cmd.lesLignes=(LignesDeCommande)lesLignes.clone();
+		return cmd;
+		
+	}
+	public Client getLeClient() 
+	{
+		return leClient;
+	}
+	public void setLeClient(Client leClient) 
+	{
+		this.leClient = leClient;
+	}
+	public LignesDeCommande getLesLignes() 
+	{
+		return lesLignes;
+	}
+	public void setLesLignes(LignesDeCommande lesLignes) 
+	{
+		this.lesLignes = lesLignes;
+	}
+}
+
+
+public class LignesDeCommande implements Cloneable
+{
+public Object clone() throws CloneNotSupportedException
+{
+		return super.clone();
+}
+}
+
+Client c;
+c=new Client("ENI","",new GregorianCalendar(1981,05,15),'E');
+Commande cmd1,cmd2;
+// création et initialisation d'une commande
+cmd1=new Commande();
+cmd1.setLeClient(c);
+System.out.println("hashCode de la commande : " +cmd1.hashCode());
+System.out.println("hashCode du Client : " +cmd1.getLeClient().hashCode());
+System.out.println("hashCode des lignes : " +cmd1.getLesLignes().hashCode());
+cmd2=(Commande)cmd1.clone();
+System.out.println("hashCode de la copie  : " +cmd2.hashCode());
+System.out.println("hashCode du Client de la copie: " +cmd2.getLeClient().hashCode());
+System.out.println("hashCode des lignes de la copie:"+cmd2.getLesLignes().hashCode());
+
+
+/************** La méthode equals  *****************/
+
+public boolean equals(Object obj) 
+{
+	Client c;
+	// verification si obj est null ou reférence une instance 
+	// d'une autre classe
+	if (obj ==null || obj.getClass()!=this.getClass())
+	{
+		return false;
+	}
+	else
+		
+	{
+		c=(Client)obj;
+		// verification des critères d'égalité sur 
+		// - le nom
+		// - le prenom
+		// - la date de naissance
+		// - le type de client
+		if (c.getNom().equals(getNom())&
+				c.getPrenom().equals(getPrenom()) &
+				c.getDate_nais().equals(getDate_nais()) &
+				c.getType()== getType() )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+/************** getClass (informations sur la classe)  ***************/
+
+public static void infoClasse(Object o)
+{
+	Class c;
+	c=o.getClass();
+	System.out.println("nom de la classe : " + c.getName());
+	System.out.println("elle est dans le package : " + c.getPackage().getName());
+	System.out.println("elle herite de la classe  : " + c.getSuperclass().getName());
+	System.out.println("elle possède les champs : ");
+	for (int i=0;i<c.getFields().length;i++)
+	{
+		System.out.print("\t" + c.getFields()[i].getName());
+		System.out.println(" de type :" + c.getFields()[i].getType().getName());
+	}
+	System.out.println("elle possède les méthodes : ");
+	for (int i=0;i<c.getMethods().length;i++)
+	{
+		System.out.print("\t" + c.getMethods()[i].getName());
+		System.out.print(" qui attend comme paramètre (");
+		for (int j=0;j<c.getMethods()[i].getParameterTypes().length;j++)
+		{
+			System.out.print(c.getMethods()[i].getParameterTypes()[j]+ " ");
+		}
+		System.out.println(")");
+	}
+}
+
+/************* création d'une interface **************/
+
+// cette interface devra être implémentée par les classes 
+// pour lesquelles un classement des instances est envisagé
+public interface Classable 
+{
+// cette méthode pourra être appelée pour comparer l'instance courante
+// avec celle reçue en paramètre
+// la méthode retourne un entier dont la valeur dépend des règles suivantes
+// 1 si l'instance courante est supérieure à celle reçue en paramètre
+// 0 si les deux instances sont égales
+// -1 si l'instance courante est inférieure à celle reçue en paramètre
+// -99 si la comparaison est impossible
+
+	int compare(Object o);
+	
+	public static final int INFERIEUR=-1;
+	public static final int EGAL=0;
+	public static final int SUPERIEUR=1;
+	public static final int ERREUR=-99;
+	
+}
+
+/************* implémentation d'une interface **************/
+
+
+public class Personne
+implements Classable
+{
+	
+	public int compare(Object o) 
+	{
+		Personne p;
+		if (o instanceof Personne)
+		{
+			p=(Personne)o;
+		}
+		else
+		{
+			return Classable.ERREUR;
+		}
+		if (getNom().compareTo(p.getNom())<0)
+		{
+			return Classable.INFERIEUR;
+		}
+		if (getNom().compareTo(p.getNom())>0)
+		{
+			return Classable.SUPERIEUR;
+		}
+		
+		return Classable.EGAL;
+	}
+}
+
+/************ Utilisation d'une interface *************/
+
+public static Classable[] tri(Classable[] tablo)
+{
+int i,j;
+	Classable c;
+    	for (i=0;i< tablo.length;i++)
+    	{
+        for( j = i + 1; j<tablo.length;j++)
+        {
+            if (tablo[j].compare(tablo[i])==Classable.INFERIEUR)
+            {
+                c = tablo[j];
+                tablo[j] = tablo[i];
+                tablo[i] = c;
+            }
+            else if (tablo[j].compare(tablo[i])==Classable.ERREUR)
+            {
+            	return null;
+            }
+        }
+    	}
+	return tablo;
+}
+
+/************** test de l'interface ***************/
+
+Personne[] tab;
+tab=new Personne[5];
+tab[0] = new Personne("toto2", "prenom2",new GregorianCalendar(1922,2,15));
+tab[1] = new Personne("toto1", "prenom1 ",new GregorianCalendar(1911,1,15));
+tab[2] = new Personne("toto5", "prenom5 ",new GregorianCalendar(1955,05,15));
+tab[3] = new Personne("toto3", "prenom3 ",new GregorianCalendar(1933,03,15));
+tab[4] = new Personne("toto4", "prenom4 ",new GregorianCalendar(1944,04,15));
+Personne[] tabTrie;
+tabTrie=(Personne[])tri(tab);
+   for (int i=0;i<tabTrie.length;i++)
+   {
+    	System.out.println(tabTrie[i]);
+   }
+
+/*************** classes anonymes *****************/
+
+public static Object[] tri(Object[] tablo,Comparateur trieur)
+{
+	int i,j;
+	Object c;
+	Object[] tabloTri;
+	tabloTri=Arrays.copyOf(tablo,tablo.length);
+    for (i=0;i< tabloTri.length;i++)
+    {
+        for( j = i + 1; j<tabloTri.length;j++)
+        {
+		// utilise la fonction compare de l’objet reçu en parameter pour
+		// comparer le contenu de deux cases du tableau
+         if (trieur.compare(tabloTri[j],tabloTri[i])==Comparateur.INFERIEUR)
+         {
+              c = tabloTri[j];
+              tabloTri[j] = tabloTri[i];
+              tabloTri[i] = c;
+         }
+         else if (trieur.compare(tabloTri[j],tabloTri[i])==Comparateur.ERREUR)
+         {
+              return null;
+         }
+        }
+    }
+	return tabloTri;
+}
+
+
+Personne[] tab;
+tab=new Personne[5];
+tab[0] = new Personne("toto2", "prenom2",new GregorianCalendar(1922,2,15));
+tab[1] = new Personne("toto1", "prenom1 ",new GregorianCalendar(1911,1,15));
+tab[2] = new Personne("toto5", "prenom5 ",new GregorianCalendar(1955,05,15));
+tab[3] = new Personne("toto3", "prenom3 ",new GregorianCalendar(1933,03,15));
+tab[4] = new Personne("toto4", "prenom4 ",new GregorianCalendar(1944,04,15));
+
+tabTrie=(Personne[])tri(tab,
+   // creation d'une instance de classe implementant l'interface Comparateur
+     new Comparateur()
+     // voici le code de la classe
+     {
+       	// comme l'exige l'interface voici la méthode compare
+			public int compare(Object o1, Object o2) 
+			{
+				Personne p1,p2;
+				if (o1 instanceof Personne & o2 instanceof Personne)
+				{
+					p1=(Personne)o1;
+					p2=(Personne)o2;
+				}
+				else
+				{
+					return Classable.ERREUR;
+				}
+				if (p1.getNom().compareTo(p2.getNom())<0)
+				{
+					return Classable.INFERIEUR;
+				}
+				if (p1.getNom().compareTo(p2.getNom())>0)
+				{
+					return Classable.SUPERIEUR;
+				}
+				
+				return Classable.EGAL;
+			
+			} // parenthese de fermeture de la methode compare
+        	
+        } // parenthese de fermeture de la classe 
+        ); // fin de l'appel de la fonction de tri
+
+	// affichage du tableau trié
+
+     for (int i=0;i<tabTrie.length;i++)
+     {
+        	System.out.println(tabTrie[i]);
+     }
+
+/************* classes anonymes deuxième version *************/
+
+tabTrie=(Personne[])tri(tab,
+// creation d'une instance de classe implementant l'interface Comparateur
+	new Comparateur()
+     // voici le code de la classe
+     {
+    	// comme l'exige l'interface voici la méthode compare
+		public int compare(Object o1, Object o2) 
+		{
+			Personne p1,p2;
+			if (o1 instanceof Personne & o2 instanceof Personne)
+			{
+				p1=(Personne)o1;
+				p2=(Personne)o2;
+			}
+			else
+			{
+				return Classable.ERREUR;
+			}
+			if (p1.calculAge()<p2.calculAge())
+			{
+				return Classable.INFERIEUR;
+			}
+			if (p1.calculAge()>p2.calculAge())
+			{
+				return Classable.SUPERIEUR;
+			}
+			return Classable.EGAL;
+		} // parenthese de fermeture de la methode
+       	
+     } // parenthese de fermeture de la classe 
+     ); // fin de l'appel de la fonction de tri
+        
+        
+        for (int i=0;i<tabTrie.length;i++)
+        {
+        	System.out.println(tabTrie[i]);
+        }
+
+/*************** classe générique  ****************/
+
+import java.util.ArrayList;
+public class ListeGenerique <T>
+{ 
+    // pour stocker les éléments de la liste 
+	private ArrayList<T> liste;
+    // pointeur de position dans la liste 
+    private int position; 
+   //nombre d'élémments de la liste 
+    private int nbElements; 
+   // constructeur avec un parametre permettant de dimensionner la liste 
+    public ListeGenerique(int taille) 
+    { 
+    	liste=new ArrayList<T>(taille);
+    } 
+    public void ajout(T element) 
+    { 
+            liste.add(element); 
+            nbElements = nbElements + 1; 
+    } 
+   public void insert(T element,int index) 
+    { 
+        // on verifie si l'index n'est pas superieur au nombre d'elements 
+        //  ou si l'index n'est pas inferieur à 0 
+        if (index >= nbElements || index < 0) 
+        { 
+           return; 
+        } 
+        liste.add(index,element);
+        // on met a jour le nombre d'elements 
+        nbElements = nbElements + 1; 
+    } 
+    
+    public void remplace(T element,int index) 
+    { 
+        // on verifie si l'index n'est pas superieur au nombre d'elements 
+        // ou si l'index n'est pas inferieur à 0 
+        if (index >= nbElements || index < 0) 
+        { 
+           return; 
+        } 
+        liste.set(index,element);
+    }
+    public void supprime(int index) 
+    { 
+        int i; 
+        // on verifie si l'index n'est pas superieur au nombre d'elements 
+        // ou si l'index n'est pas inferieur à 0 
+        if (index >= nbElements || index < 0) 
+        { 
+           return; 
+        } 
+        liste.remove(index);
+        // on met a jour le nombre d'elements 
+        nbElements = nbElements - 1; 
+    } 
+    public int getTailleListe() 
+    {  
+           return nbElements; 
+    } 
+    public T premier() throws Exception 
+    { 
+        if (nbElements == 0) 
+        { 
+            throw new Exception("liste vide"); 
+        } 
+        // on deplace le pointeur sur le premier element 
+        position = 0; 
+        return liste.get(0);
+    } 
+    public T dernier() throws Exception 
+    { 
+        if (nbElements == 0) 
+        { 
+            throw new Exception("liste vide"); 
+        } 
+        // on deplace le pointeur sur le dernier element 
+        position = nbElements - 1; 
+        return liste.get(position); 
+    } 
+    public T suivant() throws Exception 
+    { 
+        if (nbElements == 0) 
+        { 
+            throw new Exception("liste vide"); 
+        } 
+        // on verifie si on n'est pas a la fin de la liste 
+        if (position == nbElements - 1) 
+        { 
+            throw new Exception("pas d'element suivant"); 
+        } 
+        // on deplace le pointeur sur l'element suivant 
+        position = position + 1; 
+        return liste.get(position); 
+    } 
+    public T precedent() throws Exception 
+    { 
+        if (nbElements == 0) 
+        { 
+            throw new Exception("liste vide"); 
+        } 
+        // on verifie si on n'est pas sur le premier element 
+        if (position == 0) 
+        { 
+            throw new Exception("pas d'element precedent"); 
+        } 
+        // on se deplace sur l'element precedent 
+        position = position - 1; 
+        return liste.get(position); 
+    } 
+}
+
+/**************** Utilisation d’une classe générique ******************/
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+public class TestListeGenerique 
+{
+	 static ListeGenerique<String> liste = new ListeGenerique<String>(5); 
+	 public static void main(String[] args) 
+	 { 
+	        liste.ajout("premier");
+	        liste.ajout("deuxieme");
+	        liste.ajout("troisieme");
+	        liste.ajout("quatrieme");
+	        liste.ajout("cinquieme");
+	        menu(); 
+	    } 
+	 public static void menu() 
+	 { 
+	   char choix='\0'; 
+	   System.out.println("p (premier) < (precedent) >(suivant) d (dernier) f (fin)"); 
+	   while (choix != 'f') 
+	   {
+	       try
+	       {
+	           BufferedReader br;
+	        	 br=new BufferedReader(new InputStreamReader(System.in));
+	        	 choix=br.readLine().charAt(0);
+	        	 switch (choix)
+	           {
+	            case 'p':
+	                 System.out.println("le premier " + liste.premier());
+	                 break;
+	            case '<':
+	                 System.out.println("le precedent " + liste.precedent());
+	                 break;
+	            case '>':
+	                 System.out.println("le suivant " + liste.suivant());
+	                 break;
+	            case 'd':
+	                 System.out.println("le dernier " + liste.dernier());
+	                 break;
+	           }
+	       }
+	       catch (Exception e)
+	       {
+	           System.out.println(e.getMessage());
+	       }
+	 System.out.println("p (premier) < (precedent) >(suivant) d (dernier) f (fin)"); 
+	 } 
+   } 
+}
+
+/*************** méthode générique  *****************/
+
+public  static <T extends Classable> void tri(ListeGenerique<T> liste) throws Exception
+{
+   	int i,j;
+    	T c;
+    	for (i=0;i< liste.getNbElements()-1;i++)
+    	{
+    		for( j = i + 1; j<liste.getNbElements();j++)
+    		{
+   			if (liste.getElement(j).compare(liste.getElement(i))==Classable.INFERIEUR)
+    			{
+    				c = liste.getElement(j);
+    				liste.remplace(liste.getElement(i), j);
+    				liste.remplace(c,i);
+    			}
+    			else if (liste.getElement(j).compare(liste.getElement(i))==Classable.ERREUR)
+	    		{
+	    			throw new Exception("erreur pendant le tri");
+	    		}
+	    	}
+	    }
+}
+
+/***************** Récupération d’exceptions ***************/
+
+public void lireFichier(String nom)
+{
+		FileInputStream fichier=null;
+		BufferedReader br=null;
+		String ligne=null;
+		try 
+		{
+			fichier=new FileInputStream("c:\\data\\bilan.txt");
+		}
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		br=new BufferedReader(new InputStreamReader(fichier));
+		try 
+		{
+			ligne=br.readLine();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		while (ligne!=null)
+		{
+			System.out.println(ligne);
+			try 
+			{
+				ligne=br.readLine();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+}
+
+/************* Récupération d’exceptions avec regroupement **************/
+
+public void lireFichier(String nom)
+{
+		FileInputStream fichier=null;
+		BufferedReader br=null;
+		String ligne=null;
+		try 
+		{
+			fichier=new FileInputStream(nom);
+			br=new BufferedReader(new InputStreamReader(fichier));
+			ligne=br.readLine();
+			while (ligne!=null)
+			{
+				System.out.println(ligne);
+				ligne=br.readLine();
+			} 
+		}
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+			
+	}
+
+
+/************ informations sur une Exception  **************/
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.GregorianCalendar;
+
+
+public class LectureFichier 
+{
+	public static void main(String args[]) 
+	{
+		try {
+			lireFichier("bilan.txt");
+		} 
+		catch (CaMarchePasException e)
+		{
+			FileWriter log;
+			BufferedWriter br;
+			try 
+{
+			  log=new FileWriter("historique.txt",true);
+			  br=new BufferedWriter(log);
+			  br.write("------>"+ new GregorianCalendar().getTime()+" <--------\r\n");
+			  br.write("erreur : " + e.getMessage()+"\r\n");
+			  for (int i=0;i<e.getStackTrace().length;i++)
+			  {
+			    br.write("dans le fichier  " +e.getStackTrace()[i].getFileName());
+			    br.write(" à la ligne " +e.getStackTrace()[i].getLineNumber());
+			    br.write(" dans la méthode " +e.getStackTrace()[i].getMethodName());
+			    br.write(" de la classe " + e.getStackTrace()[i].getClassName()+ "\r\n");
+			  }
+        		  br.close();
+ 			  log.close();
+			}
+			catch (IOException ex) 
+			{
+				System.out.println("erreur dans l'application");
+			}
+
+		}
+	}
+
+	public static void lireFichier(String nom) throws CaMarchePasException
+	{
+		FileInputStream fichier=null;
+		BufferedReader br=null;
+		String ligne=null;
+		try 
+		{
+			fichier=new FileInputStream(nom);
+			br=new BufferedReader(new InputStreamReader(fichier));
+			ligne=br.readLine();
+			while (ligne!=null)
+			{
+				System.out.println(ligne);
+				ligne=br.readLine();
+			} 
+		}
+		catch (FileNotFoundException e) 
+		{
+			throw new CaMarchePasException("le fichier n'existe pas",e);
+		}
+		catch (IOException e) 
+		{
+			throw new CaMarchePasException("erreur de lecture du fichier",e);
+		}
+	}
+}
+
+/**************** Classe d'exception personnalisée ***************/
+
+public class CaMarchePasException extends Exception 
+{
+	public CaMarchePasException()
+	{
+		super();
+	}
+	public CaMarchePasException(String message)
+	{
+		super(message);
+	}
+	public CaMarchePasException(String message, Throwable cause)
+	{
+		super(message,cause);
+	}
+	public CaMarchePasException(Throwable cause)
+	{
+		super(cause);
+	}
+}
+
+
+
+public static void lireFichier2(String nom) throws CaMarchePasException
+{
+	FileInputStream fichier=null;
+	BufferedReader br=null;
+	String ligne=null;
+	try 
+	{
+		fichier=new FileInputStream(nom);
+		br=new BufferedReader(new InputStreamReader(fichier));
+		ligne=br.readLine();
+		while (ligne!=null)
+		{
+			System.out.println(ligne);
+			ligne=br.readLine();
+		} 
+	}
+	catch (FileNotFoundException e) 
+	{
+		throw new CaMarchePasException("le fichier n'existe pas",e);
+	}
+	catch (IOException e) 
+	{
+		throw new CaMarchePasException("erreur de lecture du fichier",e);
+	}
+}
+
+/**************** exemple ArrayList  ***************/
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+public class testArrayList 
+{
+    public static void main(String[] args)
+    {
+        ArrayList<Personne> liste1;
+        ArrayList<Personne> liste2;
+        // création des deux instances
+        liste1=new ArrayList<Personne>();
+        liste2=new ArrayList<Personne>();
+        
+        // creation des personnes pour remplir la liste
+        Personne p1,p2,p3,p4,p5;
+        p1 = new Personne("Wayne", "John",LocalDate.of(1907,5,26));
+        p2 = new Personne("McQueen", "Steeve",LocalDate.of(1930,3,24));
+        p3 = new Personne("Lennon", "John",LocalDate.of(1940,10,9));
+        p4 = new Personne("Gibson", "Mel",LocalDate.of(1956,1,3));
+        p5 = new Personne("Willis", "Bruce",LocalDate.of(1955,3,19));
+        
+               
+        // ajout de quatre personnes a la liste 
+        liste1.add(p1);
+        liste1.add(p3);
+        liste1.add(p4);
+        liste1.add(p5);
+        
+        // insertion d'une personne entre p1 et p3
+        // donc à la position 1 de la liste
+        liste1.add(1, p2);
+        
+        // ajout du contenu d'une liste a une autre liste
+        // les deux listes contiennent maintenant les mêmes objets.
+        // !!!! ne pas confondre avec liste2=liste1; !!!
+        liste2.addAll(liste1);
+        
+         // affichage du nombre d'elements de la liste
+        System.out.println("il y a " + liste1.size() + " personne(s) dans la liste");
+        
+        // parcours de la premiere liste du debut vers la fin
+        Iterator<Personne> it;
+        it=liste1.iterator();
+        Personne p;
+        // tant qu'il reste des éléments 
+        while (it.hasNext())
+        {
+            // récupération de l'élément courant
+            p=it.next();
+            System.out.println(p.getNom());
+        }
+        
+        // parcours de la premiere liste de la fin vers le debut
+        // recuperation d'un ListIterator positionne 
+        // apres le dernier element (le nombre d'elements de la liste)
+
+        ListIterator<Personne> lit;
+        lit=liste1.listIterator(liste1.size());
+        // tant qu'il reste des éléments 
+        while (lit.hasPrevious())
+        {
+            // récupération de l'élément courant
+            // en remontant dans la liste
+            p=lit.previous();
+            System.out.println(p.getNom());
+        }
+       
+        
+        // remplacement d'un élément de liste
+        liste1.set(2,new Personne("Grant", "Cary",LocalDate.of(1904,1,18)));
+        
+        // affichage de l'element a la troisieme position de la liste
+         System.out.println(liste1.get(2).getNom());
+         
+        // recherche d'un element dans la liste
+        int position;
+        position=liste1.indexOf(p4);
+        if(position==-1)
+            System.out.println("non trouve dans la liste");
+        else
+            System.out.println(liste1.get(position).getNom());
+        
+        // recherche d'un element inexistant dans la liste.
+        // John Lennon a ete remplace par Cary Grant
+        // La recherche débute à la fin de la liste
+
+        position=liste1.lastIndexOf(p3);
+        if(position==-1)
+            System.out.println("non trouve dans la liste");
+        else
+            System.out.println(liste1.get(position).getNom());
+        
+        // suppression selective de la liste
+        // l'expression lambda determine quels elements seront supprimes
+        liste1.removeIf((Personne pe)->pe.getDate_nais().getYear()<1940);
+          // parcours de la liste pour voir le resultat
+        it=liste1.iterator();
+        // tant qu'il reste des éléments
+        while (it.hasNext())
+        {
+            // récupération de l'élément courant
+            p=it.next();
+            System.out.println(p.getNom()+ " ne en " + p.getDate_nais().getYear() );
+        }
+        // une autre manière de parcourir la liste
+        // l'expression lambda est executee pour chaque 
+        // element de la liste
+                
+        liste1.forEach((Personne per)->System.out.println(per.getNom()+ " age " + per.calculAge()));
+       
+      }
+   }
+
+/**************** exemple 1 HashSet  ***************/
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+public class Personne 	implements Classable
+
+{
+    private String nom;
+    private String prenom;
+    private LocalDate date_nais=LocalDate.of(1963,11,29);
+    
+    public Personne()
+    {
+    }
+	
+    public Personne(String n,String p,LocalDate d)
+    {
+        this.nom=n;
+        this.prenom=p;
+        this.date_nais=d;
+    }
+    
+    public String getNom() 
+    {
+	return nom;
+    }
+
+    public void setNom(String nom) 
+    {
+        this.nom = nom;
+    } 
+
+    public String getPrenom() 
+    {
+	return prenom;
+    }
+ 
+    public void setPrenom(String prenom) 
+    {
+	this.prenom = prenom;
+    }
+
+    public LocalDate getDate_nais() 
+    {
+	return date_nais;
+    }
+
+    public void setDate_nais(LocalDate date_nais) 
+    {
+	this.date_nais = date_nais;
+    }
+
+    @Override
+    public int hashCode()  
+    {
+        // On choisit les deux nombres impairs
+        int resultat = 7;
+        final int multiplier = 17;
+
+        // Pour chaque attribut, on calcule le hashcode
+        // que l'on ajoute au résultat après l'avoir multiplie
+        // par le nombre "multiplieur" :
+        resultat = multiplier*resultat + (nom==null ? 0 : nom.hashCode());
+        resultat = multiplier*resultat + (prenom==null ? 0 : prenom.hashCode());
+        resultat = multiplier*resultat + (date_nais==null ? 0 : date_nais.hashCode());
+
+        return resultat;
+    }
+
+    @Override
+    public boolean equals(Object obj) 
+    {
+        // si le deuxième objet est null il ne 
+        // peut pas y avoir egalite
+        if (obj == null) 
+        {
+            return false;
+        }
+        // si les deux objets ne sont de meme type
+        // il ne peut pas y avoir egalite
+        if (getClass() != obj.getClass()) 
+        {
+            return false;
+        }
+        // il faut maintenant verifier l'egalite de chacun 
+        // des attributs
+        Personne p = (Personne) obj;
+        if (!nom.equals(p.getNom()))
+            return false;
+        if (!prenom.equals(p.getPrenom()))
+            return false;
+        if (!date_nais.equals(getDate_nais()))
+            return false;
+        return true;
+    }
+    	
+	public long calculAge()
+	{
+		return date_nais.until(LocalDate.now(),ChronoUnit.YEARS);
+	}
+	
+	public int compare(Object o) 
+	{
+		Personne p;
+		if (o instanceof Personne)
+		{
+			p=(Personne)o;
+		}
+		else
+		{
+			return Classable.ERREUR;
+		}
+		if (getNom().compareTo(p.getNom())<0)
+		{
+			return Classable.INFERIEUR;
+		}
+		if (getNom().compareTo(p.getNom())>0)
+		{
+			return Classable.SUPERIEUR;
+		}
+		
+		return Classable.EGAL;
+	}
+}
+
+
+public static void main(String[] args)
+    {
+        Personne p1,p2,p3;
+        p1 = new Personne("Wayne", "John",LocalDate.of(1907,5,26));
+        p2 = new Personne("McQueen", "Steeve",LocalDate.of(1930,3,24));
+        p3 = new Personne("Wayne", "John",LocalDate.of(1907,5,26));
+        
+        System.out.println("hashCode de p1 : " + p1.hashCode());
+        System.out.println("hashCode de p2 : " + p2.hashCode());
+        System.out.println("hashCode de p3 : " + p3.hashCode());
+        
+        if(p1.equals(p2))
+            System.out.println("p1 et p2 sont identiques");
+        else
+            System.out.println("p1 et p2 sont differents");
+            
+        if(p1.equals(p3))
+            System.out.println("p1 et p3 sont identiques");
+        else
+            System.out.println("p1 et p3 sont differents");
+        
+    }
+
+/**************** exemple 2 HashSet  ***************/
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.ListIterator;
+public class TestHashSet1
+{
+    public static void main(String[] args)
+    {
+        HashSet<Personne> hash1;
+        HashSet<Personne> hash2;
+        // création des deux instances
+        hash1=new HashSet<Personne>();
+        hash2=new HashSet<Personne>();
+        
+        // creation des personnes pour remplir le HashSet
+        Personne p1,p2,p3,p4,p5;
+        p1 = new Personne("Wayne", "John",LocalDate.of(1907,5,26));
+        p2 = new Personne("McQueen", "Steeve",LocalDate.of(1930,3,24));
+        p3 = new Personne("Lennon", "John",LocalDate.of(1940,10,9));
+        p4 = new Personne("Gibson", "Mel",LocalDate.of(1956,1,3));
+        p5 = new Personne("Willis", "Bruce",LocalDate.of(1955,3,19));
+        
+               
+        // ajout de quatre personnes au HashSet 
+        hash1.add(p1);
+        hash1.add(p3);
+        hash1.add(p4);
+        hash1.add(p5);
+          
+        // ajout du contenu d'un HashSet a un autre HashSet
+        // les deux HashSet contiennent maintenant les mêmes objets.
+        // !!!! ne pas confondre avec hash2=hash1; !!!
+        hash2.addAll(hash1);
+        
+         // affichage du nombre d'elements du HashSet
+        System.out.println("il y a " + hash1.size() + " personne(s) dans le HashSet");
+        
+        // parcours du premier HashSet du debut vers la fin
+        Iterator<Personne> it;
+        it=hash1.iterator();
+        // tant qu'il reste des éléments dans le HashSet
+        Personne p;
+        while (it.hasNext())
+        {
+            // récupération de l'élément courant
+            p=it.next();
+            System.out.println(p.getNom());
+        }
+        // suppression selective dans le HashSet
+        // l'expression determine quels elements seront supprimes
+        hash1.removeIf((Personne pe)->pe.getDate_nais().getYear()<1940);
+          // parcours du HashSet pour voir le resultat
+        it=hash1.iterator();
+        // tant qu'il reste des éléments dans le HashSet
+        while (it.hasNext())
+        {
+            // récupération de l'élément courant
+            p=it.next();
+            System.out.println(p.getNom()+ " ne en " + p.getDate_nais().getYear() );
+        }
+        // une autre manière de parcourir le HashSet
+        // l'expression lambda est executee pour chaque 
+        // element du HashSet
+                
+        hash1.forEach((Personne per)->System.out.println(per.getNom()+ " age " + per.calculAge()));
+       
+      }
+   }
+
+/**************** exemple 3 HashSet  ***************/
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Iterator;
+
+
+public class TestHashSet 
+{
+    public static void main(String[] args)
+    {
+        HashSet<Personne> acteurs;
+        HashSet<Personne> chanteurs;
+        acteurs=new HashSet<Personne>();
+        chanteurs=new HashSet<Personne>();
+      
+        // creation des personnes pour remplir la liste
+        Personne p1,p2,p3,p4,p5;
+        p1 = new Personne("Wayne", "John",LocalDate.of(1907,5,26));
+        p2 = new Personne("McQueen", "Steeve",LocalDate.of(1930,3,24));
+        p3 = new Personne("Lennon", "John",LocalDate.of(1940,10,9));
+        p4 = new Personne("Gibson", "Mel",LocalDate.of(1956,1,3));
+        p5 = new Personne("Willis", "Bruce",LocalDate.of(1955,3,19));
+        
+        
+    acteurs.add(p1);
+    acteurs.add(p2);
+    acteurs.add(p4);
+    acteurs.add(p5);
+       
+    chanteurs.add(p1);
+    chanteurs.add(p3);
+ 
+    // test si les chanteurs sont egalement acteurs
+    if (acteurs.containsAll(chanteurs))
+        System.out.println("tous les chanteurs sont aussi acteur");
+    else
+        System.out.println("certains chanteurs ne sont pas aussi acteur");
+    System.out.println("******* les artistes *****************");
+    // creation d'un HashSet artistes contenant chanteurs et acteurs
+    HashSet<Personne> artistes;
+    artistes=new HashSet<Personne>(chanteurs);
+    artistes.addAll(acteurs);
+    // parcours du premier HashSet des artistes
+        Iterator<Personne> it;
+        it=artistes.iterator();
+        // tant qu'il reste des éléments dans le HashSet
+        Personne p;
+        while (it.hasNext())
+        {
+            // récupération de l'élément courant
+            p=it.next();
+            System.out.println(p.getNom());
+        }
+    System.out.println("***** chanteurs et acteurs *******************");
+    // creation d'un HashSet des personnes qui sont
+    // chanteur et acteur
+        
+    HashSet<Personne> act_chant;
+    act_chant=new HashSet<Personne>(chanteurs);
+    act_chant.retainAll(acteurs);
+        it=act_chant.iterator();
+        // tant qu'il reste des éléments dans le HashSet
+        while (it.hasNext())
+        {
+            // récupération de l'élément courant
+            p=it.next();
+            System.out.println(p.getNom());
+        }
+    System.out.println("***** chanteurs uniquement *******************");
+   // creation d'un HashSet des personnes
+   // uniquement chanteurs 
+    HashSet<Personne> uniquementChanteurs;
+    uniquementChanteurs=new HashSet<Personne>(chanteurs);
+    uniquementChanteurs.removeAll(acteurs);
+    for(Personne pe:uniquementChanteurs)
+    {
+        System.out.println(pe.getNom());
+    }
+       
+    
+    System.out.println("***** acteurs uniquement *******************");
+   // creation d'un HashSet des personnes
+   // uniquement chanteurs 
+    HashSet<Personne> uniquementActeurs;
+    uniquementActeurs=new HashSet<Personne>(acteurs);
+    uniquementActeurs.removeAll(chanteurs);
+    for(Personne pe:uniquementActeurs)
+    {
+        System.out.println(pe.getNom());
+    }
+        
+    }
+}
+
+/**************** exemple LinkedList  ***************/
+
+import java.time.LocalDate;
+import java.util.LinkedList;
+
+public class TestLinkedList 
+{
+    public static void main(String[] args)
+    {
+        LinkedList<Personne> ll;
+        ll=new LinkedList<Personne>();
+           // creation des personnes pour remplir le HashSet
+        Personne p1,p2,p3,p4,p5;
+        p1 = new Personne("Wayne", "John",LocalDate.of(1907,5,26));
+        p2 = new Personne("McQueen", "Steeve",LocalDate.of(1930,3,24));
+        p3 = new Personne("Lennon", "John",LocalDate.of(1940,10,9));
+        p4 = new Personne("Gibson", "Mel",LocalDate.of(1956,1,3));
+        p5 = new Personne("Willis", "Bruce",LocalDate.of(1955,3,19));
+        // ajout de elements dans la liste
+        ll.addFirst(p1);
+        ll.addFirst(p2);
+        ll.addFirst(p3);
+        ll.addFirst(p4);
+        ll.addFirst(p5);
+        Personne p=null;
+        // extraction et suppression des elements 
+        // de la liste en commençant par le plus ancien
+        do 
+        {
+            p=ll.pollLast();
+            if (p!=null)
+                System.out.println(p.getNom());
+        } while(p!=null);
+        
+        ll.clear();
+    }
+}
+
+/**************** exemple Streams et Pipelines  ***************/
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+public class TestStream 
+{
+    public static void main(String[] args)
+    {
+        ArrayList<Personne> liste;
+     
+        // création des deux instances
+        liste=new ArrayList<Personne>();
+    
+        // creation des personnes pour remplir la liste
+        Personne p1,p2,p3,p4,p5;
+        p1 = new Personne("Wayne", "John",LocalDate.of(1907,5,26));
+        p2 = new Personne("McQueen", "Steeve",LocalDate.of(1930,3,24));
+        p3 = new Personne("Lennon", "John",LocalDate.of(1940,10,9));
+        p4 = new Personne("Gibson", "Mel",LocalDate.of(1956,1,3));
+        p5 = new Personne("Willis", "Bruce",LocalDate.of(1955,3,19));
+        
+        // ajout de cinq personnes a la liste 
+        liste.add(p1);
+        liste.add(p2);
+        liste.add(p3);
+        liste.add(p4);
+        liste.add(p5);
+        
+        // la fonction allMatch retourne true si tous les elements 
+        // de la liste remplissent la condition exprimée
+        // dans l'expression lambda
+        
+      if(liste.stream().allMatch(p->p.getDate_nais().getYear()>1945))
+          System.out.println("toutes les personnes sont nées après 1945");
+      else
+          System.out.println("certaines personnes sont nées avant 1945");
+      
+      // filtrage de personnes nées au mois de mars
+      // ce filtrage génére un nouveau Stream 
+      // forEach parcours ce nouveau Stream et
+      // exécute l'expression lambda pour chaque élément
+      
+      liste.stream().filter(p->p.getDate_nais().getMonthValue()==3).forEach(p->System.out.println(p.getNom()));
+      
+      // recherche de la personne la plus agée de la liste
+      // l'expression lambda représente l'implémentation 
+      // de l'interface Comparator
+      
+      System.out.println(liste.stream().max((pe1,pe2)->
+                {
+                    if (pe1.calculAge()>pe2.calculAge())
+                        return 1;
+                    if (pe1.calculAge()<pe2.calculAge())
+                        return -1;
+                    return 0;
+              }).get().getNom());
+      
+      // calcul de l'age moyen des personnes présentes dans la liste
+      // mapToLong génére un nouveau Stream de type long 
+      // obtenus a partir de la référence de fonction 
+      // average calcul la moyen de ce nouveau flux
+      //getAsDouble la tranforme en type double
+      double ageMoyen = liste
+    .stream()
+    .mapToLong(Personne::calculAge)
+    .average()
+    .getAsDouble();
+      
+      System.out.println("age moyen des personnes de la liste : " + ageMoyen + " ans");
+    }
+}
+
+/**************************************************************************************/
+/********************************** Exercices du chapitre 3 ***************************/
+/**************************************************************************************/
+/**********************************  Exercice 1 ***************************************/
+
+package exercices.chapitre3.exercice1;
+
+public class Article 
+{
+    private int reference;
+    private String designation;
+    private double prix;
+    
+    public Article()
+    {
+        super();
+    }
+    
+    public Article(int reference)
+    {
+        this();
+        setReference(reference);
+    }
+    public Article(int reference,String designation)
+    {
+        this(reference);
+        setDesignation(designation);
+    }
+    
+    public Article(int reference,String designation,double prix)
+    {
+        this(reference,designation);
+        setPrix(prix);
+    }
+
+    public int getReference() 
+    {
+        return reference;
+    }
+
+    public void setReference(int reference) 
+    {
+        this.reference = reference;
+    }
+
+    public String getDesignation() 
+    {
+        return designation;
+    }
+
+    public void setDesignation(String designation) 
+    {
+        this.designation = designation;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) 
+    {
+        this.prix = prix;
+    }
+    
+    public String toString()
+    {
+        return getReference() + " " + getDesignation() + " " + getPrix();
+    }
+    
+}
+
+package exercices.chapitre3.exercice1;
+
+
+public class Principale 
+{
+    public static void main(String[] args)
+    {
+        Article a1,a2;
+        a1=new Article();
+        a1.setReference(100);
+        a1.setDesignation("tintin au congo");
+        a1.setPrix(8.5);
+               
+        a2=new Article(110,"Le Crabe aux pinces d'or",8.5);
+       
+         test(a1);
+        System.out.println(a1.toString());
+        
+        test(a2);
+        System.out.println(a2.toString());
+        
+    }
+    
+    public static void test(Article a)
+    {
+        System.out.println("reference : " + a.getReference());
+        System.out.println("designation : " + a.getDesignation());
+        System.out.println("prix : " + a.getPrix() + " €");
+    }
+}
+
+/**********************************  Exercice 2 ***************************************/
+
+package exercices.chapitre3.exercice2;
+
+public class Article 
+{
+    private int reference;
+    private String designation;
+    private double prix;
+    
+    public Article()
+    {
+        super();
+    }
+    
+    public Article(int reference)
+    {
+        this();
+        setReference(reference);
+    }
+    public Article(int reference,String designation)
+    {
+        this(reference);
+        setDesignation(designation);
+    }
+    
+    public Article(int reference,String designation,double prix)
+    {
+        this(reference,designation);
+        setPrix(prix);
+    }
+
+    public int getReference() 
+    {
+        return reference;
+    }
+
+    public void setReference(int reference) 
+    {
+        this.reference = reference;
+    }
+
+    public String getDesignation() 
+    {
+        return designation;
+    }
+
+    public void setDesignation(String designation) 
+    {
+        this.designation = designation;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) 
+    {
+        this.prix = prix;
+    }
+    
+    public String toString()
+    {
+        return getReference() + " " + getDesignation() + " " + getPrix();
+    }
+    
+}
+	
+package exercices.chapitre3.exercice2;
+
+import java.time.Duration;
+
+
+public class Dvd extends Article
+{
+    private Duration duree;
+    private String realisateur;
+    
+    public Dvd()
+    {
+        super();
+    }
+    
+    public Dvd(int reference,String designation,double prix,Duration duree,String realisateur)
+    {
+        super(reference,designation,prix);
+        
+        setDuree(duree);
+        setRealisateur(realisateur);
+    }
+
+    public Duration getDuree() 
+    {
+        return duree;
+    }
+
+    public void setDuree(Duration duree) 
+    {
+        this.duree = duree;
+    }
+
+    public String getRealisateur() 
+    {
+        return realisateur;
+    }
+
+    public void setRealisateur(String realisateur) 
+    {
+        this.realisateur = realisateur;
+    }
+
+  public String toString()
+    {
+        return super.toString() + " " + getDuree().toMinutes() + " " + getRealisateur();
+    }
+}	
+	
+package exercices.chapitre3.exercice2;
+
+public class Livre extends Article
+{
+    private String isbn;
+    private int nbPages;
+    private String auteur;
+    
+    public Livre()
+    {
+        super();
+    }
+    
+    public Livre(int reference,String designation,double prix,String isbn,int nbPages,String auteur)
+    {
+        super(reference,designation,prix);
+        setIsbn(isbn);
+        setNbPages(nbPages);
+        setAuteur(auteur);
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public int getNbPages() {
+        return nbPages;
+    }
+
+    public void setNbPages(int nbPages) {
+        this.nbPages = nbPages;
+    }
+
+    public String getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(String auteur) {
+        this.auteur = auteur;
+    }
+    public String toString()
+    {
+        return super.toString() + " " + getNbPages() + " " + getAuteur();
+    }
+    
+}
+	
+	
+package exercices.chapitre3.exercice2;
+
+import java.time.Duration;
+
+public class Principale 
+{
+    public static void main(String[] args)
+    {
+        Livre l;
+        Dvd d; 
+        l=new Livre();
+        l.setReference(100);
+        l.setDesignation("Le Crabe aux pinces d'or");
+        l.setPrix(8.5);
+        l.setNbPages(86);
+        l.setAuteur("Hergé");
+        testLivre(l);
+        System.out.println(l.toString());
+        
+        d=new Dvd();
+        d.setReference(110);
+        d.setDesignation("La soupe aux choux");
+        d.setPrix(19.50);
+        d.setDuree(Duration.ofMinutes(98));
+        d.setRealisateur("Girault");
+        testDvd(d);
+        System.out.println(d.toString());
+        
+    }
+    
+     public static void test(Article a)
+    {
+        System.out.println("reference : " + a.getReference());
+        System.out.println("designation : " + a.getDesignation());
+        System.out.println("prix : " + a.getPrix() + " €");
+    }
+    
+    public static void testLivre(Livre l)
+    {
+        test(l);
+        System.out.println("nombre de pages : " + l.getNbPages());
+        System.out.println("auteur : " + l.getAuteur());
+    }
+    
+    public static void testDvd(Dvd d)
+    {
+        test(d);
+        System.out.println("durée : " + d.getDuree().toMinutes() + " minutes");
+        System.out.println("réalisateur : " + d.getRealisateur());
+    }
+}	
+	
+/**********************************  Exercice 3 ***************************************/	
+
+package exercices.chapitre3.exercice3;
+
+public class Article 
+{
+    private int reference;
+    private String designation;
+    private double prix;
+    
+    public Article()
+    {
+        super();
+    }
+    
+    public Article(int reference)
+    {
+        this();
+        setReference(reference);
+    }
+    public Article(int reference,String designation)
+    {
+        this(reference);
+        setDesignation(designation);
+    }
+    
+    public Article(int reference,String designation,double prix)
+    {
+        this(reference,designation);
+        setPrix(prix);
+    }
+
+    public int getReference() 
+    {
+        return reference;
+    }
+
+    public void setReference(int reference) 
+    {
+        this.reference = reference;
+    }
+
+    public String getDesignation() 
+    {
+        return designation;
+    }
+
+    public void setDesignation(String designation) 
+    {
+        this.designation = designation;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) 
+    {
+        this.prix = prix;
+    }
+    
+    public String toString()
+    {
+        return getReference() + " " + getDesignation() + " " + getPrix();
+    }
+    
+}
+
+package exercices.chapitre3.exercice3;
+
+import java.time.Duration;
+
+
+public class Dvd extends Article
+{
+    private Duration duree;
+    private Personne realisateur;
+    
+    public Dvd()
+    {
+        super();
+    }
+    
+    public Dvd(int reference,String designation,double prix,Duration duree,Personne realisateur)
+    {
+        super(reference,designation,prix);
+        
+        setDuree(duree);
+        setRealisateur(realisateur);
+    }
+
+    public Duration getDuree() 
+    {
+        return duree;
+    }
+
+    public void setDuree(Duration duree) 
+    {
+        this.duree = duree;
+    }
+
+    public Personne getRealisateur() 
+    {
+        return realisateur;
+    }
+
+    public void setRealisateur(Personne realisateur) 
+    {
+        this.realisateur = realisateur;
+    }
+
+  public String toString()
+    {
+        return super.toString() + " " + getDuree().toMinutes() + " " + getRealisateur();
+    }    
+}
+
+package exercices.chapitre3.exercice3;
+
+public class Livre extends Article
+{
+    private String isbn;
+    private int nbPages;
+    private Personne auteur;
+    
+    public Livre()
+    {
+        super();
+    }
+    
+    public Livre(int reference,String designation,double prix,String isbn,int nbPages,Personne auteur)
+    {
+        super(reference,designation,prix);
+        setIsbn(isbn);
+        setNbPages(nbPages);
+        setAuteur(auteur);
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public int getNbPages() {
+        return nbPages;
+    }
+
+    public void setNbPages(int nbPages) {
+        this.nbPages = nbPages;
+    }
+
+    public Personne getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(Personne auteur) {
+        this.auteur = auteur;
+    }
+    public String toString()
+    {
+        return super.toString() + " " + getNbPages() + " " + getAuteur();
+    }
+    
+}
+
+package exercices.chapitre3.exercice3;
+
+import java.time.LocalDate;
+
+public class Personne 
+{
+    private String nom;
+    private String prenom;
+    private LocalDate date_nais=LocalDate.of(1963,11,29);
+    
+    public Personne()
+    {
+        super();
+    }
+	
+    public Personne(String n,String p,LocalDate d)
+    {
+        this.nom=n;
+        this.prenom=p;
+        this.date_nais=d;
+    }
+    
+    public String getNom() 
+    {
+	return nom;
+    }
+
+    public void setNom(String nom) 
+    {
+        this.nom = nom;
+    } 
+
+    public String getPrenom() 
+    {
+	return prenom;
+    }
+ 
+    public void setPrenom(String prenom) 
+    {
+	this.prenom = prenom;
+    }
+
+    public LocalDate getDate_nais() 
+    {
+	return date_nais;
+    }
+
+    public void setDate_nais(LocalDate date_nais) 
+    {
+	this.date_nais = date_nais;
+    }
+
+    public String toString() {
+        return prenom + " " + nom;
+    }
+    
+}
+
+
+package exercices.chapitre3.exercice3;
+
+import java.time.Duration;
+import java.time.LocalDate;
+
+
+
+public class Principale 
+{
+    public static void main(String[] args)
+    {
+        Livre l;
+        Dvd d;
+        l=new Livre();
+        l.setReference(100);
+        l.setDesignation("Le Crabe aux pinces d'or");
+        l.setPrix(8.5);
+        l.setNbPages(86);
+        l.setAuteur(new Personne("HergÃ©","Georges",LocalDate.of(1907,05,22)));
+        testLivre(l);
+        System.out.println(l.toString());
+        
+        d=new Dvd();
+        d.setReference(110);
+        d.setDesignation("La soupe aux choux");
+        d.setPrix(19.50);
+        d.setDuree(Duration.ofMinutes(98));
+        d.setRealisateur(new Personne("Girault","jean",LocalDate.of(1924,05,9)));
+        testDvd(d);
+        System.out.println(d.toString());
+        
+    }
+    
+     public static void test(Article a)
+    {
+        System.out.println("reference : " + a.getReference());
+        System.out.println("designation : " + a.getDesignation());
+        System.out.println("prix : " + a.getPrix() + " â‚¬");
+    }
+    
+    public static void testLivre(Livre l)
+    {
+        test(l);
+        System.out.println("nombre de pages : " + l.getNbPages());
+        System.out.println("auteur : " + l.getAuteur().toString());
+    }
+    
+    public static void testDvd(Dvd d)
+    {
+        test(d);
+        System.out.println("durÃ©e : " + d.getDuree().toMinutes() + " minutes");
+        System.out.println("rÃ©alisateur : " + d.getRealisateur().toString());
+    }
+}
+
+/**********************************  Exercice 4 ***************************************/
+
+package exercices.chapitre3.exercice4;
+
+public class Article 
+{
+    private int reference;
+    private String designation;
+    private double prix;
+    
+    public Article()
+    {
+        super();
+    }
+    
+    public Article(int reference)
+    {
+        this();
+        setReference(reference);
+    }
+    public Article(int reference,String designation)
+    {
+        this(reference);
+        setDesignation(designation);
+    }
+    
+    public Article(int reference,String designation,double prix)
+    {
+        this(reference,designation);
+        setPrix(prix);
+    }
+
+    public int getReference() 
+    {
+        return reference;
+    }
+
+    public void setReference(int reference) 
+    {
+        this.reference = reference;
+    }
+
+    public String getDesignation() 
+    {
+        return designation;
+    }
+
+    public void setDesignation(String designation) 
+    {
+        this.designation = designation;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) 
+    {
+        this.prix = prix;
+    }
+    
+    public String toString()
+    {
+        return getReference() + " " + getDesignation() + " " + getPrix();
+    }
+    
+}
+
+package exercices.chapitre3.exercice4;
+
+import java.time.Duration;
+import java.util.ArrayList;
+
+
+public class Dvd extends Article
+{
+    private Duration duree;
+    private Personne realisateur;
+    
+    public Dvd()
+    {
+        super();
+    }
+    
+    public Dvd(int reference,String designation,double prix,Duration duree,Personne realisateur)
+    {
+        super(reference,designation,prix);
+        
+        setDuree(duree);
+        setRealisateur(realisateur);
+    }
+
+    public Duration getDuree() 
+    {
+        return duree;
+    }
+
+    public void setDuree(Duration duree) 
+    {
+        this.duree = duree;
+    }
+
+    public Personne getRealisateur() 
+    {
+        return realisateur;
+    }
+
+    public void setRealisateur(Personne realisateur) 
+    {
+          this.realisateur = realisateur;
+        ArrayList<Article> lst;
+        lst=realisateur.getOeuvres();
+        if (!lst.contains(this))
+        {
+            lst.add(this);
+        }
+    }
+
+  public String toString()
+    {
+        return super.toString() + " " + getDuree().toMinutes() + " " + getRealisateur();
+    }
+}
+
+package exercices.chapitre3.exercice4;
+
+import java.util.ArrayList;
+
+
+
+public class Livre extends Article
+{
+    private String isbn;
+    private int nbPages;
+    private Personne auteur;
+    
+    public Livre()
+    {
+        super();
+    }
+    
+    public Livre(int reference,String designation,double prix,String isbn,int nbPages,Personne auteur)
+    {
+        super(reference,designation,prix);
+        setIsbn(isbn);
+        setNbPages(nbPages);
+        setAuteur(auteur);
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public int getNbPages() {
+        return nbPages;
+    }
+
+    public void setNbPages(int nbPages) {
+        this.nbPages = nbPages;
+    }
+
+    public Personne getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(Personne auteur) {
+        this.auteur = auteur;
+        ArrayList<Article> lst;
+        lst=auteur.getOeuvres();
+        if (!lst.contains(this))
+        {
+            lst.add(this);
+        }
+    }
+    public String toString()
+    {
+        return super.toString() + " " + getNbPages() + " " + getAuteur();
+    }
+    
+}
+
+package exercices.chapitre3.exercice4;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class Personne 
+{
+    private String nom;
+    private String prenom;
+    private LocalDate date_nais=LocalDate.of(1963,11,29);
+    private ArrayList<Article> oeuvres;
+    
+    public Personne()
+    {
+        super();
+        oeuvres=new ArrayList<> ();
+    }
+	
+    public Personne(String n,String p,LocalDate d)
+    {
+        this();
+        this.nom=n;
+        this.prenom=p;
+        this.date_nais=d;
+    }
+    
+    public String getNom() 
+    {
+	return nom;
+    }
+
+    public void setNom(String nom) 
+    {
+        this.nom = nom;
+    } 
+
+    public String getPrenom() 
+    {
+	return prenom;
+    }
+ 
+    public void setPrenom(String prenom) 
+    {
+	this.prenom = prenom;
+    }
+
+    public LocalDate getDate_nais() 
+    {
+	return date_nais;
+    }
+
+    public void setDate_nais(LocalDate date_nais) 
+    {
+	this.date_nais = date_nais;
+    }
+    
+    public ArrayList<Article> getOeuvres() 
+    {
+        return oeuvres;
+    }
+
+    public String toString() {
+        return prenom + " " + nom;
+    }
+}
+
+package exercices.chapitre3.exercice4;
+
+import java.time.LocalDate;
+
+
+
+public class Principale 
+{
+    public static void main(String[] args)
+    {
+        Personne p1;
+        p1=new Personne("HergÃ©","Georges",LocalDate.of(1907,05,22));
+        Livre l1,l2;
+        
+        l1=new Livre();
+        l1.setReference(100);
+        l1.setDesignation("Le Crabe aux pinces d'or");
+        l1.setPrix(8.5);
+        l1.setNbPages(86);
+        l1.setAuteur(p1);
+        
+        l2=new Livre();
+        l2.setReference(120);
+        l2.setDesignation("Le lotus bleu");
+        l2.setPrix(10.5);
+        l2.setNbPages(78);
+        l2.setAuteur(p1);
+        
+        for(Article a:p1.getOeuvres())
+        {
+            System.out.println(a.toString());
+        }
+  
+    }
+    
+     public static void test(Article a)
+    {
+        System.out.println("reference : " + a.getReference());
+        System.out.println("designation : " + a.getDesignation());
+        System.out.println("prix : " + a.getPrix() + " â‚¬");
+    }
+    
+    public static void testLivre(Livre l)
+    {
+        test(l);
+        System.out.println("nombre de pages : " + l.getNbPages());
+        System.out.println("auteur : " + l.getAuteur().toString());
+    }
+    
+    public static void testDvd(Dvd d)
+    {
+        test(d);
+        System.out.println("durÃ©e : " + d.getDuree().toMinutes() + " minutes");
+        System.out.println("rÃ©alisateur : " + d.getRealisateur().toString());
+    }
+}
+
+	
+/**************************************************************************************/
+/********************************** Chapitre 4 ****************************************/
+/**************************************************************************************/
+
+/**************** première application graphique ***************/
+
+package fr.eni;
+import javax.swing.JFrame;
+public class Principale {
+	public static void main(String[] args) 
+	{
+		JFrame fenetre;
+		// creation de l’instance de la classe JFrame
+		fenetre=new JFrame();
+		// modification de la position et se la 
+		// taille de la fenetre
+		fenetre.setBounds(0,0,300,400);
+		// modification du titre de la fenetre
+		fenetre.setTitle("premiere fenetre en JAVA");
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+
+/**************** interface utilisateur composée de trois boutons ***************/
+
+
+package fr.eni;
+
+import java.awt.Graphics;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Principale {
+
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		JFrame fenetre;
+		fenetre=new JFrame();
+		fenetre.setTitle("premiere fenetre en JAVA");
+		fenetre.setBounds(0,0,300,100);
+	fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// creation des trois boutons
+		JButton b1,b2,b3;
+		b1=new JButton("Rouge");
+		b2=new JButton("Vert");
+		b3=new JButton("Bleu");
+		// creation du conteneur intermediaire
+		JPanel pano;
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(b1);
+		pano.add(b2);
+		pano.add(b3);
+	// ajout du conteneur intermediaire sur le ContentPane
+		fenetre.getContentPane().add(pano);
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** base de travail gestion des événements ***************/
+
+package fr.eni;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Ecran 
+extends JFrame
+{
+	public Ecran()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		JButton b1,b2,b3;
+		b1=new JButton("Rouge");
+		b2=new JButton("Vert");
+		b3=new JButton("Bleu");
+		// creation du conteneur intermediaire
+		JPanel pano;
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(b1);
+		pano.add(b2);
+		pano.add(b3);
+		// ajout du conteneur sur le ContentPane
+		getContentPane().add(pano);
+	}
+}
+
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** Utilisation d’une classe "normale" implémentant l’interface ***************/
+
+package fr.eni;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class EcouteurFenetre implements WindowListener {
+
+	public void windowActivated(WindowEvent arg0) 
+	{
+	}
+	public void windowClosed(WindowEvent arg0)
+	{
+	}
+	public void windowClosing(WindowEvent arg0)
+	{
+		System.exit(0);
+	}
+	public void windowDeactivated(WindowEvent arg0)
+	{
+	}
+	public void windowDeiconified(WindowEvent arg0)
+	{
+	}
+	public void windowIconified(WindowEvent arg0) 
+	{
+	}
+	public void windowOpened(WindowEvent arg0)
+	{
+	}
+}
+
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// creation d’une instance de la classe chargee
+		// de gerer les evenements
+		EcouteurFenetre ef;
+		ef=new EcouteurFenetre();
+		// referencement de cette instance de classe 
+		// comme ecouteur d’evenement pour la fenetre
+		fenetre.addWindowListener(ef);
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** implémenter l’interface dans une classe déjà existante ***************/
+
+package fr.eni;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					implements WindowListener 
+
+{
+	public Ecran()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		JButton b1,b2,b3;
+		b1=new JButton("Rouge");
+		b2=new JButton("Vert");
+		b3=new JButton("Bleu");
+		// creation du conteneur intermediaire
+		JPanel pano;
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(b1);
+		pano.add(b2);
+		pano.add(b3);
+	// ajout du conteneur intermediaire sur le ContentPane
+		getContentPane().add(pano);
+	// referencement de la fenetre elle meme 
+	// comme ecouteur de ses propres evenements
+
+		addWindowListener(this);
+	}
+	public void windowActivated(WindowEvent arg0) 
+	{
+	}
+	public void windowClosed(WindowEvent arg0)
+	{
+	}
+	public void windowClosing(WindowEvent arg0)
+	{
+		System.exit(0);
+	}
+	public void windowDeactivated(WindowEvent arg0)
+	{
+	}
+	public void windowDeiconified(WindowEvent arg0)
+	{
+	}
+	public void windowIconified(WindowEvent arg0) 
+	{
+	}
+	public void windowOpened(WindowEvent arg0)
+	{
+	}
+}
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** classe interne implémentant l’interface ***************/
+
+package fr.eni;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	public Ecran()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		JButton b1,b2,b3;
+		b1=new JButton("Rouge");
+		b2=new JButton("Vert");
+		b3=new JButton("Bleu");
+		// creation du conteneur intermediaire
+		JPanel pano;
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(b1);
+		pano.add(b2);
+		pano.add(b3);
+	// ajout du conteneur intermediaire sur le ContentPane
+		getContentPane().add(pano);
+		// creation d’une instance de la classe chargee
+		// de gerer les evenements
+		EcouteurFenetre ef;
+		ef=new EcouteurFenetre();
+		// referencement de cette instance de classe 
+		// comme ecouteur d’evenement pour la fenetre
+
+		addWindowListener(ef);
+	}
+	
+	public class EcouteurFenetre implements WindowListener
+	{
+		public void windowActivated(WindowEvent arg0) 
+		{
+		}
+		public void windowClosed(WindowEvent arg0)
+		{
+		}
+		public void windowClosing(WindowEvent arg0)
+		{
+			System.exit(0);
+		}
+		public void windowDeactivated(WindowEvent arg0)
+		{
+		}
+		public void windowDeiconified(WindowEvent arg0)
+		{
+		}
+		public void windowIconified(WindowEvent arg0) 
+		{
+		}
+		public void windowOpened(WindowEvent arg0)
+		{
+		}
+	}
+}
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** classe interne anonyme implémentant l’interface ***************/
+
+package fr.eni;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	public Ecran()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		JButton b1,b2,b3;
+		b1=new JButton("Rouge");
+		b2=new JButton("Vert");
+		b3=new JButton("Bleu");
+		// creation du conteneur intermediaire
+		JPanel pano;
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(b1);
+		pano.add(b2);
+		pano.add(b3);
+	// ajout du conteneur intermediaire sur le ContentPane
+		getContentPane().add(pano);
+		// creation d’une instance d'une classe anonyme
+		// chargee de gerer les evenements
+		addWindowListener(new WindowListener()
+		// debut de la définition de la classe 
+		{
+			public void windowActivated(WindowEvent arg0) 
+			{
+			}
+			public void windowClosed(WindowEvent arg0)
+			{
+			}
+			public void windowClosing(WindowEvent arg0)
+			{
+				System.exit(0);
+			}
+			public void windowDeactivated(WindowEvent arg0)
+			{
+			}
+			public void windowDeiconified(WindowEvent arg0)
+			{
+			}
+			public void windowIconified(WindowEvent arg0) 
+			{
+			}
+			public void windowOpened(WindowEvent arg0)
+			{
+			}
+		} // fin de la definition de la classe
+		); // fin de l'appel de la méthode addWindowListener
+	}// fin du constructeur
+}// fin de la classe Ecran
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** classe "normale" héritant d’une classe XXXXAdapter ***************/
+
+package fr.eni;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Ecouteurfenetre extends WindowAdapter 
+{
+	public void windowClosing(WindowEvent arg0)
+	{
+		System.exit(0);
+	}
+}
+
+
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// creation d’une instance de la classe chargee
+		// de gerer les evenements
+		EcouteurFenetre ef;
+		ef=new EcouteurFenetre();
+		// referencement de cette instance de classe 
+		// comme ecouteur d’evenement pour la fenetre
+		fenetre.addWindowListener(ef);
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** classe interne héritant d’une classe XXXXAdapter ***************/
+
+package fr.eni;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	public Ecran()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		JButton b1,b2,b3;
+		b1=new JButton("Rouge");
+		b2=new JButton("Vert");
+		b3=new JButton("Bleu");
+		// creation du conteneur intermediaire
+		JPanel pano;
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(b1);
+		pano.add(b2);
+		pano.add(b3);
+	// ajout du conteneur intermediaire sur le ContentPane
+		getContentPane().add(pano);
+		// creation d’une instance de la classe chargee
+		// de gerer les evenements
+		EcouteurFenetre ef;
+		ef=new EcouteurFenetre();
+		// referencement de cette instance de classe 
+		// comme ecouteur d’evenement pour la fenetre
+
+		addWindowListener(ef);
+	}
+	
+public class Ecouteurfenetre extends WindowAdapter 
+{
+	public void windowClosing(WindowEvent arg0)
+	{
+		System.exit(0);
+	}
+}
+}
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** classe interne anonyme héritant d’une classe XXXXAdapter ***************/
+
+package fr.eni;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	public Ecran()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		JButton b1,b2,b3;
+		b1=new JButton("Rouge");
+		b2=new JButton("Vert");
+		b3=new JButton("Bleu");
+		// creation du conteneur intermediaire
+		JPanel pano;
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(b1);
+		pano.add(b2);
+		pano.add(b3);
+	// ajout du conteneur intermediaire sur le ContentPane
+		getContentPane().add(pano);
+		// creation d’une instance d'une classe anonyme
+		// chargee de gerer les evenements
+		addWindowListener(new WindowAdapter()
+		// debut de la définition de la classe 
+		{
+			public void windowClosing(WindowEvent arg0)
+			{
+				System.exit(0);
+			}
+		} // fin de la definition de la classe
+		); // fin de l'appel de la méthode addWindowListener
+	}// fin du constructeur
+}// fin de la classe Ecran
+
+package fr.eni;
+
+public class Principale {
+
+	public static void main(String[] args) 
+
+	{
+		// creation de la fenetre
+		Ecran fenetre;
+		fenetre=new Ecran();
+		// affichage de la fenetre
+		fenetre.setVisible(true);
+	}
+}
+
+/**************** le même écouteur pour deux sources d’événement  ***************/
+
+package fr.eni;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	JPanel pano;
+	public Ecran ()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		JButton btnRouge,btnVert,btnBleu;
+		btnRouge=new JButton("Rouge");
+		btnVert=new JButton("Vert");
+		btnBleu=new JButton("Bleu");
+		// creation des trois ecouteurs
+		EcouteurRouge ecR;
+		EcouteurVert ecV;
+		EcouteurBleu ecB;
+		ecR=new EcouteurRouge();
+		ecV=new EcouteurVert();
+		ecB=new EcouteurBleu();
+		// association de l'ecouteur a chaque bouton
+		btnRouge.addActionListener(ecR);
+		btnVert.addActionListener(ecV);
+		btnBleu.addActionListener(ecB);
+		// Creation du menu
+		JMenuBar barreMenu;
+		barreMenu=new JMenuBar();
+		JMenu mnuCouleurs;
+		mnuCouleurs=new JMenu("Couleurs");
+		barreMenu.add(mnuCouleurs);
+		JMenuItem mnuRouge,mnuVert,mnuBleu;
+		mnuRouge=new JMenuItem("Rouge");
+		mnuVert=new JMenuItem("Vert");
+		mnuBleu=new JMenuItem("Bleu");
+		mnuCouleurs.add(mnuRouge);
+		mnuCouleurs.add(mnuVert);
+		mnuCouleurs.add(mnuBleu);
+		// association de l'ecouteur a chaque menu
+		// ( les memes que pour les boutons )
+		mnuRouge.addActionListener(ecR);
+		mnuVert.addActionListener(ecV);
+		mnuBleu.addActionListener(ecB);
+		// ajout du menu sur la fenetre
+		setJMenuBar(barreMenu);
+		// creation du conteneur intermediaire
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(btnRouge);
+		pano.add(btnVert);
+		pano.add(btnBleu);
+	// ajout du conteneur intermediaire sur le ContentPane
+		getContentPane().add(pano);
+		// creation d’une instance d'une classe anonyme
+		// chargee de gerer les evenements de la fenetre
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent arg0)
+			{
+				System.exit(0);
+			}
+		} 
+		);
+	}
+public class EcouteurRouge implements ActionListener
+{
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		pano.setBackground(Color.RED);
+	}
+}
+public class EcouteurVert implements ActionListener
+{
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		pano.setBackground(Color.GREEN);
+	}
+}
+public class EcouteurBleu implements ActionListener
+{
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		pano.setBackground(Color.BLUE);
+	}
+}
+	
+}
+
+/**************** le même écouteur pour deux sources d’événement (code simplifié)  ***************/
+
+package fr.eni;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	JPanel pano;
+	JButton btnRouge,btnVert,btnBleu;
+	JMenuItem mnuRouge,mnuVert,mnuBleu;
+	public Ecran ()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		btnRouge=new JButton("Rouge");
+		btnVert=new JButton("Vert");
+		btnBleu=new JButton("Bleu");
+		// creation des trois ecouteurs
+		EcouteurCouleur ec;
+		ec=new EcouteurCouleur();
+		// association de l'ecouteur a chaque bouton
+		btnRouge.addActionListener(ec);
+		btnVert.addActionListener(ec);
+		btnBleu.addActionListener(ec);
+		// Creation du menu
+		JMenuBar barreMenu;
+		barreMenu=new JMenuBar();
+		JMenu mnuCouleurs;
+		mnuCouleurs=new JMenu("Couleurs");
+		barreMenu.add(mnuCouleurs);
+		
+		mnuRouge=new JMenuItem("Rouge");
+		mnuVert=new JMenuItem("Vert");
+		mnuBleu=new JMenuItem("Bleu");
+		mnuCouleurs.add(mnuRouge);
+		mnuCouleurs.add(mnuVert);
+		mnuCouleurs.add(mnuBleu);
+		// association de l'ecouteur a chaque menu
+		// ( le meme que pour les boutons )
+		mnuRouge.addActionListener(ec);
+		mnuVert.addActionListener(ec);
+		mnuBleu.addActionListener(ec);
+		// ajout du menu sur la fenetre
+		setJMenuBar(barreMenu);
+		// creation du conteneur intermediaire
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(btnRouge);
+		pano.add(btnVert);
+		pano.add(btnBleu);
+		// ajout du conteneur intermediaire sur le Content-Pane
+		getContentPane().add(pano);
+		// creation d’une instance d'une classe anonyme
+		// chargee de gerer les evenements
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent arg0)
+			{
+				System.exit(0);
+			}
+		} 
+		);
+	}
+public class EcouteurCouleur implements ActionListener
+{
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		if (arg0.getSource()==btnRouge | arg0.getSource()==mnuRouge)
+		{
+			pano.setBackground(Color.RED);
+		}
+		if (arg0.getSource()==btnVert | arg0.getSource()==mnuVert)
+		{
+			pano.setBackground(Color.GREEN);
+		}
+		if (arg0.getSource()==btnBleu | arg0.getSource()==mnuBleu)
+		{
+			pano.setBackground(Color.BLUE);
+		}
+	}
+}
+
+}
+
+/**************** le même écouteur pour deux sources d’événement avec utilisation de ActionCommand  ***************/
+
+package fr.eni;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	JPanel pano;
+	JButton btnRouge,btnVert,btnBleu;
+	JMenuItem mnuRouge,mnuVert,mnuBleu;
+
+	
+	public Ecran ()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		btnRouge=new JButton("Rouge");
+		btnRouge.setActionCommand("red");
+		btnVert=new JButton("Vert");
+		btnVert.setActionCommand("green");
+		btnBleu=new JButton("Bleu");
+		btnBleu.setActionCommand("blue");
+		// creation des trois ecouteurs
+		EcouteurCouleur ec;
+		ec=new EcouteurCouleur();
+		// association de l'ecouteur a chaque bouton
+		btnRouge.addActionListener(ec);
+		btnVert.addActionListener(ec);
+		btnBleu.addActionListener(ec);
+		// Creation du menu
+		JMenuBar barreMenu;
+		barreMenu=new JMenuBar();
+		JMenu mnuCouleurs;
+		mnuCouleurs=new JMenu("Couleurs");
+		barreMenu.add(mnuCouleurs);
+		mnuRouge=new JMenuItem("Rouge");
+		mnuRouge.setActionCommand("red");
+		mnuVert=new JMenuItem("Vert");
+		mnuVert.setActionCommand("green");
+		mnuBleu=new JMenuItem("Bleu");
+		mnuBleu.setActionCommand("blue");
+		mnuCouleurs.add(mnuRouge);
+		mnuCouleurs.add(mnuVert);
+		mnuCouleurs.add(mnuBleu);
+		// association de l'ecouteur a chaque menu
+		// ( le meme que pour les boutons )
+		mnuRouge.addActionListener(ec);
+		mnuVert.addActionListener(ec);
+		mnuBleu.addActionListener(ec);
+		// ajout du menu sur la fenetre
+		setJMenuBar(barreMenu);
+		// creation du conteneur intermediaire
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(btnRouge);
+		pano.add(btnVert);
+		pano.add(btnBleu);
+		// ajout du conteneur intermediaire sur le Content-Pane
+		getContentPane().add(pano);
+		// creation d’une instance d'une classe anonyme
+		// chargee de gerer les evenements
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent arg0)
+			{
+				System.exit(0);
+			}
+		} 
+		);
+	}
+public class EcouteurCouleur implements ActionListener
+{
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		String commande;
+		commande=arg0.getActionCommand();
+		if (commande.equals("red"))
+		{
+			pano.setBackground(Color.RED);
+		}
+		if (commande.equals("green"))
+		{
+			pano.setBackground(Color.GREEN);
+		}
+		if (commande.equals("blue"))
+		{
+			pano.setBackground(Color.BLUE);
+		}
+	}
+}
+
+}
+
+/**************** plusieurs écouteurs pour une même source d’événement   ***************/
+
+package fr.eni;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
+
+public class ConsoleLog implements ActionListener 
+{
+	public void actionPerformed(ActionEvent e) 
+	{
+		String message;
+		SimpleDateFormat sdf;
+		sdf=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		message=sdf.format(new Date());
+		message=message + " clic sur le ";
+		if (e.getSource() instanceof JButton)
+		{
+			message=message+ "bouton ";
+		}
+		if (e.getSource() instanceof JMenuItem)
+		{
+			message=message+ "menu ";
+		}
+message=message + ((AbstractButton)e.getSource()).getText();
+		System.out.println(message);
+	}
+} 
+
+package fr.eni;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+public class Ecran extends JFrame
+					
+{
+	JPanel pano;
+	JButton btnRouge,btnVert,btnBleu;
+	JMenuItem mnuRouge,mnuVert,mnuBleu;
+	ConsoleLog lg;
+	public Ecran ()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		
+		btnRouge=new JButton("Rouge");
+		btnRouge.setActionCommand("red");
+		btnVert=new JButton("Vert");
+		btnVert.setActionCommand("green");
+		btnBleu=new JButton("Bleu");
+		btnBleu.setActionCommand("blue");
+		// creation des trois ecouteurs
+		EcouteurCouleur ec;
+		ec=new EcouteurCouleur();
+		// association de l'ecouteur a chaque bouton
+		btnRouge.addActionListener(ec);
+		btnVert.addActionListener(ec);
+		btnBleu.addActionListener(ec);
+		// creation de la case a cocher
+		JCheckBox chkLog;
+		chkLog=new JCheckBox("log sur console");
+		// ajout d'un ecouteur a la case a cocher
+		chkLog.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				JCheckBox chk;
+				chk=(JCheckBox)arg0.getSource();
+				if (chk.isSelected())
+				{
+					// ajout d'un ecouteur supplementaire 
+					// aux boutons et menus
+					lg=new ConsoleLog();
+					btnBleu.addActionListener(lg);
+					btnRouge.addActionListener(lg);
+					btnVert.addActionListener(lg);
+					mnuBleu.addActionListener(lg);
+					mnuRouge.addActionListener(lg);
+					mnuVert.addActionListener(lg);
+				}
+				else
+				{
+				// supression de l'ecouteur supplementaire
+					// des boutons et menus
+					btnBleu.removeActionListener(lg);
+					btnRouge.removeActionListener(lg);
+					btnVert.removeActionListener(lg);
+					mnuBleu.removeActionListener(lg);
+					mnuRouge.removeActionListener(lg);
+					mnuVert.removeActionListener(lg);
+				}
+				
+			}
+		});
+		// Creation du menu
+		JMenuBar barreMenu;
+		barreMenu=new JMenuBar();
+		JMenu mnuCouleurs;
+		mnuCouleurs=new JMenu("Couleurs");
+		barreMenu.add(mnuCouleurs);
+		mnuRouge=new JMenuItem("Rouge");
+		mnuRouge.setActionCommand("red");
+		mnuVert=new JMenuItem("Vert");
+		mnuVert.setActionCommand("green");
+		mnuBleu=new JMenuItem("Bleu");
+		mnuBleu.setActionCommand("blue");
+		mnuCouleurs.add(mnuRouge);
+		mnuCouleurs.add(mnuVert);
+		mnuCouleurs.add(mnuBleu);
+		// association de l'ecouteur a chaque menu
+		// ( le meme que pour les boutons )
+		mnuRouge.addActionListener(ec);
+		mnuVert.addActionListener(ec);
+		mnuBleu.addActionListener(ec);
+		// ajout du menu sur la fenetre
+		setJMenuBar(barreMenu);
+		// creation du conteneur intermediaire
+		pano=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		pano.add(btnRouge);
+		pano.add(btnVert);
+		pano.add(btnBleu);
+		pano.add(chkLog);
+		// ajout du conteneur intermediaire sur le Content-Pane
+		getContentPane().add(pano);
+		// creation d’une instance d'une classe anonyme
+		// chargee de gerer les evenements
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent arg0)
+			{
+				System.exit(0);
+			}
+		} 
+		);
+	}
+public class EcouteurCouleur implements ActionListener
+{
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		String commande;
+		commande=arg0.getActionCommand();
+		if (commande.equals("red"))
+		{
+			pano.setBackground(Color.RED);
+		}
+		if (commande.equals("green"))
+		{
+			pano.setBackground(Color.GREEN);
+		}
+		if (commande.equals("blue"))
+		{
+			pano.setBackground(Color.BLUE);
+		}
+	}
+}
+
+}
+
+/**************** BorderLayout   ***************/
+
+package fr.eni;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+public class Ecran9 extends JFrame
+					
+{
+	JPanel panoBoutons;
+	JPanel panoChk;
+	JPanel panoCouleur;
+	JButton btnRouge,btnVert,btnBleu;
+	JMenuItem mnuRouge,mnuVert,mnuBleu;
+	ConsoleLog lg;
+	public Ecran9()
+	{
+		setTitle("premiere fenetre en JAVA");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// creation des trois boutons
+		
+		btnRouge=new JButton("Rouge");
+		btnRouge.setActionCommand("red");
+		btnVert=new JButton("Vert");
+		btnVert.setActionCommand("green");
+		btnBleu=new JButton("Bleu");
+		btnBleu.setActionCommand("blue");
+		// creation des trois ecouteurs
+		EcouteurCouleur ec;
+		ec=new EcouteurCouleur();
+		// association de l'ecouteur a chaque bouton
+		btnRouge.addActionListener(ec);
+		btnVert.addActionListener(ec);
+		btnBleu.addActionListener(ec);
+		// creation de la case a cocher
+		JCheckBox chkLog;
+		chkLog=new JCheckBox("log sur console");
+		// ajout d'un ecouteur a la case a cocher
+		chkLog.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				JCheckBox chk;
+				chk=(JCheckBox)arg0.getSource();
+				if (chk.isSelected())
+				{
+					// ajout d'un ecouteur supplementaire 
+					// aux boutons et menus
+					lg=new ConsoleLog();
+					btnBleu.addActionListener(lg);
+					btnRouge.addActionListener(lg);
+					btnVert.addActionListener(lg);
+					mnuBleu.addActionListener(lg);
+					mnuRouge.addActionListener(lg);
+					mnuVert.addActionListener(lg);
+				}
+				else
+				{
+					// supression de l'ecouteur supplemen-taire
+					// des boutons et menus
+					btnBleu.removeActionListener(lg);
+					btnRouge.removeActionListener(lg);
+					btnVert.removeActionListener(lg);
+					mnuBleu.removeActionListener(lg);
+					mnuRouge.removeActionListener(lg);
+					mnuVert.removeActionListener(lg);
+				}
+				
+			}
+		});
+		// Creation du menu
+		JMenuBar barreMenu;
+		barreMenu=new JMenuBar();
+		JMenu mnuCouleurs;
+		mnuCouleurs=new JMenu("Couleurs");
+		barreMenu.add(mnuCouleurs);
+		mnuRouge=new JMenuItem("Rouge");
+		mnuRouge.setActionCommand("red");
+		mnuVert=new JMenuItem("Vert");
+		mnuVert.setActionCommand("green");
+		mnuBleu=new JMenuItem("Bleu");
+		mnuBleu.setActionCommand("blue");
+		mnuCouleurs.add(mnuRouge);
+		mnuCouleurs.add(mnuVert);
+		mnuCouleurs.add(mnuBleu);
+		// association de l'ecouteur a chaque menu
+		// ( le meme que pour les boutons )
+		mnuRouge.addActionListener(ec);
+		mnuVert.addActionListener(ec);
+		mnuBleu.addActionListener(ec);
+		// ajout du menu sur la fenetre
+		setJMenuBar(barreMenu);
+		// creation du conteneur intermediaire
+		panoBoutons=new JPanel();
+		// ajout des boutons sur le conteneur intermediaire
+		panoBoutons.add(btnRouge);
+		panoBoutons.add(btnVert);
+		panoBoutons.add(btnBleu);
+		// ajout du conteneur intermediaire sur le Content-Pane zone nord
+		getContentPane().add(panoBoutons,BorderLayout.NORTH);
+		// creation du conteneur pour la case a cocher
+		panoChk=new JPanel();
+		panoChk.add(chkLog);
+		// ajout du conteneur dans la zone sud
+		getContentPane().add(panoChk,BorderLayout.SOUTH);
+		// creation du conteneur pour affichage de la couleur
+		panoCouleur=new JPanel();
+		// ajout du conteneur dans la zone centre
+		getContent-Pane().add(panoCouleur,BorderLayout.CENTER);
+		// creation d’une instance d'une classe anonyme
+		// chargee de gerer les evenements
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent arg0)
+			{
+				System.exit(0);
+			}
+		} 
+		);
+		((FlowLay-out)panoBoutons.getLayout()).setAlignment(FlowLayout.LEFT);
+		((FlowLayout)panoBoutons.getLayout()).setHgap(50);
+		((FlowLayout)panoBoutons.getLayout()).setVgap(20);
+		}
+public class EcouteurCouleur implements ActionListener
+{
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		String commande;
+		commande=arg0.getActionCommand();
+		if (commande.equals("red"))
+		{
+			panoCouleur.setBackground(Color.RED);
+		}
+		if (commande.equals("green"))
+		{
+			panoCouleur.setBackground(Color.GREEN);
+		}
+		if (commande.equals("blue"))
+		{
+			panoCouleur.setBackground(Color.BLUE);
+		}
+	}
+}
+
+}
+
+/****************  GridBagLayout ***************/
+
+package fr.eni;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+public class Ecran extends JFrame
+					
+{
+	JPanel pano;
+	JCheckBox chkGras,chkItalique;
+	JLabel lblTaille,lblExemple;
+	JComboBox cboTaille;
+	JList lstPolices;
+	JScrollPane defilPolices;
+	
+	public Ecran()
+	{
+		setTitle("choix d\'une police");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// creation des composants
+		
+		pano=new JPanel();
+		chkGras=new JCheckBox("gras");
+		chkItalique=new JCheckBox("italique");
+		lblTaille=new JLabel("taille");
+		lblExemple=new JLabel("essai de police de caracte-res");
+		cboTaille=new JComboBox(new String[]{"10","12","14","16","18","20"});
+		lstPolices=new JList(new String[]{"arial","courier","letter","helvetica","times ro-man","symbole","antique"});
+		defilPolices=new JScrollPane(lstPolices);
+		
+		GridBagLayout gbl;
+		gbl=new GridBagLayout();
+		pano.setLayout(gbl);
+		
+		GridBagConstraints gbc;
+		gbc=new GridBagConstraints();
+		// position dans la case 0,0
+		gbc.gridx=0;
+		gbc.gridy=0;
+		// sur une colonne de largeur
+		gbc.gridwidth=1;
+		// et sur trois lignes en hauteur
+		gbc.gridheight=3;
+		// ponderation en cas d'agrandisemment du conteneur
+		gbc.weightx=100;
+		gbc.weighty=100;
+		// le composant est redimensionne pour occuper
+		// tout l'espace disponible dans son conteneur
+		gbc.fill=GridBagConstraints.BOTH;
+		pano.add(defilPolices,gbc);
+		// position dans la case 1,0
+		gbc.gridx=1;
+		gbc.gridy=0;
+		// sur deux colonnes de largeur
+		gbc.gridwidth=2;
+		// et sur une ligne en hauteur
+		gbc.gridheight=1;
+		// ponderation en cas d'agrandisemment du conteneur
+		gbc.weightx=100;
+		gbc.weighty=100;
+		// le composant n'est pas redimensionne pour occuper
+		// tout l'espace disponible dans son conteneur
+		gbc.fill=GridBagConstraints.NONE;
+		pano.add(chkGras,gbc);
+		// position dans la case 1,1
+		gbc.gridx=1;
+		gbc.gridy=1;
+		// sur deux colonnes de largeur
+		gbc.gridwidth=2;
+		// et sur une ligne en hauteur
+		gbc.gridheight=1;
+		// ponderation en cas d'agrandisemment du conteneur
+		gbc.weightx=100;
+		gbc.weighty=100;
+		pano.add(chkItalique,gbc);
+		// position dans la case 1,2
+		gbc.gridx=1;
+		gbc.gridy=2;
+		// sur une colonne de largeur
+		gbc.gridwidth=1;
+		// et sur une ligne en hauteur
+		gbc.gridheight=1;
+		// ponderation en cas d'agrandisemment du conteneur
+		gbc.weightx=100;
+		gbc.weighty=100;
+		pano.add(lblTaille,gbc);
+		// position dans la case 2,2
+		gbc.gridx=2;
+		gbc.gridy=2;
+		// sur une colonne de largeur
+		gbc.gridwidth=1;
+		// et sur une ligne en hauteur
+		gbc.gridheight=1;
+		// ponderation en cas d'agrandisemment du conteneur
+		gbc.weightx=100;
+		gbc.weighty=100;
+		pano.add(cboTaille,gbc);
+		// position dans la case 0,3
+		gbc.gridx=0;
+		gbc.gridy=3;
+		// sur trois colonnes de largeur
+		gbc.gridwidth=3;
+		// et sur une ligne en hauteur
+		gbc.gridheight=1;
+		// ponderation en cas d'agrandisemment du conteneur
+		gbc.weightx=100;
+		gbc.weighty=100;
+		pano.add(lblExemple,gbc);
+		getContentPane().add(pano);
+	}
+}
+
+/**************** Sans gestionnaire de mise en page  ***************/
+
+package fr.eni;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+public class Ecran extends JFrame
+					
+{
+	JPanel pano;
+	JCheckBox chkGras,chkItalique;
+	JLabel lblTaille,lblExemple;
+	JComboBox cboTaille;
+	JList lstPolices;
+	JScrollPane defilPolices;
+	
+public Ecran()
+{
+setTitle("choix d\'une police");
+setBounds(0,0,300,100);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+// creation des composants
+pano=new JPanel();
+chkGras=new JCheckBox("gras");
+chkItalique=new JCheckBox("italique");
+lblTaille=new JLabel("taille");
+lblExemple=new JLabel("essai de police de caracteres");
+cboTaille=new JComboBox(new String[]{"10","12","14","16","18","20"});
+lstPolices=new JList(new String[]{"arial","courier","letter","helvetica","times roman","symbole","antique"});
+defilPolices=new JScrollPane(lstPolices);
+		
+// ajout sur le conteneur
+pano.setLayout(null);
+pano.add(defilPolices);
+pano.add(chkGras);
+pano.add(chkItalique);
+pano.add(lblTaille);
+pano.add(cboTaille);
+pano.add(lblExemple);
+		
+// position des composants.
+defilPolices.setBounds(24, 29, 156, 255);
+chkGras.setBounds(258, 78, 170, 25);
+chkItalique.setBounds(261, 139, 167, 46);
+lblTaille.setBounds(215, 211, 106, 24);
+cboTaille.setBounds(354, 208, 107, 32);
+lblExemple.setBounds(17, 309, 459, 28);
+getContentPane().add(pano);
+}
+
+/**************** une horloge originale  *************************/
+
+package fr.eni;
+
+
+import java.util.GregorianCalendar;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+
+public class Ecran13 extends JFrame
+					
+{
+	JPanel pano;
+	JProgressBar pgbHeure,pgbMinutes,pgbSeconde,pgbDefil;
+	
+	public Ecran13()
+	{
+		setTitle("horloge");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// creation des composants
+		pgbHeure =new JProgressBar();
+		pgbMinutes=new JProgressBar();
+		pgbSeconde=new JProgressBar();
+		pgbDefil=new JProgressBar();
+		pgbHeure.setMinimum(0);
+		pgbHeure.setMaximum(23);
+		pgbMinutes.setMinimum(0);
+		pgbMinutes.setMaximum(59);
+		pgbSeconde.setMinimum(0);
+		pgbSeconde.setMaximum(59);
+		pgbHeure.setString("heure");
+		pgbHeure.setStringPainted(true);
+		pgbMinutes.setString("minute");
+		pgbMinutes.setStringPainted(true);
+		pgbSeconde.setString("seconde");
+		pgbSeconde.setStringPainted(true);
+		pgbDefil.setString("le temps passe");
+		pgbDefil.setStringPainted(true);
+		pgbDefil.setIndeterminate(true);
+		pano=new JPanel();
+		pano.add(pgbHeure);
+		pano.add(pgbMinutes);
+		pano.add(pgbSeconde);
+		pano.add(pgbDefil);
+		getContentPane().add(pano);
+		Thread th;
+		th=new Thread()
+		{
+			public void run()
+			{
+				while (true)
+				{
+					GregorianCalendar d;
+					d=new GregorianCalendar();
+					pgbHeure.setValue(d.get(GregorianCalendar.HOUR));
+					pgbMinutes.setValue(d.get(GregorianCalendar.MINUTE));
+	pgbSeconde.setValue(d.get(GregorianCalendar.SECOND));
+	try 
+{
+		sleep(500);
+	} 
+catch (InterruptedException e) 
+	{
+	}
+}
+}};
+th.start();
+}
+}
+
+/****************  JTextArea **************/
+package fr.eni;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class Ecran extends JFrame
+{
+	JPanel pano;
+	JTextArea txt;
+	JCheckBox chkWrap,chkWrapWord;
+	JScrollPane defil;
+
+	public Ecran()
+	{
+		setTitle("editeur de texte");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// creation des composants
+		pano=new JPanel();
+		txt=new JTextArea(10,40);
+		defil=new JScrollPane(txt);
+		pano.add(defil);
+		chkWrap=new JCheckBox("retours a la ligne automati-que");
+		chkWrapWord=new JCheckBox("retours entre deux mots");
+		chkWrap.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				txt.setLineWrap(chkWrap.isSelected());
+			}
+		});
+		chkWrapWord.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				txt.setWrapStyleWord(chkWrapWord.isSelected());
+			}
+		});
+		pano.add(chkWrap);
+		pano.add(chkWrapWord);
+		getContentPane().add(pano);
+	}
+}
+
+/************* menus **************/
+
+package fr.eni;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+
+public class Ecran14 extends JFrame
+{
+	JPanel pano;
+	JTextArea txt;
+	JScrollPane defil;
+	JMenuBar barre;
+	JMenu mnuFichier,mnuEdition,mnuSauvegarde;
+	JMenuItem mnuNou-veau,mnuOuvrir,mnuEnregister,mnuEnregistrerSous,mnuQuitter;
+	JMenuItem mnuCopier,mnuCouper,mnuColler;
+	File fichier;
+
+	public Ecran14()
+	{
+		setTitle("editeur de texte");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// creation des composants
+		pano=new JPanel();
+		pano.setLayout(new BorderLayout());
+		txt=new JTextArea();
+		defil=new JScrollPane(txt);
+		pano.add(defil,BorderLayout.CENTER);
+		getContentPane().add(pano);
+		// creation des composants des menus
+		barre=new JMenuBar();
+		mnuFichier=new JMenu("Fichier");
+		mnuEdition=new JMenu("Edition");
+		mnuSauvegarde=new JMenu("Sauvegarde");
+		mnuNouveau=new JMenuItem("Nouveau");
+		mnuOuvrir=new JMenuItem("Ouvrir");
+		mnuEnregister=new JMenuItem("Enregistrer");
+		mnuEnregister.setEnabled(false);
+		mnuEnregistrerSous=new JMenuItem("Enregistrer sous");
+		mnuCopier=new JMenuItem("Copier");
+		mnuCouper=new JMenuItem("Couper");
+		mnuColler=new JMenuItem("Coller");
+		mnuQuitter=new JMenuItem("Quitter");
+		// association des elements
+		barre.add(mnuFichier);
+		barre.add(mnuEdition);
+		mnuFichier.add(mnuNouveau);
+		mnuFichier.add(mnuOuvrir);
+		mnuFichier.add(mnuSauvegarde);
+		mnuSauvegarde.add(mnuEnregister);
+		mnuSauvegarde.add(mnuEnregistrerSous);
+		mnuFichier.add(new JSeparator());
+		mnuFichier.add(mnuQuitter);
+		mnuEdition.add(mnuCopier);
+		mnuEdition.add(mnuCouper);
+		mnuEdition.add(mnuColler);
+		// association du menu avec la JFrame
+		setJMenuBar(barre);
+		// les ecouteurs associés aux différents menus
+		mnuNouveau.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				fichier=null;
+				txt.setText("");
+				mnuEnregister.setEnabled(false);
+			}
+			
+		});
+		mnuOuvrir.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				JFileChooser dlg;
+				dlg=new JFileChooser();
+				dlg.showDialog(null,"Ouvrir");
+				fichier=dlg.getSelectedFile();
+				FileInputStream in;
+				try 
+				{
+					in=new FileInputStream(fichier);
+					BufferedReader br;
+					br=new BufferedReader(new InputStream-Reader(in));
+					String ligne;
+					txt.setText("");
+					while ((ligne=br.readLine())!=null)
+					{
+						txt.append(ligne+"\r\n");
+					}
+					br.close();
+					mnuEnregister.setEnabled(true);
+				} 
+				catch (FileNotFoundException e) 
+				{
+					e.printStackTrace();
+				}
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+		});
+	mnuQuitter.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			System.exit(0);
+		}
+	});
+	mnuCopier.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.copy();
+		}
+	});
+	mnuCouper.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.cut();
+		}
+	});
+	mnuColler.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.paste();
+		}
+	});
+	mnuEnregister.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+		    try 
+			{
+				PrintWriter pw;
+				pw=new PrintWriter(fichier);
+				pw.write(txt.getText());
+				pw.close();
+			} 
+			catch (FileNotFoundException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	});
+	mnuEnregistrerSous.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+		    try 
+			{
+		    	JFileChooser dlg;
+				dlg=new JFileChooser();
+				dlg.showDialog(null,"enregistrer sous");
+				fichier=dlg.getSelectedFile();
+				PrintWriter pw;
+				pw=new PrintWriter(fichier);
+				pw.write(txt.getText());
+				pw.close();
+			} 
+			catch (FileNotFoundException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	});
+	}
+}
+
+/**************  JToolBar ******************************/
+
+JToolBar tlbr;
+	tlbr=new JToolBar();
+	JButton btnNouveau,btnOuvrir,btnEnregister;
+	JButton btnCopier,btnCouper,btnColler;
+// creation des boutons
+	btnNouveau=new JButton(new ImageIcon("new.jpg"));
+	btnOuvrir=new JButton(new ImageIcon("open.jpg"));
+	btnEnregister=new JButton(new ImageIcon("save.jpg"));
+	btnCopier=new JButton(new ImageIcon("copy.jpg"));
+	btnColler=new JButton(new ImageIcon("paste.jpg"));
+	btnCouper=new JButton(new ImageIcon("cut.jpg"));
+// ajout des boutons a la barre d’outils
+	tlbr.add(btnNouveau);
+	tlbr.add(btnOuvrir);
+	tlbr.add(btnEnregister);
+	tlbr.addSeparator();
+	tlbr.add(btnCopier);
+	tlbr.add(btnCouper);
+	tlbr.add(btnColler);
+	// ajout de la barre d’outils sur son conteneur
+	pano.add(tlbr,BorderLayout.NORTH);
+	// reutilisation ecouteurs deja associes aux menus
+btnNouveau.addActionListener(mnuNouveau.getActionListeners()[0]);
+	btnOuvrir.addActionListener(mnuOuvrir.getActionListeners()[0]);
+btnEnregister.addActionListener(mnuEnregister.getActionListeners()[0]);
+	btnCopier.addActionListener(mnuCopier.getActionListeners()[0]);
+	btnCouper.addActionListener(mnuCouper.getActionListeners()[0]);
+	btnColler.addActionListener(mnuColler.getActionListeners()[0]);
+
+/*************** JCheckBox *****************/
+
+	JPanel options;
+	GridLayout gl;
+	options=new JPanel();
+	gl=new GridLayout(2,1);
+	options.setLayout(gl);
+	chkGras=new JCheckBox("Gras");
+	chkItalique=new JCheckBox("Italique");
+	options.add(chkGras);
+	options.add(chkItalique);
+	chkGras.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			changePolice();
+		}
+	});
+	chkItalique.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			changePolice();
+		}
+	});
+	
+	pano.add(options,BorderLayout.SOUTH);
+}
+
+	public void changePolice()
+	{
+		int attributs;
+		attributs=0;
+		if (chkGras.isSelected())
+		{
+			attributs=attributs+Font.BOLD;
+		}
+		if (chkItalique.isSelected())
+		{
+			attributs=attributs+Font.ITALIC;
+		}
+				
+		Font police;
+		police=new Font(txt.getFont().getName(),attributs,txt.getFont().getSize());
+		txt.setFont(police);
+}
+
+/***************** JRadioButton *****************/
+
+JRadioButton optFondRouge,optFondVert,optFondBleu;
+	JRadioButton optRouge,optVert,optBleu;
+	JPanel couleur,couleurFond;
+	ButtonGroup grpCouleur,grpCouleurFond;
+	// creation des boutons
+	optRouge=new JRadioButton("Rouge");
+	optVert=new JRadioButton("Vert");
+	optBleu=new JRadioButton("Bleu");
+	optFondRouge=new JRadioButton("Rouge");
+	optFondVert=new JRadioButton("Vert");
+	optFondBleu=new JRadioButton("Bleu");
+	// regroupement logique des boutons
+	grpCouleur=new ButtonGroup();
+	grpCouleur.add(optRouge);
+	grpCouleur.add(optVert);
+	grpCouleur.add(optBleu);
+	grpCouleurFond=new ButtonGroup();
+	grpCouleurFond.add(optFondRouge);
+	grpCouleurFond.add(optFondVert);
+	grpCouleurFond.add(optFondBleu);
+	// regroupement physique des boutons
+	couleur=new JPanel();
+	couleur.setLayout(new GridLayout(0,1));
+	couleur.add(optRouge);
+	couleur.add(optVert);
+	couleur.add(optBleu);
+	couleurFond=new JPanel();
+	couleurFond.setLayout(new GridLayout(0,1));
+	couleurFond.add(optFondRouge);
+	couleurFond.add(optFondVert);
+	couleurFond.add(optFondBleu);
+	// ajout d'une bordure avec titre
+	cou-leur.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"couleur police"));
+	couleur-Fond.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"couleur fond"));
+	// referencement des ecouteurs
+	optBleu.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setForeground(Color.BLUE);
+		}
+	});
+	optVert.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setForeground(Color.GREEN);
+		}
+	});
+	optRouge.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setForeground(Color.RED);
+		}
+	});
+	optFondBleu.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setBackground(Color.BLUE);
+		}
+	});
+	optFondRouge.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setBackground(Color.RED);
+		}
+	});
+	optFondVert.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setBackground(Color.GREEN);
+		}
+	});
+
+/************** JList ****************/
+
+JList polices ;
+JScrollPane defilPolices;
+	
+String[] nomsPoli-ces={"Dialog","DialogInput","Monospaced","Serif","SansSerif"};
+polices=new JList(nomsPolices);
+polices.setSelectedIndex(0);
+defilPolices=new JScrollPane(polices);
+defilPolices.setPreferredSize(new Dimension(100,60));
+options.add(defilPolices);
+polices.addListSelectionListener(new ListSelectionListener()
+{
+	public void valueChanged(ListSelectionEvent e) 
+	{
+		if (!e.getValueIsAdjusting())
+		{
+			changePolice();
+		}
+	}
+});
+…
+…
+…
+public void changePolice()
+{
+	int attributs;
+	attributs=0;
+	if (chkGras.isSelected())
+	{
+		attributs=attributs+Font.BOLD;
+	}
+	if (chkItalique.isSelected())
+	{
+		attributs=attributs+Font.ITALIC;
+	}
+	Font police;
+	police=new Font(polices.getSelectedValue().toString(),attributs,txt.getFont().getSize());
+	txt.setFont(police);
+}
+
+/************************* JComboBox ******************/
+
+JComboBox cboTaille ;
+String tailles[]={"10","12","14","16","20"};
+cboTaille=new JComboBox(tailles);
+cboTaille.setEditable(true);
+options.add(cboTaille);
+cboTaille.addActionListener(new ActionListener()
+{
+	public void actionPerformed(ActionEvent e) 
+	{
+		changePolice();
+	}
+		
+});
+…
+…
+…
+	public void changePolice()
+	{
+		int attributs;
+		attributs=0;
+		if (chkGras.isSelected())
+		{
+			attributs=attributs+Font.BOLD;
+		}
+		if (chkItalique.isSelected())
+		{
+			attributs=attributs+Font.ITALIC;
+		}
+				
+		Font police;
+		Sys-tem.out.println(cboTaille.getSelectedItem().toString());
+		police=new Font(polices.getSelectedValue().toString(),attributs,Integer.parseInt(cboTaille.getSelectedItem().toString()));
+		txt.setFont(police);
+}
+
+/***************  Editeur de texte complet ****************/
+
+package fr.eni;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+public class Ecran14 extends JFrame
+{
+	JPanel pano;
+	JTextArea txt;
+	JScrollPane defil;
+	JMenuBar barre;
+	JMenu mnuFichier,mnuEdition,mnuSauvegarde;
+	JMenuItem mnuNouveau,mnuOuvrir,mnuEnregister,mnuEnregistrerSous,mnuQuitter;
+	JMenuItem mnuCopier,mnuCouper,mnuColler;
+	File fichier;
+	JCheckBox chkGras,chkItalique;
+	JList polices;
+	JComboBox cboTaille;
+
+	public Ecran14()
+	{
+		setTitle("editeur de texte");
+		setBounds(0,0,300,100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// creation des composants
+		pano=new JPanel();
+		pano.setLayout(new BorderLayout());
+		txt=new JTextArea();
+		defil=new JScrollPane(txt);
+		pano.add(defil,BorderLayout.CENTER);
+		getContentPane().add(pano);
+		// creation des composants des menus
+		barre=new JMenuBar();
+		mnuFichier=new JMenu("Fichier");
+		mnuEdition=new JMenu("Edition");
+		mnuSauvegarde=new JMenu("Sauvegarde");
+		mnuNouveau=new JMenuItem("Nouveau");
+		mnuOuvrir=new JMenuItem("Ouvrir");
+		mnuEnregister=new JMenuItem("Enregistrer");
+		mnuEnregister.setEnabled(false);
+		mnuEnregistrerSous=new JMenuItem("Enregistrer sous");
+		mnuCopier=new JMenuItem("Copier");
+		mnuCouper=new JMenuItem("Couper");
+		mnuColler=new JMenuItem("Coller");
+		mnuQuitter=new JMenuItem("Quitter");
+		// association des elements
+		barre.add(mnuFichier);
+		barre.add(mnuEdition);
+		mnuFichier.add(mnuNouveau);
+		mnuFichier.add(mnuOuvrir);
+		mnuFichier.add(mnuSauvegarde);
+		mnuSauvegarde.add(mnuEnregister);
+		mnuSauvegarde.add(mnuEnregistrerSous);
+		mnuFichier.add(new JSeparator());
+		mnuFichier.add(mnuQuitter);
+		mnuEdition.add(mnuCopier);
+		mnuEdition.add(mnuCouper);
+		mnuEdition.add(mnuColler);
+		// association du menu avec la JFrame
+		setJMenuBar(barre);
+		// les ecouteurs associés aux différents menus
+		mnuNouveau.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				fichier=null;
+				txt.setText("");
+				mnuEnregister.setEnabled(false);
+			}
+			
+		});
+		mnuOuvrir.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				JFileChooser dlg;
+				dlg=new JFileChooser();
+				dlg.showDialog(null,"Ouvrir");
+				fichier=dlg.getSelectedFile();
+				FileInputStream in;
+				try 
+				{
+					in=new FileInputStream(fichier);
+					BufferedReader br;
+					br=new BufferedReader(new InputStreamReader(in));
+					String ligne;
+					txt.setText("");
+					while ((ligne=br.readLine())!=null)
+					{
+						txt.append(ligne+"\r\n");
+					}
+					br.close();
+					mnuEnregister.setEnabled(true);
+				} 
+				catch (FileNotFoundException e) 
+				{
+					e.printStackTrace();
+				}
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+		});
+	mnuQuitter.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			System.exit(0);
+		}
+	});
+	mnuCopier.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.copy();
+		}
+	});
+	mnuCouper.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.cut();
+		}
+	});
+	mnuColler.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.paste();
+		}
+	});
+	mnuEnregister.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+		    try 
+			{
+				PrintWriter pw;
+				pw=new PrintWriter(fichier);
+				pw.write(txt.getText());
+				pw.close();
+			} 
+			catch (FileNotFoundException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	});
+	mnuEnregistrerSous.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+		    try 
+			{
+		    	JFileChooser dlg;
+				dlg=new JFileChooser();
+				dlg.showDialog(null,"enregistrer sous");
+				fichier=dlg.getSelectedFile();
+				PrintWriter pw;
+				pw=new PrintWriter(fichier);
+				pw.write(txt.getText());
+				pw.close();
+			} 
+			catch (FileNotFoundException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	});
+	JToolBar tlbr;
+	tlbr=new JToolBar();
+	JButton btnNouveau,btnOuvrir,btnEnregister;
+	JButton btnCopier,btnCouper,btnColler;
+	btnNouveau=new JButton(new ImageIcon("new.jpg"));
+	btnOuvrir=new JButton(new ImageIcon("open.jpg"));
+	btnEnregister=new JButton(new ImageIcon("save.jpg"));
+	btnCopier=new JButton(new ImageIcon("copy.jpg"));
+	btnColler=new JButton(new ImageIcon("paste.jpg"));
+	btnCouper=new JButton(new ImageIcon("cut.jpg"));
+	tlbr.add(btnNouveau);
+	tlbr.add(btnOuvrir);
+	tlbr.add(btnEnregister);
+	tlbr.addSeparator();
+	tlbr.add(btnCopier);
+	tlbr.add(btnCouper);
+	tlbr.add(btnColler);
+	pano.add(tlbr,BorderLayout.NORTH);
+	btnNouveau.addActionListener(mnuNouveau.getActionListeners()[0]);
+	btnOuvrir.addActionListener(mnuOuvrir.getActionListeners()[0]);
+	btnEnregister.addActionListener(mnuEnregister.getActionListeners()[0]);
+	btnCopier.addActionListener(mnuCopier.getActionListeners()[0]);
+	btnCouper.addActionListener(mnuCouper.getActionListeners()[0]);
+	btnColler.addActionListener(mnuColler.getActionListeners()[0]);
+	JPanel options;
+	GridLayout gl;
+	options=new JPanel();
+	gl=new GridLayout(2,3);
+	//options.setLayout(gl);
+	chkGras=new JCheckBox("Gras");
+	chkItalique=new JCheckBox("Italique");
+	options.add(chkGras);
+	options.add(chkItalique);
+	chkGras.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			changePolice();
+		}
+	});
+	chkItalique.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			changePolice();
+		}
+	});
+	JScrollPane defilPolices;
+	
+	String[] nomsPolices={"Dialog","DialogInput","Monospaced","Serif","SansSerif"};
+	polices=new JList(nomsPolices);
+	polices.setSelectedIndex(0);
+	defilPolices=new JScrollPane(polices);
+	defilPolices.setPreferredSize(new Dimension(100,60));
+	options.add(defilPolices);
+	polices.addListSelectionListener(new ListSelectionListener()
+	{
+		public void valueChanged(ListSelectionEvent e) 
+		{
+			if (!e.getValueIsAdjusting())
+			{
+				changePolice();
+			}
+		}
+	});
+	
+	String tailles[]={"10","12","14","16","20"};
+	cboTaille=new JComboBox(tailles);
+	cboTaille.setEditable(true);
+	options.add(cboTaille);
+	cboTaille.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+		changePolice();
+		}
+		
+	});
+	JRadioButton optFondRouge,optFondVert,optFondBleu;
+	JRadioButton optRouge,optVert,optBleu;
+	JPanel couleur,couleurFond;
+	ButtonGroup grpCouleur,grpCouleurFond;
+	// creation des boutons
+	optRouge=new JRadioButton("Rouge");
+	optVert=new JRadioButton("Vert");
+	optBleu=new JRadioButton("Bleu");
+	optFondRouge=new JRadioButton("Rouge");
+	optFondVert=new JRadioButton("Vert");
+	optFondBleu=new JRadioButton("Bleu");
+	// regroupement logique des boutons
+	grpCouleur=new ButtonGroup();
+	grpCouleur.add(optRouge);
+	grpCouleur.add(optVert);
+	grpCouleur.add(optBleu);
+	grpCouleurFond=new ButtonGroup();
+	grpCouleurFond.add(optFondRouge);
+	grpCouleurFond.add(optFondVert);
+	grpCouleurFond.add(optFondBleu);
+	// regroupement physique des boutons
+	couleur=new JPanel();
+	couleur.setLayout(new GridLayout(0,1));
+	couleur.add(optRouge);
+	couleur.add(optVert);
+	couleur.add(optBleu);
+	couleurFond=new JPanel();
+	couleurFond.setLayout(new GridLayout(0,1));
+	couleurFond.add(optFondRouge);
+	couleurFond.add(optFondVert);
+	couleurFond.add(optFondBleu);
+	// ajout d'une bordure avec titre
+	couleur.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"couleur police"));
+	couleurFond.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"couleur fond"));
+	// referencement des ecouteurs
+	optBleu.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setForeground(Color.BLUE);
+		}
+	});
+	optVert.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setForeground(Color.GREEN);
+		}
+	});
+	optRouge.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setForeground(Color.RED);
+		}
+	});
+	optFondBleu.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setBackground(Color.BLUE);
+		}
+	});
+	optFondRouge.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setBackground(Color.RED);
+		}
+	});
+	optFondVert.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			txt.setBackground(Color.GREEN);
+		}
+	});
+	
+
+	options.add(couleur);
+	options.add(couleurFond);
+	pano.add(options,BorderLayout.SOUTH);
+}
+	public void changePolice()
+	{
+		int attributs;
+		attributs=0;
+		if (chkGras.isSelected())
+		{
+			attributs=attributs+Font.BOLD;
+		}
+		if (chkItalique.isSelected())
+		{
+			attributs=attributs+Font.ITALIC;
+		}
+				
+		Font police;
+		System.out.println(cboTaille.getSelectedItem().toString());
+		police=new Font(polices.getSelectedValue().toString(),attributs,Integer.parseInt(cboTaille.getSelectedItem().toString()));
+		txt.setFont(police);
+	}
+}
+
+/**************************************************************************************/
+/********************************** Chapitre 5 ****************************************/
+/**************************************************************************************/
+
+/**************** Cycle de vie d'une applet ***************/
+
+import java.applet.Applet;
+import java.awt.Graphics;
+
+
+public class TestApplet extends Applet 
+{
+	private String message="";
+	public void destroy() 
+	{
+		message=message + "methode destroy \r\n";
+	}
+
+	public void init() 
+	{
+		message=message + "methode init \r\n";
+	}
+
+	public void start() 
+	{
+		message=message + "methode start \r\n";
+	}
+
+	public void stop() 
+	{
+		message=message + "methode stop \r\n";
+	}
+
+	public void paint(Graphics g) 
+	{
+		message=message + "methode paint \r\n";
+		g.drawString(message, 10, 20);
+	}
+
+} 
+
+Pour vérifier le bon fonctionnement de l’applet nous devons insérer celle-ci dans une page html et visualiser cette dernière dans un navigateur ou avec l’outil appletViewer du jdk.
+
+<html>
+<head>
+<title> premiere applet </title>
+</head>
+<body>
+<h1>visualisation des appels des méthodes d'une applet</h1>
+<applet code="TestApplet"></applet>
+</body>
+</html>
+
+/**************** applet avec gestion de l'affichage ***************/
+
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import javax.swing.JApplet;
+
+
+public class TestApplet2 extends JApplet 
+{
+	private String message="";
+	public void destroy() 
+	{
+		message=message + "methode destroy \r\n";
+	}
+
+	public void init() 
+	{
+		message=message + "methode init \r\n";
+	}
+
+	public void start() 
+	{
+		message=message + "methode start \r\n";
+	}
+
+	public void stop() 
+	{
+		message=message + "methode stop \r\n";
+	}
+
+public void paint(Graphics g) 
+{
+// creation de la police de caracteres
+		Font police=null;
+		police =new Font("SansSerif",Font.PLAIN,14);
+// affectation de la police au contexte graphique
+		g.setFont(police);
+// determination de la largeur et de la hauteur de l'applet
+		int largeurApplet;
+		int hauteurApplet;
+		largeurApplet=getWidth();
+		hauteurApplet=getHeight();
+// creation d'un objet FontMetrics pour obtenir des informations
+		// sur la taille des caracteres
+		FontMetrics fm;
+		fm=g.getFontMetrics(police);
+		int hauteurPolice;
+		int largeurCaractere;
+		hauteurPolice=fm.getHeight();
+// declaration des variables pour gérer la position d'affichage
+		int curseurX;
+		int curseurY;
+		curseurX=0;
+		curseurY=hauteurPolice;
+		message=message + "methode paint \r\n";
+		// boucle de traitement des caracteres un a un
+		for (int i=0;i<message.length();i++)
+		{
+	// recuperation du caractere a traiter et de sa largeur
+			String caractereCourant;
+			caractereCourant=message.substring(i,i+1);
+			largeurCaractere=fm.stringWidth(caractereCourant);
+		// verification si il reste de la place sur la ligne
+			if (curseurX+largeurCaractere>largeurApplet)
+			{
+				// passage au debut de la ligne suivante
+				curseurY=curseurY+hauteurPolice;
+				curseurX=0;
+			}
+		// affichage du caractere a la position courante
+			g.drawString(caractereCourant,curseurX,curseurY);
+		// mise a jour de la position du curseur
+			curseurX=curseurX+largeurCaractere;
+		}
+	}
+}
+
+/**************** applet avec gestion de l'affichage par un TextArea ***************/
+
+import java.applet.Applet;
+import java.awt.Graphics;
+import java.awt.ScrollPane;
+import java.awt.TextArea;
+
+
+public class TestApplet3 extends Applet 
+{
+	ScrollPane defil;
+	TextArea txt;
+	private String message="";
+	
+	public void destroy() 
+	{
+		message=message + "methode destroy \r\n";
+	}
+
+	public void init() 
+	{
+		txt=new TextArea(50,50);
+		defil=new ScrollPane();
+		defil.add(txt);
+		add(defil);
+		txt.append("methode init \r\n");
+	}
+
+	public void start() 
+	{
+		txt.append("methode start \r\n");
+	}
+
+	public void stop() 
+	{
+		txt.append("methode stop \r\n");
+	}
+
+	public void paint(Graphics g) 
+	{
+		txt.append("methode paint \r\n");
+	}
+} 
+
+/**************** Thread dans une applet ***************/
+
+import java.applet.Applet;
+import java.awt.Graphics;
+import java.awt.Image;
+
+public class TestApplet5 extends Applet implements Runnable
+{
+	Thread th;
+	final int MAXI=100;
+	final int MINI=10;
+	int largeur=MINI;
+	int hauteur=MINI;
+	Image img;
+
+	public void run() 
+	{
+	 	boolean grossir=true;
+	 	Thread t;
+	 	t=Thread.currentThread();
+		while (th==t)
+		{
+			if(largeur>MAXI & grossir)
+			{
+				grossir=false;
+			}
+			if (largeur<MINI & !grossir)
+			{
+				grossir=true;
+			}
+			if (grossir)
+			{
+				largeur++;
+				hauteur++;
+			}
+			else
+			{
+				largeur--;
+				hauteur--;
+			}	
+			repaint();
+			try 
+			{
+				th.sleep(10);
+			} 
+			catch (InterruptedException e)
+			 {}
+		}
+		
+	}
+
+	public void init() 
+	{
+		img=getImage(getCodeBase(),"images/duke.gif");
+	}
+
+	public void start()
+	{
+		th=new Thread(this);
+		th.start();
+	}
+
+	public void stop()
+	{
+		th=null;
+	}
+
+	public void paint(Graphics g) 
+	{
+		g.drawImage(img,30,0,largeur,hauteur,this);
+	}
+}
+
+/**************** son dans une applet ***************/
+
+import java.applet.Applet;
+import java.applet.AudioClip;
+
+public class TestAppletAudio extends Applet implements Runnable 
+{
+	AudioClip ac;
+	public void init() 
+	{
+		Thread th;
+		th=new Thread(this);
+		th.start();
+	}
+
+	public void start() 
+	{
+		if (ac!=null)
+		{
+			ac.loop();
+		}
+	}
+	public void stop() 
+	{
+		if (ac!=null)
+		{
+			ac.stop();
+		}
+	}
+	public void run() 
+	{
+		ac=getAudioClip(getCodeBase(),"son.wav");
+		ac.loop();
+	}
+}
+
+/**************** passage de paramètres à une applet ***************/
+
+import java.applet.Applet;
+import java.awt.Graphics;
+import java.awt.Image;
+
+public class TestApplet5 extends Applet implements Runnable
+{
+	Thread th;
+	int MAXI=100;
+	int MINI=10;
+	int largeur=MINI;
+	int hauteur=MINI;
+	Image img;
+
+
+	public void init() 
+	{
+		String min;
+		String max;
+		min=getParameter("minimum");
+		if(min!=null)
+		{
+			MINI=Integer.parseInt(min);
+		}
+		max=getParameter("maximum");
+		if(max!=null)
+		{
+			MAXI=Integer.parseInt(max);
+		}
+		MAXI=Integer.parseInt(max);
+		img=getImage(getCodeBase(),"images/duke.gif");
+
+	}
+…
+}
+
+/**************** affichage dans la console java du navigateur ***************/
+
+import java.applet.Applet;
+import java.awt.Graphics;
+
+
+public class TestApplet extends Applet 
+{
+	public void destroy() 
+	{
+		System.out.println("methode destroy“);
+	}
+
+	public void init() 
+	{
+		System.out.println("methode init”);
+	}
+
+	public void start() 
+	{
+		System.out.println("methode start”);
+	}
+
+	public void stop() 
+	{
+		System.out.println("methode stop");
+	}
+
+	public void paint(Graphics g) 
+	{
+		System.out.println("methode paint");
+	}
+
+} 
+
+/**************** obtenir les propriétés du système ***************/
+
+import java.applet.Applet;
+
+
+public class Proprietes extends Applet 
+{
+
+  public void start() 
+  {
+  System.out.print("version du jre \t");
+  System.out.println(System.getProperty("java.version"));
+  System.out.print("fournisseur du jre \t");
+  System.out.println(System.getProperty("java.vendor"));
+  System.out.print("site web du fournisseur du jre \t");
+  System.out.println(System.getProperty("java.vendor.url"));
+  System.out.print("nom du systeme d'exploitation \t");
+  System.out.println(System.getProperty("os.name"));
+  System.out.print("plateforme du systeme d'exploitation \t");
+  System.out.println(System.getProperty("os.arch"));
+  System.out.print("separateur dans les chemins d'acces \t");
+  System.out.println(System.getProperty("file.separator"));
+  System.out.print("separateur dans la variable PATH \t");
+  System.out.println(System.getProperty("path.separator"));
+  }
+}
+
+/**************************************************************************************/
+/********************************** Chapitre 6 ****************************************/
+/**************************************************************************************/
+
+/**************** Connection pilote SQL Server ***************/
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnexionDirecte 
+{
+public static void main(String[] args)
+{
+	try 
+	{
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	}
+	catch (ClassNotFoundException e) 
+	{
+		System.out.println("erreur pendant le chargement du pilote");
+	}
+	Connection cnxDirect=null;
+	try 
+	{
+		cnxDirect=DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=northwind; user=thierry;password=secret;");
+	} 
+	catch (SQLException e) 
+	{
+		System.out.println("erreur pendant la connexion");
+	}
+	}
+}
+
+/**************** Connection pilote ODBC ***************/
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnexionDirecte 
+{
+public static void main(String[] args)
+{
+	try 
+	{
+		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+	}
+	catch (ClassNotFoundException e) 
+	{
+			System.out.println("erreur pendant le chargement du pilote");
+	}
+	Connection cnxOdbc=null;
+	try 
+	{
+		cnxOdbc=DriverManager.getConnection("jdbc:odbc:nwd","thierry","secret");
+	} 
+	catch (SQLException e) 
+	{
+		System.out.println("erreur pendant la connexion");
+	}
+}
+}
+
+/**************** propriétés de la connection ***************/
+
+public static void testLectureSeule(Connection cnx) 
+	{
+		boolean etat;
+		try 
+		{
+			etat = cnx.isReadOnly();
+			cnx.setReadOnly(!etat);
+			if (cnx.isReadOnly() != etat) 
+			{
+				System.out
+						.println("le mode lecture seule est pris en charge par ce pilote");
+			}
+			else 
+			{
+				System.out
+						.println("le mode lecture seule n\'est pas pris en charge par ce pilote");
+			}
+			cnx.setReadOnly(etat);
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** affichage des avertissements du serveur ***************/
+
+public static void affichageWarnings(Connection cnx)
+	{
+		SQLWarning avertissement;
+		try 
+		{
+			avertissement=cnx.getWarnings();
+			if (avertissement==null)
+			{
+				System.out.println("il n\'y a pas d\'avertissement ");
+			}
+			else
+			{
+				while (avertissement!=null)
+				{
+					System.out.println(avertissement.getMessage());
+					System.out.println(avertissement.getSQLState());
+					System.out.println(avertissement.getErrorCode());
+					avertissement=avertissement.getNextWarning();
+				}
+			}
+			cnx.clearWarnings();
+		} 
+		catch (SQLException e) 
+		{
+				e.printStackTrace();
+		}
+	}
+
+/**************** informations sur la structure de la base ***************/
+
+	public static void infosBase(Connection cn)
+	{
+		ResultSet rs;
+		DatabaseMetaData dbmd;
+		try 
+		{
+			dbmd=cn.getMetaData();
+			System.out.println("type de base : " + dbmd.getDatabaseProductName());
+			System.out.println("version: " + dbmd.getDatabaseProductVersion());
+			System.out.println("nom du pilote : " + dbmd.getDriverName());
+			System.out.println("version du pilote : " + dbmd.getDriverVersion());
+			System.out.println("nom de l\'utilisateur : " + dbmd.getUserName());
+			System.out.println("url de connexion : " + dbmd.getURL());
+			rs=dbmd.getTables(null,null,"%",null);
+			System.out.println("structure de la base");
+		    System.out.println("base\tschema\tnom table\ttype table");
+		    while(rs.next()) 
+		    {
+		    	for (int i = 1; i <=4 ; i++)
+		    	{
+		    		System.out.print(rs.getString(i)+"\t");
+		    	}
+		    	System.out.println();
+		    }
+		    rs.close();
+		    rs=dbmd.getProcedures(null,null,"%");
+		    System.out.println("les procedures stockées");
+		    System.out.println("base\tschema\tnom procedure");
+		    while(rs.next()) 
+		    {
+		    	for (int i = 1; i <=3 ; i++)
+		    	{
+		    		System.out.print(rs.getString(i)+"\t");
+		    	}
+		    	System.out.println();
+		    }
+		    rs.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** exécution d'instructions SQL de base ***************/
+
+public static void testExecute(Connection cnx)
+	{
+		Statement stm;
+		BufferedReader br;
+		String requete;
+		ResultSet rs;
+		boolean resultat;
+		try 
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("saisir votre instruction SQL :");
+			requete=br.readLine();
+			resultat=stm.execute(requete);
+			if (resultat)
+			{
+				System.out.println("votre instruction a genere un jeu d\'enregistrements");
+				rs=stm.getResultSet();
+				rs.last();
+				System.out.println("il contient " + rs.getRow() + " enregistrements");
+			}
+			else
+			{
+				System.out.println("votre instruction a modifie des enregistrements dans la base");
+				System.out.println("nombre d'enregistrements modifiés :" + stm.getUpdateCount());
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("votre instruction n\'a pas fonctionne correctement");
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** exécution d'instructions par lot ***************/
+
+	public static void testExecuteBatch(Connection cnx)
+	{
+		Statement stm;
+		BufferedReader br;
+		String requete="";
+		int[] resultats;
+		try
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("saisir vos instructions SQL puis run pour exécuter le lot :");
+			requete=br.readLine();
+			while (!requete.equalsIgnoreCase("run"))
+			{
+				stm.addBatch(requete);
+				requete=br.readLine();
+			}
+			System.out.println("execution du lot d\'instructions");
+			resultats=stm.executeBatch();
+			for (int i=0; i<resultats.length;i++)
+			{
+				switch (resultats[i])
+				{
+				case Statement.EXECUTE_FAILED:
+					System.out.println("l\'execution de l'instruction " + i + " a echoue");
+					break;
+				case Statement.SUCCESS_NO_INFO:
+					System.out.println("l\'execution de l'instruction " + i + " a reussie");
+					System.out.println("le nombre d\'enregistrements modifiés est inconnu");
+					break;
+				default:
+					System.out.println("l\'execution de l'instruction " + i + " a reussie");
+					System.out.println("elle a modifie " + resultats[i] + " enregistrements");
+					break;
+				}
+				
+				       
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** exécution de plusieurs instructions ***************/
+
+	public static void testExecuteMultiple(Connection cnx)
+	{
+		Statement stm;
+		BufferedReader br;
+		String requete;
+		ResultSet rs;
+		boolean resultat;
+		try 
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("saisir vos instruction SQL separes par ; :");
+			requete=br.readLine();
+			resultat=stm.execute(requete);
+			int i=1;
+			// traitement du resultat genere par la premiere instruction
+			if (resultat)
+			{
+				System.out.println("votre instruction N° " + i + " a genere un jeu d\'enregistrements");
+				rs=stm.getResultSet();
+				rs.last();
+				System.out.println("il contient " + rs.getRow() + " enregistrements");
+			}
+			else
+			{
+				System.out.println("votre instruction N° " + i + " a modifie des enregistrements dans la base");
+				System.out.println("nombre d'enregistrements modifiés :" + stm.getUpdateCount());
+			}
+			i++;
+			// deplacement du pointeur sur un eventuel resultat suivant
+			resultat=stm.getMoreResults();
+			// boucle tant qu'il y a encore un resultat de type jeu d'enregistrement -> resultat==true
+			// ou qu'il y a encore un resultat de type nombre d'enregistrements modifiés -> getUpdateCount != -1
+			while (resultat || stm.getUpdateCount()!=-1)
+			{
+				if (resultat)
+				{
+					System.out.println("votre instruction N° " + i + " a genere un jeu d\'enregistrements");
+					rs=stm.getResultSet();
+					rs.last();
+					System.out.println("il contient " + rs.getRow() + " enregistrements");
+				}
+				else
+				{
+					System.out.println("votre instruction N° " + i + " a modifie des enregistrements dans la base");
+					System.out.println("nombre d'enregistrements modifiés :" + stm.getUpdateCount());
+				}
+				i++;
+				// deplacement du pointeur sur un eventuel resultat suivant
+				resultat=stm.getMoreResults();
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("votre instruction n\'a pas fonctionne correctement");
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** création de requete par concaténation ***************/
+
+ 	public static void testRequeteConcat(Connection cnx)
+	{
+		Statement stm;
+		BufferedReader br;
+		String requete;
+		String code;
+		ResultSet rs;
+		boolean resultat;
+		try 
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("saisir le code du client recherche :");
+			code=br.readLine();
+			requete="select * from customers where customerID=\'" + code + "\'";
+			resultat=stm.execute(requete);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+	}
+
+/**************** exécution de requete avec paramètres ***************/
+
+public static void testPreparedStatement(Connection cnx)
+	{
+		{
+			PreparedStatement stm;
+			BufferedReader br;
+			String code;
+			ResultSet rs;
+			try 
+			{
+				stm=cnx.prepareStatement("select * from customers where customerID like ?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+				br=new BufferedReader(new InputStreamReader(System.in));
+				System.out.println("saisir le code du client recherche :");
+				code=br.readLine();
+				stm.setString(1,code);
+				rs=stm.executeQuery();
+				while (rs.next())
+				{
+					 for (int i = 1; i <=rs.getMetaData().getColumnCount(); i++)
+					 {
+					 	System.out.print(rs.getString(i)+"\t");
+					 }
+					 System.out.println();
+			   }
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+/**************** exécution de procédures stockées ***************/
+
+create PROCEDURE commandesParClient @code nchar(5)
+AS
+SELECT OrderID, 
+	OrderDate,
+	RequiredDate,
+	ShippedDate
+FROM Orders
+WHERE CustomerID = @code
+ORDER BY OrderID
+
+CREATE procedure nbCommandes @code nchar(5) as
+declare @nb int
+select @nb=count(*) from orders where customerid=@code
+return @nb
+ 
+
+ public static void testProcedureStockee(Connection cnx)
+	{
+		CallableStatement cstm1,cstm2;
+		BufferedReader br;
+		String code;
+		ResultSet rs;
+		int nbCommandes;
+		try 
+		{
+			br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("saisir le code du client recherche :");
+			code=br.readLine();
+			cstm1=cnx.prepareCall("{ ?=call nbCommandes ( ? )}");
+			cstm1.setString(2,code);
+			cstm1.registerOutParameter(1,java.sql.Types.INTEGER);
+			cstm1.execute();
+			nbCommandes=cstm1.getInt(1);
+			System.out.println("nombre de commandes passees par le client " + code + " : " + nbCommandes );
+			cstm2=cnx.prepareCall("{ call commandesParClient ( ? )}",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			cstm2.setString(1,code);
+			rs=cstm2.executeQuery();
+			System.out.println("detail des commandes");
+			System.out.println("numero de commande\tdate de commande");
+			while (rs.next())
+			{
+				System.out.print(rs.getInt("OrderID") + "\t");
+				System.out.println(new SimpleDateFormat("dd/MM/yy").format(rs.getDate("OrderDate")));
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** informations sur le jeu de résultats ***************/
+
+public static void infosResultset(ResultSet rs)
+	{
+		try {
+			switch (rs.getType())
+			{
+				case ResultSet.TYPE_FORWARD_ONLY:
+					System.out.println("le Resultset est a defilement en avant seulement");
+					break;
+				case ResultSet.TYPE_SCROLL_INSENSITIVE:
+					System.out.println("le Resultset peut etre parcouru dans les deux sens");
+					System.out.println("il n\'est pas sensible au modifications faites par d\'autres utilisateurs");
+					break;
+				case ResultSet.TYPE_SCROLL_SENSITIVE:
+					System.out.println("le Resultset peut etre parcouru dans les deux sens");
+					System.out.println("il est sensible au modifications faites par d\'autres utilisateurs");
+					break;
+			}
+			switch (rs.getConcurrency()) 
+			{
+				case ResultSet.CONCUR_READ_ONLY:
+					System.out.println("les donnees contenues dans le ResulSet sont en lecture seule");
+					break;
+				case ResultSet.CONCUR_UPDATABLE:
+					System.out.println("les donnees contenues dans le ResulSet sont modifiables");
+					break;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** position dans le jeu de résultats ***************/
+
+	public static void positionRs(ResultSet rs)
+	{
+		try {
+			if (rs.isBeforeFirst())
+			{
+				System.out.println("le pointeur est avant le premier enregistrement");
+			}
+			if (rs.isAfterLast())
+			{
+				System.out.println("le pointeur est apres le dernier enregistrement");
+			}
+			if (rs.isFirst())
+			{
+				System.out.println("le pointeur est sur le premier enregistrement");
+			}
+			if (rs.isLast())
+			{
+				System.out.println("le pointeur est sur le dernier enregistrement");
+			}
+			int position;
+			position=rs.getRow();
+			if (position!=0)
+			{
+				System.out.println("c'est l\'enregistrement numero " + position);
+			}
+		} catch (SQLException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+	}
+}
+
+/**************** lecture dans le jeu de résultats ***************/
+
+	public static void lectureRs(Connection cnx)
+	{
+		Statement stm;
+		String requete;
+		ResultSet rs;
+		try 
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			requete="select *   from products " ;
+			rs=stm.executeQuery(requete);
+			System.out.println("code produit\tdesignation\tprix unitaire\tstock\tepuise\tDLC");
+			while(rs.next())
+			{
+					System.out.print(rs.getInt("ProductID")+"\t");
+					System.out.print(rs.getString("ProductName")+"\t");
+					System.out.print(rs.getDouble("UnitPrice")+"\t");
+					rs.getShort("UnitsInStock");
+					if (rs.wasNull())
+					{
+						System.out.print("inconnu\t");
+					}
+					else
+					{	
+					System.out.print(rs.getShort("UnitsInStock")+"\t");
+					}
+					System.out.print(rs.getBoolean("Discontinued")+"\t");
+					if (rs.getDate("DLC")!=null)
+					{
+						System.out.println(rs.getDate("DLC"));
+					}
+					else
+						System.out.println("non perissable");
+			}
+			rs.close();
+			stm.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		} 
+	}
+
+/**************** modification dans le jeu de résultats ***************/
+
+	public static void modificationRs(Connection cnx)
+	{
+		Statement stm;
+		String requete;
+		ResultSet rs;
+		int num=0;
+		BufferedReader br;
+		String reponse;
+		try 
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			requete="select *   from products " ;
+			rs=stm.executeQuery(requete);
+			System.out.println("numero de ligne\tcode produit\tdesignation\tprix unitaire\tstock\tepuise\tDLC");
+			while(rs.next())
+			{
+					num++;
+					System.out.print(num + "\t");
+					System.out.print(rs.getInt("ProductID")+"\t");
+					System.out.print(rs.getString("ProductName")+"\t");
+					System.out.print(rs.getDouble("UnitPrice")+"\t");
+					rs.getShort("UnitsInStock");
+					if (rs.wasNull())
+					{
+						System.out.print("inconnu\t");
+					}
+					else
+					{	
+					System.out.print(rs.getShort("UnitsInStock")+"\t");
+					}
+					System.out.print(rs.getBoolean("Discontinued")+"\t");
+					if (rs.getDate("DLC")!=null)
+					{
+						System.out.println(rs.getDate("DLC"));
+					}
+					else
+						System.out.println("non perissable");
+			}
+			br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("quelle ligne voulez vous modifier ? ");
+			reponse=br.readLine();
+			rs.absolute(Integer.parseInt(reponse));
+			System.out.println("designation actuelle " + rs.getString("ProductName"));
+			System.out.println("saisir la nouvelle valeur ou enter pour conserver la valeur actuelle");
+			reponse=br.readLine();
+			if (!reponse.equals(""))
+			{
+				rs.updateString("ProductName",reponse);
+			}
+			System.out.println("prix unitaire actuel " + rs.getDouble("UnitPrice"));
+			System.out.println("saisir la nouvelle valeur ou enter pour conserver la valeur actuelle");
+			reponse=br.readLine();
+			if (!reponse.equals(""))
+			{
+				rs.updateDouble("UnitPrice",Double.parseDouble(reponse));
+			}
+			rs.getShort("UnitsInStock");
+			if (rs.wasNull())
+			{
+				System.out.println ("quantite en stock actuelle inconnue");
+			}
+			else
+			{	
+			System.out.println("quantite en stock actuelle " + rs.getShort("UnitsInStock"));
+			}
+			System.out.println("saisir la nouvelle valeur ou enter pour conserver la valeur actuelle");
+			reponse=br.readLine();
+			if (!reponse.equals(""))
+			{
+				rs.updateShort("UnitsInStock",Short.parseShort(reponse));
+			}
+			System.out.println("voulez vous valider ces modifications o/n");
+			reponse=br.readLine();
+			if (reponse.toLowerCase().equals("o"))
+			{
+				rs.updateRow();
+			}
+			else
+			{
+				rs.cancelRowUpdates();
+			}
+			System.out.println("les valeurs actuelles ");
+			System.out.print(rs.getString("ProductName")+"\t");
+			System.out.print(rs.getDouble("UnitPrice")+"\t");
+			rs.getShort("UnitsInStock");
+			if (rs.wasNull())
+			{
+				System.out.print("inconnu\t");
+			}
+			else
+			{	
+			System.out.print(rs.getShort("UnitsInStock")+"\t");
+			}
+			rs.close();
+			stm.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+
+/**************** suppression dans le jeu de résultats ***************/
+
+	public static void suppressionRs(Connection cnx)
+	{
+		Statement stm;
+		String requete;
+		ResultSet rs;
+		int num=0;
+		BufferedReader br;
+		String reponse;
+		try 
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			requete="select *  from products " ;
+			rs=stm.executeQuery(requete);
+			System.out.println("numero de ligne\tcode produit\tdesignation\tprix unitaire\tstock\tepuise\tDLC");
+			while(rs.next())
+			{
+					num++;
+					System.out.print(num + "\t");
+					System.out.print(rs.getInt("ProductID")+"\t");
+					System.out.print(rs.getString("ProductName")+"\t");
+					System.out.print(rs.getDouble("UnitPrice")+"\t");
+					rs.getShort("UnitsInStock");
+					if (rs.wasNull())
+					{
+						System.out.print("inconnu\t");
+					}
+					else
+					{	
+					System.out.print(rs.getShort("UnitsInStock")+"\t");
+					}
+					System.out.print(rs.getBoolean("Discontinued")+"\t");
+					if (rs.getDate("DLC")!=null)
+					{
+						System.out.println(rs.getDate("DLC"));
+					}
+					else
+						System.out.println("non perissable");
+			}
+			br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("quelle ligne voulez vous supprimer ? ");
+			reponse=br.readLine();
+			rs.absolute(Integer.parseInt(reponse));
+			rs.deleteRow();
+			System.out.println("le pointeur est maintenant sur la ligne " + rs.getRow());
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+/**************** ajout dans le jeu de résultats ***************/
+
+	public static void ajoutRs(Connection cnx)
+	{
+		Statement stm;
+		String requete;
+		ResultSet rs;
+		int num=0;
+		BufferedReader br;
+		String reponse;
+		try 
+		{
+			stm=cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			requete="select *  from products " ;
+			rs=stm.executeQuery(requete);
+			br=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("saisir les valeurs de la nouvelle ligne");
+			rs.moveToInsertRow();
+			System.out.print("code produit : ");
+			reponse=br.readLine();
+			rs.updateInt ("ProductID",Integer.parseInt(reponse));
+			System.out.print("Designation : ");
+			reponse=br.readLine();
+			rs.updateString ("ProductName",reponse);
+			System.out.print("Prix unitaire : ");
+			reponse=br.readLine();
+			rs.updateDouble("UnitPrice",Double.parseDouble(reponse));
+			System.out.print("Quantite en stock : ");
+			reponse=br.readLine();
+			rs.updateDouble("UnitsInStock",Short.parseShort(reponse));
+			rs.insertRow();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+}
+
+/**************** exemple sans transaction ***************/
+
+public static void mouvement(String compteDebit,String compteCredit,double somme)
+	{
+		try 
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Connection cnx=null;
+			cnx=DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=banque; user=sa;password=;");
+			PreparedStatement stm;
+			stm=cnx.prepareStatement("update comptes set solde=solde + ? where numero=?");
+			stm.setDouble(1,somme * -1);
+			stm.setString(2,compteDebit);
+			stm.executeUpdate();
+			impressionRapport(compteDebit, somme);
+			stm.setDouble(1,somme);
+			stm.setString(2,compteCredit);
+			stm.executeUpdate();
+			impressionRapport(compteCredit, somme);
+		}
+		catch (Exception e)
+		{
+		e.printStackTrace();	
+		}
+	}
+
+/**************** utilisation des transactions ***************/
+
+public static void mouvement1(String compteDebit,String compteCredit,double somme)
+	{
+		Connection cnx=null;
+		try 
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	cnx=DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=banque; user=sa;password=;");
+			cnx.setAutoCommit(false);
+			PreparedStatement stm;
+			stm=cnx.prepareStatement("update comptes set solde=solde + ? where numero=?");
+			stm.setDouble(1,somme * -1);
+			stm.setString(2,compteDebit);
+			stm.executeUpdate();
+			impressionRapport(compteDebit, somme);
+			stm.setDouble(1,somme);
+			stm.setString(2,compteCredit);
+			stm.executeUpdate();
+			impressionRapport(compteCredit, somme);
+			cnx.commit();
+		}
+		catch (Exception e)
+		{
+			try {
+				cnx.rollback();
+			} 
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
+			e.printStackTrace();	
+		}
+	}
+
+

@@ -1,0 +1,84 @@
+JAVA 8
+------------------
+
+creer au milieu des années 90 par sun
+un des premier langage répandu avec sur machine virtuel
+code java -> javac -> bytecode -> jvm(java virtual machine) -> exec
+c++ -> gcc -> .o -> link -> exec
+
+le but original, c'était d'avoir un langage a compiler une fois
+et executable sur de multiples plate-forme sans recompiler
+write once, run everywhere
+
+au début, le but était d'avoir java s'executant partout
+	-> une jvm (jre, java runtime environement) pour
+	toutes les plate-formes
+	
+java a plus ou moins échoué pour les programmes clients
+	java a eu du succes la ou e l'attendait pas
+	-> coté serveur (grand succès de java)
+deuxieme succes
+	-> coté mobile
+	java se (java standard edition)
+	java ee (java enterprise edition)
+	java me (java mobile edition)
+java me a marché correctement
+	-> blackberry (java mobile edition)
+google -> android (sa propre version de java)
+
+a cause de ses débuts , java a une réputation de 
+mauvaise performance. ce n'est plus le cas
+	-> techno vm n'on plus rien a voire, très optimisé
+	-> le matériel n'est plus le même
+actuellement, sauf langage orienté systeme ou cas particulier
+la plupart des langage sont soit interprété, soit compilé
+vers un bytecode
+
+	-> java est un langage sans pointeur, garbage collecting
+	vous ne gerez pas directement la mémoire
+	
+	petit surcout (actuellement) sur les performances
+	simplifie le développement
+	managed language
+	
+--------------------------
+java 8
+	version majeure de java
+		-> lambda, innovations pour diverses librairies
+			exemple:la gestion des dates
+			exemple: les collections
+			
+	la version 6 de java est restée très longtemp la dernière
+	rapidement une fois rachetée, sortie de java 7
+	peu de chose nouvelle
+	la version 8, a enfin sortie des innovation majeures
+	en attente depuis des années
+
+installation
+		-> jdk
+		java dev kit
+			(jre + outils de dev)
+			java -> executer programme java (jre)
+			javac -> compiler java (jdk)
+			jar -> generer fichier .jar, etc....
+			
+autres piege sur les versions
+	java EE a aussi un numero de version
+		il est décalé d'un par rapport a java
+	java 8 -> java EE 7
+
+
+
+	
+
+
+
+
+
+
+
+
+	
+
+	
+
