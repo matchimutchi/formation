@@ -1,0 +1,28 @@
+﻿exercice uml université
+-------------------------
+1) une université propose des cours
+2) un cours à une date de debut et une date de fin
+3) un etudiant peut assister a de multuiples cours
+4) chaque cours est donné par un professeur
+5) chaque cours est donné dans une salle
+6) l'université propose plusieurs sujet
+7) chaque cours concerne un sujet
+8) chaque professeur maitrise quelques uns des sujets
+9) etudiant et professeur sont enregistré comme personnel
+de l'université
+
+
+exercice boutique
+-------------------
+1) une boutique propose des produits a la vente
+2) chaque produit appartient a une categorie
+3) un produit a un nom, prix et poids
+4) une commande contient un certain nombre de produits
+5) un client a une adresse de livraison
+6) chaque client  peut consulter ses commandes
+7) une commande peut être dans différents etats (passée, livrée)
+
+
+
+
+

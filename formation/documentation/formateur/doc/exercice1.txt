@@ -1,0 +1,31 @@
+exercice git equipe
+--------------------
+chaque personne du groupe creer sa propre branche
+etape 1
+-------
+	chaque personne travail sur une partie différente du projet
+	avec au moins 2 commits
+	
+src/.. app.js ...
+doc/.. api.txt
+conf/..
+
+une fois terminé
+une des personne vas rapartrier/fusionner son travail dans master
+et le pousser sur le depot commun
+
+le ou les autres doivent d'abord récupérer ce qui a été poussé
+dans master par l'autre personne
+le réconciler avec son travail
+puis repousser dans master le résultat
+
+etape 2
+--------
+gestion de conflit
+
+editer un fichier contributeurs (nom des participants)
+chaque personne l'edite de son coté
+résoudre le conflit:
+	- en utilisant les branches/pull/push correctement
+	- en résolvant le conflit dans le fichier
+

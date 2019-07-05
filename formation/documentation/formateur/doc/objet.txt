@@ -1,0 +1,171 @@
+introduction Objet
+----------------------
+POO -> programmation orientée objet
+	la quasi totalité des langages orientés objet sont
+	à base de classe
+	mais pas tous
+		l'exception notable: javascript -> prototypal
+	
+un objet qu'est ce donc?
+	1) le regroupement , dans une entité, de donnée structurée
+	et des fonctions pour les manipuler
+	Produit -> nom, prix, description
+			-> acheter(), etc
+la définition d'un type d'objet particulier passe par
+une classe.
+dans une classe, on va définir 2 parties principales:
+	->etat: attribut/propriétés/variable
+	->opérations: méthodes/fonctions/messages
+	
+exemple
+	classe Personne(nom, age : contacter())
+une instance, est un exemplaire d'objet construit
+a partir d'une classe
+	Instance (nom: "bob", age: 25)
+	Instance (nom: "bruce", age: 43)
+	
+chaque classe représente un "Type" de donnée que l'on
+peut manipuler dans notre programme
+
+pourquoi l'objet?
+cela offre plusieurs facilités
+	- cela permet d'organiser/conceptualiser ce qu'on
+	manipule: structuration
+	- permet de lier les fonctions aux données qu'elles
+	sont sensée manipuler
+	fonctions qui sont liées à un objet sont appelées méthodes
+	
+la combinaison de ces 2 facteurs permet de mieux modulariser
+votre code: encapsulation, objet "boite noire"
+
+il y a , grace à l'encapsulation, le concept visibilité
+	on peut "controller" qui peu accéder aux méthodes et
+	attributs d'un objet
+	
+les méthodes d'une classe sont responsable d'un état
+cohérent de l'objet
+on peut donc "bloquer" l'acces a certaines parties interne
+de l'objet -> visibilité
+	-> public
+		tout le monde
+	-> private
+		seule les instances de la classe y on accès
+	
+une des pratiques communes:
+	accesseurs ou getter/setter
+
+en uml public est dénoté par '+'
+	   private est dénoté par '-'
+
+en plus, s'ajoute le concept d'heritage
+	
+l'heritage est un mecanisme qui permet de définir
+une relation 'parent/enfant' entre deux classes
+une classe 'enfant' hérite de sa classe 'parent'
+la classe parent est une généralisation de la classe enfant
+la classe enfant est une spécialisation de la classe parent
+la classe enfant récupere tous les attributs/opérations
+de son parent. A ce titre, la classe enfant peut faire tout
+ce qui est possible de faire par le parent
+l'inverse n'est pas vrais
+
+c'est un concept 'relativement' parlant pour l'humain
+cela permet de mettre en commun du code/logique partagé
+par plein de classe enfant via leur parent
+on peu partir d'une classe parent en la spécialisant aux
+minimum, en ajoutant que ce qui est nécéssaire
+
+en java, on parle d'heritage simple
+en C++, on parle d'heritage multiple
+
+en heritage simple, une classe à une class parente uniquement
+en héritage multiple, une classe peut avoir de multiple classes
+parentes
+
+le langage C++ a été l'introducteur de l'objet dans 
+l'industrie. choix de l'heritage multiple
+
+par la suite, l'heritage multiple a été considéré comme
+trop complexe à l'usage, les langages plus récent (comme java)
+utilise l'heritage simple, avec certains mecanisme pour
+compenser la perte de l'heritage multiple
+
+on a limité à un seul parent, pour eviter les complications
+coté enfant
+	- on récupere les attributs du parent
+	- on récupere les methodes du parent
+	- on peut ajouter de nouveaux attributs
+	- on peut ajouter de nouvelles méthodes
+	- on peu remplacer une méthode héritée du parent
+	
+visibilité complete
+				classe		package		heritier 	reste
+public +			X			X			X			X
+protected #			X			X			X			-
+package ~			X			X			-			-
+private -			X			-			-			-
+
+le principe
+	on ouvre en publique uniquement ce qui est nécéssaire
+	à l'interaction avec l'objet
+	tout le fonctionnement interne est caché en private
+	
+associations
+des classes peuvent avoir des realtions/associations
+association basique
+	-> aggregation
+		un objet regroupe un ensemble d'autres objets
+		mais ceux-ci sont indépendants
+		contact -> repertoire
+	-> composition
+		un objet est composé de plusieurs autres objets
+		partie avec le tout
+		cheval -> organes
+		
+
+quelques subtilités avec les classes/diagrammmes/objets
+
+il y a la possibilité de déclarer des classes abstraites
+c'est une classe qui n'aura jamais d'instance
+
+En uml, une classe abstraite est dénotée par son nom en
+italique
+
+une méthode peut aussi être abstraite, a ce moment la
+elle ne contient pas de code
+on ne peut déclarer une méthode abstraitre que dans une 
+classe abstraite
+
+on peut aussi déclarer des attributs ou méthodes statiques
+	- class TeslaModel3 (couleur, proprietaire, charge)
+		
+		- tesla de bob (couleur, propriétaire...)
+		- tesla patrick (couleur, propriétaire...)
+	attribut constructeur (identique pour toutes les teslamodel3)
+	methode statique, methode qui n'a acces qu'aux attributs statiques
+en uml, une méthode ou un attribut statique est indiqué
+via un soulignement
+
+
+	
+	
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+	
+	
+			
+			
+			

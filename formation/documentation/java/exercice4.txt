@@ -1,0 +1,37 @@
+exercice java heritage
+------------------------
+
+exercice principal
+-------------------
+creer plusieurs classes
+application de suivi/maintenance
+classe parente abstraite "Ticket"
+Ticket ->id, titre, description, urgence (entier)
+TicketLogiciel : Ticket -> nomLogiciel, version
+TicketMateriel : Ticket -> noMateriel, localisation
+
+ecrire les classes, attributs, getter, setter, constructeurs
+et toString
+
+--> je veux pouvoir sauvegarder les tickets dans un fichier csv
+	il n'y aura pas de ',' dans les champs texte
+--> methode description
+--> bonus (plus dure)
+	pouvoir charger une collection de ticket depuis le fichier CSV
+	
+exercice super bonus
+	ecrire les classes pour les différentes pieces du jeu d'échec
+	les pieces ont une méthode getDeplacementsPossibles()
+	-> la liste des cases ou peu se deplacer la piece
+	on considere que l'echiquier est vide a part la piece
+	pour le pion, gerer juste le déplacement en avant normal
+	
+	
+	
+	
+
+
+	
+		
+
+

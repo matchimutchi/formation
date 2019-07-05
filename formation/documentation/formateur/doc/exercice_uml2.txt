@@ -1,0 +1,17 @@
+exercice diagramme classe
+------------------------
+modeliser
+
+facile
+	un modem et un clavier sont des périphériques 
+	d'entree sortie
+	
+	une operation boursiere est un achat ou une vente
+	une transaction est un ensemble d'operation boursieres
+	
+	
+difficile
+	modeliser les classes permettant de représenter
+	une partie d'echec
+	
+	

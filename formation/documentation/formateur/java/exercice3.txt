@@ -1,0 +1,38 @@
+exercice java 3 (objet)
+------------------------
+inspiration gestion de maintenance
+
+ecrire le code pour 2 des classes du projet
+Materiel
+Article
+
+Materiel
+	String noSerie
+	String localisation
+	int age
+	
+Article
+	String nom
+	String description
+	String famille
+	
+Materiel n)-----(1 Article
+
+ecrire les classes
+	avec:
+		les attributs en privé
+		les accesseurs
+		au moins 2 constructeurs
+		toString redéfini
+		
+	ajouter des methodes pour
+		pouvoir creer un materiel depuis un article
+		en indiquant noSerie, etc
+		
+	pouvoir comparer deux materiel pour egalité (equals)
+		deux materiels sont egaux quand ils
+		ont le même noSerie et qu'il référence le même
+		article
+		
+	
+		

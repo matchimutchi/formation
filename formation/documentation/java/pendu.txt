@@ -1,0 +1,16 @@
+pendu
+---------
+vous avez 10 essais
+
+_______
+
+lire dans un fichier une liste de mots
+tirer au hasard un mot
+ (Random dans java)
+ 
+demander a l'utilisateur de taper une lettre
+si elle est présente dans le mot
+reafficher le mot avec
+____e__e
+si la lettre n'est pas présente
+reduire d'un essais

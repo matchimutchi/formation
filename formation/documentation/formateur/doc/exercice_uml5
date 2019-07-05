@@ -1,0 +1,12 @@
+exercice etat transition
+-----------------------
+modeliser une montre simplifiée
+
+- on a deux boutons sur la montre
+- un bouton permet d'allumer un eclairage (ou de l'eteindre)
+- un deuxieme bouton permet de basculer entre heure et date
+a l'affichage
+- on demarre sur l'heure et non rétro éclairé
+
+bonus:
+	bouton supplémentaire et reglage de l'heure

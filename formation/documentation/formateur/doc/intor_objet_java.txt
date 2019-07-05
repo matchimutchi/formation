@@ -1,0 +1,32 @@
+objet et classe en java
+-------------------------
+
+1)toutes les classes en java commence par une majuscule
+2) sauf pour les classes internes, chaque classe est dans
+son propre fichier source, qui porte le même nom que la classe
+
+Produit  -> Produit.java  --> compilation --> Produit.class
+
+3) les classes sont "rangée/organisée" en package
+cela permet d'avoir 2 classes avec le même nom
+du moment qu'elle ne sont pas dans le même package
+le nom pleinement qualifié d'une classe incorpore son
+package
+dans votre projet
+un package correspond a un répertoire
+
+monprojet.metier.Produit
+  |
+  v
+monprojet/metier/Produit.java
+
+java est un langage avec chargement dynamique des classes
+quand la jvm rencontre une classe qu'elle ne connait pas
+elle va tenter de la charger en recherchant son fichier class
+corespondant
+
+
+
+
+
+

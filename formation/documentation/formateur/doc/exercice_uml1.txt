@@ -1,0 +1,51 @@
+permier exemple:
+	modeliser un dab (distributeur automatique de billet)
+	
+première étape, modéliser les cas d'utilisations
+
+	A) quels sont les acteurs/utilisateurs
+		distinguer les acteurs primaires/secondaires
+	B) quelle est la "limite" de ce qui est dans le systeme
+	C) a quoi sert le systeme, lister les cas d'utilisations
+	
+listez moi ces 3 informations 
+
+-------------------------------------------
+A) 
+	- client banque	(primaire)
+	- porteur de carte (primaire)
+	- technicien de maintenance	+
+	- convoyeur de fond			+---> ensemble? (secondaire)
+	- employe banque ? (secondaire)
+	- le SI de la banque (secondaire)
+	- agent sécurité (secondaire)
+	- le SI visa
+	
+B)
+	- carte bancaire n'est pas un acteur
+	idem pour clavier, etc...
+	- laisser les SI comme acteur
+	- laisser le technicien de maintenance comme acteur
+	
+C) 
+	- retirer de l'argent
+	- consulter le solde
+	- depot de numéraire
+	- choisir la langue
+	- choisir le compte
+	- accessibilité
+	- insérer carte
+	- recharger le dab
+	- retirer les depots
+	
+---------------------
+premier cas d'utilisation simple
+
+acteurs : client, porteur carte, technicien, si Visa
+cas d'utilisation:
+			retirer, consulter solde, deposer numéraire
+			recharger dab
+			
+
+	
+	
