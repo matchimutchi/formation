@@ -1,0 +1,24 @@
+exercice 2 java
+------------------
+exercice 2A  (facile)
+
+ecrire une fonction prenant un ensemble de valeurs doubles
+en parametre et affichant les valeurs minimales et maximales
+
+exercice 2B (facile+)
+
+ecrire une fonction prenant en parametre une somme initiale
+et un taux d'interet, ainsi qu'une somme à atteindre
+cette fonction me renverra le nombre d'année minimum a attendre
+pour obtenir la somme voulue
+
+exercice 2C (moyen++)
+
+ecire une fonction prenant en parametre un nombre 
+entre 1 et 999 et affichant le chiffre romain correspondant
+par exemple
+146 -> CXLVI
+
+
+
+
