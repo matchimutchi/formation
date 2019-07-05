@@ -1,0 +1,100 @@
+git workflow avec fork
+----------------------
+configuration
+un depot "maitre" sur github
+chaque contributeur fork ce depot une fois
+sur leur compte
+	resultat
+		1 depot maitre + n depot fork pour n 
+contributeur.
+seul le mainteneur (celui qui mergera dans 'master')
+a le droit en ecriture sur le depot maitre
+les autres on uniquement le droit en lecture
+
+--> pas de conf particuliere pour le mainteneur
+	il peut cloner directement le dépot maitre
+	pour travailler dessus.
+	
+pour les contributeurs:
+	ils clonent leur fork du depot maitre
+	sur lequel ils on tous les droits
+	
+quand on clone un depot, le remote "origin" pointe
+vers le dépot depuis lequel on a cloné
+
+pour pouvoir se mettre a jour des derniers developpements
+du depot maitre, on ajoute un deuxieme remote, typiquement
+nommé "upstream" vers le depot maitre
+
+upstream ne sert qu'en lecture
+origin vous sert à pousser vos modification et à vous mettre
+à jour avec upstream
+
+pour eviter toutes interference, un contributeur ne travail
+que dans ses propres branches, jamais dans master
+
+--- scenario 1 
+on travaille sur une feature (api_localisation)
+et le depot maitre a des nouveauté dans la branche master
+	-> on veut se mettre à jour de ses nouveauté
+	pour continuer a travailler sur la derniere version
+	
+on travaille dans notre branche "api_localisation"
+je bascule vers la branche master
+	-> git checkout master
+je met a jour celle-ci depuis upstream
+	-> git pull upstream master
+master est à jour
+je rebascule sur ma branche api_localisation
+	-> git checkout master api_localisation
+je merge les nouveauté de master dans api_localisation
+	-> git merge master
+	
+une fois résolus les conflits, on continue
+
+2eme cas
+	-> on ne veut pas que notre travail soit mis a jours
+idem que cas au dessus, mais sans la dernière etape,
+sans le merge de master dans "api_localisation"
+
+scenario 2. travail "pret" dans api_localisation
+	on veut le faire integrer a la branche master
+	
+on reproduit le cas 1du scenario 1
+si tout est bon
+	on pousse notre branche vers notre depot fork (origin)
+	git checkout api_localisation
+	git push origin api_localisation
+-> notre travail apparait coté github dans une branche
+	api_localisation
+	
+	dans l'interface github
+	on peut a ce moment la, une fois positionné sur la branche
+	envoyer une pull resquest au mainteneur
+	-> on demande au mainteneur:
+		merge mes commit de ma branche "api_localisation"
+		de mon dépot vers la branche "master" du depot maitre
+		
+	si c'est ok
+		le mainteneur accepte la pull request, github commit un
+		merge vers la branche master
+	
+	le(s) contributeurs peuvent alors récupérer les nouveaux
+	commit de la branche master depuis upstream
+	
+	3eme scenario
+	de temps en temps (pour contributeur)
+	pousser notre branche master vers origin master
+	git checkout master
+	git push origin master
+	
+	
+		
+	
+
+	
+
+
+
+
+

@@ -1,0 +1,41 @@
+﻿
+Modéliser un dab (distributeur automatique de billet)
+	
+Première étape, modéliser les cas d'utilisations
+
+	A) quels sont les acteurs/utilisateurs
+		Distinguer les acteurs primaires/secondaires
+	B) quelle est la "limite" de ce qui est dans le système
+	C) à quoi sert le système, lister les cas d'utilisations
+	
+Listez-moi ces 3 informations
+
+	A) quels sont les acteurs/utilisateurs :
+		- Primaire : 
+       - Client
+       - Porteur de carte 
+       
+		- Secondaire : 
+       - Serveur
+       - Technicien de maintenance
+       - Employé de banque
+       - le SI de la banque
+       - Agent de sécurité
+       - convoyeur de fond
+       - le SI visa
+       
+       		
+	B) quelle est la "limite" de ce qui est dans le système :
+		- carte bancaire
+		- limite de la somme
+		- 
+	
+	C) à quoi sert le système, lister les cas d'utilisations :
+		- Introduire la carte bancaire 
+		- taper son code confidentiel
+		- choix du compte
+		- choix des options proposé (retirer de l'argent, visualiser le solde, déposer de l'argent)
+		- effectue le fonctionnement demandé (dépôt de billet ou retrait)
+		- donne un ticket ou pas selon son choix
+		- propose d'autre choix si l’on n’a pas fini 
+		- rend la carte

@@ -1,0 +1,168 @@
+Programme
+-------------
+etat de l'art (3 jours)
+	-> tour du programme
+	-> voire les technologies actuelles dans l'univers java
+	-> familiariser avec l'outillage
+		en particulier Git (gestion de source)
+		
+UML (3 jours)
+	-> unified modeling language
+	-> modelisation objet
+		-> concepts objets
+		-> modelisation de systeme
+			-> tours des diagrammes
+			
+JAVA 8 (5 jours)
+	-> apprenstissage du langage java (base)
+
+JAVA EE ( 5 jours)
+	-> aspect "entreprise" de java
+		-> serveur d'application, jdbc base, java avancé
+		tomcat (pas serveur java ee complet)
+	-> sql (base de données)
+	servlet/jsp
+	spring a repris beaucoup des fonctions java ee
+	
+JAVA WEB (5 jours)
+	-> html/js /css
+	+ certaines technologies comme ajax/json
+
+DESIGN PATTERN (3 jours)	
+	-> objet
+		manière de résoudre des problemes avec des classes objets
+		répertoire de bonne pratique
+			-> mvc, iterateur
+			-> visiteur, factory, composite
+
+Framework java ee jpa(5 jours)
+	-> web struts2 (courte introduction)
+	-> jpa/hibernate
+	-> spring (mvc, etc)
+	
+spring  IOC tdd ( 5 jours)
+	IOC -> inversion of control / DI -> dependency injection
+	-> spring avancé
+		-> mvc avancé (api rest/json)
+		-> spring data
+		-> spring rest repositories
+	-> spring boot
+		-> contenairisation
+
+spring mvc securite (5 jours)
+	-> spring mvc avancé 2
+	-> gestion securité (login mot de passe, droits, concepts)
+	
+xml (2 jours)
+	-> extended markup language
+	-> xsd (schemas xml)
+	-> lecture/ecriture de xml avec java (dom et sax)
+
+angular framwork javascript/typescript
+	-> html + typescript + conf
+		-> generer un package html/js avec votre application
+	-> google (open source)
+	-> angular 8
+		-> composant, service, pipe, etc...
+		-> module router
+	
+android ( 5 jours)
+	-> dev mobile sur la plateforme android de google
+		-> linux customisé avec une surcouche "java"
+			et les fonctionnalités téléphonne
+	-> soit application "native" -> java/kotlin
+	-> ionic/electron
+		-> package une app web dans un "executable"
+	android studio (dérivé inteliiji)
+
+service et soa: concepts et methodes (5 jours)
+	soa: Service Oriented Architecture
+	plus orienté conception/architecture
+	
+soa: outils et solution en java (6 jours)
+	mise en application SOA
+	parler des webservices
+			SOA et WOA
+	SOAP -> simple object access protocol
+	WSDL, SOAP  ou  REST/JSON
+	
+sécurité et architecture de confiance (5 jours)
+	crypto
+	authentification
+	certification
+	vulnérabilité
+		-> injection sql
+		-> injection xss, csrf
+	OWASP top 10
+	
+qualité logicielle et qualimétrie ( 5 jours)
+	controle et mesure de la qualité du code
+	
+	-> tests unitaires
+		ecrire du code qui test le bon fonctionnement de votre code
+		test integration
+		test de régréssion
+		test de charge/performance
+		test end to end/fonctionnels
+	-> analyse de code
+		sonarqube...
+	bonnes pratiques en général
+
+methodes agiles/gestion de projet/scrum (5 jours)
+	-> méthodologie
+		organisation d'une petite equipe
+			roles, sprint/release
+	-> usine logicielle
+	
+RIA, ajax ( 3 jours)
+	- application web multimedia avancée
+	
+big data (12 jours)
+	- hadoop
+		map reduce
+		hive
+		pig
+		impala
+		spark
+		shark
+		kafka
+	- base nosql:
+		- mongodb
+	- cloud/microservice
+		- kubernetes (orchestration de contener)
+		- docker swarm
+		-ovh, aws, gce, etc..
+		
+		
+	
+
+	
+
+		
+		
+	
+	
+
+	
+
+
+	
+
+	
+
+	
+	
+	
+	
+
+
+	
+	
+
+			
+			
+
+
+
+		
+	
