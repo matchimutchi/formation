@@ -1,7 +1,8 @@
 	package firtsSwing;
 
 	import java.awt.BorderLayout;
-	import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 	import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
 	import java.io.File;
@@ -12,13 +13,18 @@ import java.util.Scanner;
 	import javax.swing.BoxLayout;
 	import javax.swing.JButton;
 	import javax.swing.JFrame;
-	import javax.swing.JOptionPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 	import javax.swing.JPanel;
 	import javax.swing.JScrollPane;
 	import javax.swing.JTextArea;
 	import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-public class Fenetre2 extends JFrame implements ActionListener{
+public class Fenetre2 extends JFrame implements ActionListener, DocumentListener{
 
 
 		//constante
@@ -30,6 +36,11 @@ public class Fenetre2 extends JFrame implements ActionListener{
 		private JButton boutonSave;
 		private JTextField nomFicher;
 		private JTextArea contenuFichier;
+		
+		//Faire un menu
+		private JMenuBar barreMenu;
+		private JMenu menuFichier;
+		private JMenu menuEdition;
 		
 		//constructeur
 		public Fenetre2() {
@@ -71,17 +82,52 @@ public class Fenetre2 extends JFrame implements ActionListener{
 			contenuFichier = new JTextArea();
 			//Scroll peut scroller dans la fenetre
 			add(new JScrollPane(contenuFichier), BorderLayout.CENTER);
+			
+			
+			
+			
+			//Creation du menu
+			barreMenu = new JMenuBar();
+			menuFichier = new JMenu("Fichier");
+			
+			//entree chargement
+			JMenuItem charger = new JMenuItem("Chargement");
+			charger.setActionCommand(LOAD_COMMAND);
+			charger.addActionListener(this);
+			menuFichier.add(charger);
+			
+			//entree sauvergarde du menu fichier
+			JMenuItem sauver = new JMenuItem("sauvegarder");
+			sauver.setActionCommand(SAVE_COMMAND);
+			sauver.addActionListener(this);
+			menuFichier.add(sauver);
+			
+			//ajout du menu fichier dans la barre de menu
+			barreMenu.add(menuFichier);
+			
+			//activer la barre de menu pour notre fenetre
+			setJMenuBar(barreMenu);
+			
+			//ecouter le changement de contenu du champ nomFicher
+			nomFicher.getDocument().addDocumentListener(this);
+			
+			documentChanged(null);
+			//vider le champ au debut
+			//nomFicher.setText("");
+			
+			
+			
+			
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand()) {
 			case LOAD_COMMAND:	
-//				JOptionPane.showMessageDialog(null,"load");
 				chargerFichier();
 				break;
 			case SAVE_COMMAND:
-				JOptionPane.showMessageDialog(null,"save");
+				sauverFichier();
 				break;
 			}
 			
@@ -125,5 +171,26 @@ public class Fenetre2 extends JFrame implements ActionListener{
 			}
 			
 		}
+		
+		private void documentChanged(DocumentEvent e) {
+			String filename = nomFicher.getText();
+			File f = new File(filename);
+			if(f.exists() && f.isFile() && f.canRead()) {
+				nomFicher.setBackground(Color.green);
+				boutonLoad.setEnabled(true);
+			}else {
+				nomFicher.setBackground(Color.pink);
+				boutonLoad.setEnabled(false);
+			}
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent e) {documentChanged(e);}
+
+		@Override
+		public void removeUpdate(DocumentEvent e) {documentChanged(e);}
+
+		@Override
+		public void changedUpdate(DocumentEvent e) {documentChanged(e);}
 
 }
