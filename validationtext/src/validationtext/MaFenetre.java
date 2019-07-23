@@ -95,7 +95,7 @@ public class MaFenetre extends JFrame {
 			//champRegex.setText("[0-9]+");
 			//champRegex.setText("[0-9]{2}([. ]?[0-9]{2}){4}");
 			//champRegex.setText("[0-9]{2}(([0-9]{2}){4}|([ 0-9]{2}){4}|([.0-9]{2}){4}");
-			champRegex.setText("[a-zA-Z0-9]+([.][a-zA-Z0-9]+)*@[a-zA-Z0-9]++([.][a-zA-Z0-9]+)*([.][a-zA-Z0-9]{2,4})");
+			champRegex.setText("[a-zA-Z0-9]+([.][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.][a-zA-Z0-9]+)*([.][a-zA-Z0-9]{2,4})");
 			
 			champValidation.getDocument().addDocumentListener(new DocumentListener(){
 				
