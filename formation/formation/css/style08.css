@@ -1,0 +1,15 @@
+ul.invisible{
+    display: none;
+}
+
+ul.visible{
+    display: block;
+}
+
+li{
+    list-style: none; 
+}
+
+h2{
+    text-align: center;
+}

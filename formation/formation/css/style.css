@@ -1,0 +1,49 @@
+div{
+    margin: 1%;
+    padding: 1%;
+    background-color: aqua;
+    border: 2px solid gray;
+}
+
+div:hover{
+    background-color: antiquewhite;
+    
+}
+
+div#boite1{
+    background-color:pink;
+}
+
+div#boite2{
+    background-color: red;
+    position: relative;
+    width: 50%;
+    left: 20%;
+    top:50px;
+    z-index: 10;
+}
+
+div#boite3{
+    background-color:gray;
+    color: white;
+    z-index: 20;
+    position: relative;
+}
+
+div#boite3:hover{
+    background-color:white;
+    color: gray;
+}
+
+div#boite4{
+    background-color:black;
+    color: white;
+    position: fixed;
+    left: 10%;
+    top: 60px;
+}
+
+div#boite4:hover{
+    background-color:white;
+    color: black;
+}

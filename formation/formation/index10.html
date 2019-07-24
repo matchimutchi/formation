@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculatrice et email</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style10.css">
+    <script type="text/javascript" src="js/script10.js"></script>
+</head>
+<body onload="init()">
+     <!--DEBUT NAVBAR-->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">JAVASCRIPT</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Navigation
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="index4.html">index4</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="index06.html">index06</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="index07.html">index07</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="index08.html">index08</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="index10.html">index10</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="index11.html">index11</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="formulaire.html">Formulaire</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+</nav>
+
+<!-------------FIN NAVBAR---------------------------->
+<br>
+    <h2>Calculatrice et email</h2>
+    <br>
+    <b>&nbsp;&nbsp;&nbsp;Operande 1:&nbsp;&nbsp;&nbsp;</b> <input type="number" name="operande1" id="operande1" /><br /><br>
+    <b>&nbsp;&nbsp;&nbsp;Operande 2:&nbsp;&nbsp;&nbsp;</b> <input type="number" name="operande2" id="operande2" /><br />
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<button id="addition">addition</button>
+    <button id="soustraction">soustraction</button>
+    <button id="multiplication">multiplication</button>
+    <button id="division">division</button><br />
+    <div id="reponsecalcul"></div>
+    <br>
+    <hr />
+    <br>
+    <h2>Ajouter une adresse</h2>
+    <br>
+    <form>
+        <label for="email">&nbsp;&nbsp;&nbsp;<b>Email:</b>&nbsp;&nbsp;&nbsp; </label><input type="text" name="email" id="email" />
+        <button id="ajout">Ajouter email</button>
+    </form>
+    <div id="listeemails"></div>
+    <hr />
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</html>
