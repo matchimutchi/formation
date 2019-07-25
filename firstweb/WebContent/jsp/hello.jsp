@@ -27,6 +27,8 @@
             <a class="dropdown-item" target="_blanck" href="http://localhost:8080/firstweb/HelloServlet">Servlets</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" target="_blanck" href="http://localhost:8080/firstweb/jsp/hello.jsp">JSP</a>
+          	<div class="dropdown-divider"></div>
+            <a class="dropdown-item" target="_blanck" href="http://localhost:8080/webjdbcdao/jsp/liste.jsp">Film</a>
           </div>
         </li>
       </ul>
