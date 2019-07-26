@@ -22,6 +22,38 @@
     <servlet-name>FilmServlet</servlet-name>
     <url-pattern>/FilmServlet/*</url-pattern>
     <url-pattern>/FilmServlet</url-pattern>
-     <url-pattern>/</url-pattern>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SupprimerServlet</display-name>
+    <servlet-name>SupprimerServlet</servlet-name>
+    <servlet-class>webjdbcdao.servlets.SupprimerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerServlet</servlet-name>
+    <url-pattern>/SupprimerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SupprimerServlets</display-name>
+    <servlet-name>SupprimerServlets</servlet-name>
+    <servlet-class>webjdbcdao.servlets.SupprimerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerServlets</servlet-name>
+    <url-pattern>/SupprimerServlets</url-pattern>
+    <url-pattern>/SupprimerServlets/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GenreServlet</display-name>
+    <servlet-name>GenreServlet</servlet-name>
+    <servlet-class>webjdbcdao.servlets.GenreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GenreServlet</servlet-name>
+    <url-pattern>/GenreServlet</url-pattern>
+    <url-pattern>/GenreServlet/*</url-pattern>
   </servlet-mapping>
 </web-app>

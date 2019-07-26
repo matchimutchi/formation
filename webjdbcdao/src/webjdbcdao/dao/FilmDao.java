@@ -16,7 +16,7 @@ public class FilmDao {
 	public static final String INSERT_ONE_SQL = "INSERT INTO `films`(`titre`,`longueur`,`annee`,`genre`) VALUES(?,?,?,?)";
 	public static final String UPDATE_ONE_SQL = "UPDATE `films` set `titre`=?,`longueur`=?,`annee`=?,`genre`=? WHERE `id` = ?";
 	public static final String DELETE_ONE_SQL = "DELETE from `films` WHERE id=?";
-	
+	public static final String REQUETE_ALL_SQL = "SELECT * FROM `films` WHERE genre = ?";
 	
 	//declaration 
 	private Connection base;
@@ -25,6 +25,7 @@ public class FilmDao {
 	private PreparedStatement insertOneStatement;
 	private PreparedStatement updateOneStatement;
 	private PreparedStatement deleteOneStatement;
+	private PreparedStatement requeteAllStatement;
 	
 
 	public FilmDao(Connection base) {
@@ -36,6 +37,7 @@ public class FilmDao {
 			insertOneStatement = base.prepareStatement(INSERT_ONE_SQL);
 			updateOneStatement = base.prepareStatement(UPDATE_ONE_SQL);
 			deleteOneStatement = base.prepareStatement(DELETE_ONE_SQL);
+			requeteAllStatement = base.prepareStatement(REQUETE_ALL_SQL);
 		} catch (SQLException e) {e.printStackTrace();}
 		
 	}
@@ -122,8 +124,25 @@ public class FilmDao {
 			return deleteOneStatement.executeUpdate();
 			
 		} catch (SQLException e) {e.printStackTrace();}
+		
 		return 0;
+		
 	}
 	
+	
+	public List<Film> requeteAll(String genre){
+		ArrayList<Film> films = new ArrayList<>();
+		try {
+			requeteAllStatement.clearParameters();
+			requeteAllStatement.setString(1, genre);
+			ResultSet rs = requeteAllStatement.executeQuery();
+			while(rs.next()) {
+				films.add(fetchFromResultSet(rs));
+			}
+			rs.close();
+		} catch (SQLException e) {e.printStackTrace();}
+		return films;
+		
+	}
 	
 }

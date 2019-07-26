@@ -34,4 +34,16 @@
     <servlet-name>SupprimeServlet</servlet-name>
     <url-pattern>/SupprimeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PlateformeServlet</display-name>
+    <servlet-name>PlateformeServlet</servlet-name>
+    <servlet-class>exerciceServlets.servlet.PlateformeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlateformeServlet</servlet-name>
+
+    <url-pattern>/PlateformeServlet</url-pattern>
+	    <url-pattern>/PlateformeServlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>

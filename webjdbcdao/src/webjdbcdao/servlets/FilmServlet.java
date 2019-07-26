@@ -78,8 +78,7 @@ public class FilmServlet extends HttpServlet {
 		
 		//sauvegarde dans la method filmDao
 		filmDao.save(f);
-		
-		filmDao.delete(id);
+
 		
 		//redirection
 		response.sendRedirect("/webjdbcdao/");

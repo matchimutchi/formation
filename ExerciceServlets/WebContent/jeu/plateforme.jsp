@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Liste des films</title>
+<title>Liste des Jeux PLATEFORME</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -18,13 +18,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Navigation
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">  
-            <a class="dropdown-item" target="_blanck" href="http://localhost:8080/webjdbcdao/jsp/liste.jsp">1 - Film</a>
+            <a class="dropdown-item" target="_blanck" href="http://localhost:8080/webjdbcdao/">1 - Film</a>
           	<div class="dropdown-divider"></div>
-          	<a class="dropdown-item" target="_blanck" href="http://localhost:8080/ExerciceServlets/">2 - Jeux</a>
+          	            <a class="dropdown-item" target="_blanck" href="http://localhost:8080/ExerciceServlets/">1 - Jeux</a>
+          	<div class="dropdown-divider"></div>
           </div>
         </li>
       </ul>
@@ -33,8 +34,8 @@
   <br>
   <br>
   <div class="row">
-  		<div class="col-md-6 offset-md-5">
-			<h2>Les meilleurs films</h2>
+  		<div class="col-md-6 offset-md-4">
+			<h2>Les meilleurs Jeux de plateforme</h2>
 		</div>
 	</div>
 	<br>
@@ -46,36 +47,40 @@
 					<tr class="bg-dark" style="color:white;text-align:center">
 						<th scope="col">Id</th>
 						<th scope="col">Titre</th>
-						<th scope="col">Longueur</th>
-						<th scope="col">Année</th>
-						<th scope="col">Genre</th>
+						<th scope="col">Description</th>
+						<th scope="col">Platforme</th>
+						<th scope="col">Annee Sortie</th>
 						<th scope="col">Actions</th>
-						<th scope="col">Trier par genre</th>
-						<th scope="col">Actions</th>
+						<th scope="col">Supprision</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.films}" var="film">
+					<c:forEach items="${requestScope.jeux}" var="jeu">
 						<tr>
-							<td style="text-align:center"><c:out value="${film.id}"></c:out></td>
-							<td style="text-align:center"><c:out value="${film.titre}"></c:out></td>
-							<td style="text-align:center"><c:out value="${film.longueur}"></c:out></td>
-							<td style="text-align:center"><c:out value="${film.annee}"></c:out></td>
-							<td style="text-align:center"><c:out value="${film.genre}"></c:out></td>
-							<td style="text-align:center"><button type="button" class="btn btn-warning" style="color:white;width:100px;"><a style="color:white" target="_blanck" href="/webjdbcdao/FilmServlet/<c:out value='${film.id}'></c:out>">Editer</a></button></td>
-							<td style="text-align:center"><button type="button" class="btn btn-primary" style="color:white;width:100px;"><a  style="color:white" href="/webjdbcdao/GenreServlet/<c:out value='${film.genre}'></c:out>">Trier <c:out value='${film.genre}'></c:out></a></button></td>
+							<td style="text-align:center"><c:out value="${jeu.id}"></c:out></td>
+							<td style="text-align:center"><c:out value="${jeu.titre}"></c:out></td>
+							<td style="text-align:center"><c:out value="${jeu.description}"></c:out></td>
+							<td style="text-align:center"><c:out value="${jeu.plateforme}"></c:out></td>
+							<td style="text-align:center"><c:out value="${jeu.anneeSortie}"></c:out></td>
+							<td style="text-align:center"><button type="button" class="btn btn-warning" style="color:white;width:100px;"><a  style="color:black" href="/ExerciceServlets/JeuServlet/<c:out value='${jeu.id}'></c:out>">Editer</a></button></td>
 							<td style="text-align:center">
-								<form action="/webjdbcdao/SupprimerServlet" method="post">
-											<input type="hidden" name="suprId" value="<c:out value='${film.id}'></c:out>"/>
+									<form action="/ExerciceServlets/SupprimeServlet" method="post">
+											<input type="hidden" name="suprId" value="<c:out value='${jeu.id}'></c:out>"/>
 											<input type="submit" class="btn btn-danger" value="Supprimer"/>
 								</form>
-							</td>
+						</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<button type="button" class="btn btn-primary btn-lg"><a href="/webjdbcdao/FilmServlet/0" style="text-decoration:none;color:white;font-weight:bold">Creer un nouveau film</a></button>
-			
+			<div class="row">
+			<div class="col-md-2">
+			<button type="button" class="btn btn-primary"><a href="/ExerciceServlets/JeuServlet/0" style="text-decoration:none;color:white;font-weight:bold">Creer un nouveau jeu</a></button>
+			</div>
+			<div class="col-md-2">
+				<button style="margin-right:5%" type="button" class="btn btn-warning "><a href="http://localhost:8080/ExerciceServlets/JeuServlet/*" style="text-decoration:none;color:black;font-weight:bold">Retour</a></button>
+			</div>
+			</div>
 		</div>
 	</div>
 

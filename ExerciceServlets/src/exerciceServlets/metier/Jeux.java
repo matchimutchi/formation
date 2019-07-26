@@ -2,6 +2,7 @@ package exerciceServlets.metier;
 
 public class Jeux {
 	
+	//construction de mon objet
 	private int id;
 	private String titre;
 	private String description;

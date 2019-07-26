@@ -17,27 +17,27 @@ import exerciceServlets.metier.Jeux;
 public class JeuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	private JeuDao jeuDao;
 	
     public JeuServlet() {
         super();
     }
 
-
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		
+		//je recupere dans mon controller le dao préparé
+		//par le database listener
+		// on appelle JeuDao déclarer dans DataBaseListener
 		this.jeuDao = (JeuDao)getServletContext().getAttribute("JeuDao");
 	}
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		System.out.println("path = " + request.getPathInfo());
 		String pathinfo = request.getPathInfo();
 		if(pathinfo != null && pathinfo.length() > 1) {
 			try {
+				//substring signifie enlever le / et prendre que la donnée qui se situe apres
+				
 				int id = Integer.parseInt(pathinfo.substring(1));
 				if(id > 0) {
 
@@ -46,20 +46,15 @@ public class JeuServlet extends HttpServlet {
 				else {
 					request.setAttribute("jeu", new Jeux());
 				}
-
-				
-				getServletContext().getRequestDispatcher("/jeu/edit.jsp").forward(request, response);
-				
+				getServletContext().getRequestDispatcher("/jeu/edit.jsp").forward(request, response);	
 				return;
 			}
 			catch(NumberFormatException ex){ex.printStackTrace();}
 		}
-		
 		List<Jeux> jeux = jeuDao.findAll();
 		request.setAttribute("jeux", jeux);
 		getServletContext().getRequestDispatcher("/jeu/liste.jsp").forward(request, response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -73,7 +68,7 @@ public class JeuServlet extends HttpServlet {
 		
 		jeuDao.save(f);
 		
-		jeuDao.delete(id);
+		
 		response.sendRedirect("/ExerciceServlets/");
 	}
 

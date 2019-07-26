@@ -18,14 +18,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Navigation
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">  
             <a class="dropdown-item" target="_blanck" href="http://localhost:8080/webjdbcdao/">1 - Film</a>
           	<div class="dropdown-divider"></div>
-          	            <a class="dropdown-item" target="_blanck" href="http://localhost:8080/ExerciceServlets/">1 - Jeux</a>
-          	<div class="dropdown-divider"></div>
+          	<a class="dropdown-item" target="_blanck" href="http://localhost:8080/ExerciceServlets/">2 - Jeux</a>
           </div>
         </li>
       </ul>
@@ -34,7 +33,7 @@
   <br>
   <br>
   <div class="row">
-  		<div class="col-md-6 offset-md-4">
+  		<div class="col-md-6 offset-md-5">
 			<h2>Les meilleurs Jeux</h2>
 		</div>
 	</div>
@@ -51,10 +50,12 @@
 						<th scope="col">Platforme</th>
 						<th scope="col">Annee Sortie</th>
 						<th scope="col">Actions</th>
+						<th scope="col">Trier par jeux de plateforme</th>
 						<th scope="col">Supprision</th>
 					</tr>
 				</thead>
 				<tbody>
+				<!-- requestScope signifie va regarder dans request -->
 					<c:forEach items="${requestScope.jeux}" var="jeu">
 						<tr>
 							<td style="text-align:center"><c:out value="${jeu.id}"></c:out></td>
@@ -62,11 +63,13 @@
 							<td style="text-align:center"><c:out value="${jeu.description}"></c:out></td>
 							<td style="text-align:center"><c:out value="${jeu.plateforme}"></c:out></td>
 							<td style="text-align:center"><c:out value="${jeu.anneeSortie}"></c:out></td>
-							<td style="text-align:center"><a  href="/ExerciceServlets/JeuServlet/<c:out value='${jeu.id}'></c:out>">Editer</a></td>
+							<td style="text-align:center"><button type="button" class="btn btn-warning" style="color:white;width:100px;"><a  style="color:white" href="/ExerciceServlets/JeuServlet/<c:out value='${jeu.id}'></c:out>">Editer</a></button></td>
+							<td style="text-align:center"><button type="button" class="btn btn-primary" style="color:white;width:100px;"><a  style="color:white" href="/ExerciceServlets/PlateformeServlet/<c:out value='${jeu.plateforme}'></c:out>">Trier <c:out value='${jeu.plateforme}'></c:out></a></button></td>
 							<td style="text-align:center">
+								<!-- form action method precise ou allez chercher l'information -->
 									<form action="/ExerciceServlets/SupprimeServlet" method="post">
 											<input type="hidden" name="suprId" value="<c:out value='${jeu.id}'></c:out>"/>
-											<input type="submit" class="btn btn-primary" value="Supprimer"/>
+											<input type="submit" class="btn btn-danger" value="Supprimer"/>
 								</form>
 						</td>
 						</tr>
@@ -80,7 +83,7 @@
 			<br>
 			<br>
 			<div class="col-md-4">
-			
+				
 			</div>
 			</div>
 		</div>
