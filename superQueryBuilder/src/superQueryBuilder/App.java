@@ -22,6 +22,8 @@ public class App {
 		int nbId = Integer.parseInt(saisieId);
 		
 		
+		
+		
 //		System.out.println("Comment s'appel votre film?");
 //		String saisieTitre = lecteur.nextLine();
 //		
@@ -50,7 +52,7 @@ public class App {
 			/*----------------------------DELETE---------------------*/
 			PreparedStatement deleteStat = builder.addField("id").delete().build();
 											
-			deleteStat.setInt(1, 5);
+			deleteStat.setInt(1, nbId);
 			deleteStat.executeUpdate();
 			
 //			System.out.println(nbId);

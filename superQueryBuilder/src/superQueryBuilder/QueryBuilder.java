@@ -16,7 +16,7 @@ public class QueryBuilder {
 	private List<String> selectedFields;
 	private List<WhereClause> whereClauses;
 	
-	
+
 	
 	
 	//enumeration de tt les type de requete
