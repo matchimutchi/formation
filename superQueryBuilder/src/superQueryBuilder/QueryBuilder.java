@@ -126,12 +126,16 @@ public class QueryBuilder {
 			switch (type) {
 				case SELECT:return buildSelect();
 				case UPDATE:return buildUpdate();
+				case INSERT:return buildInsert();
+				case DELETE:return buildDelete();
 			} 
 		}catch (SQLException e) {e.printStackTrace();}
 		return null;
 	}
 	
 	
+	
+	/*----------------------------SELECT--------------------------*/
 	//CREATION de la requete select all
 	private PreparedStatement buildSelect() throws SQLException {
 		StringBuilder sb = new StringBuilder("SELECT ");
@@ -162,6 +166,7 @@ public class QueryBuilder {
 		return base.prepareStatement(sb.toString());
 	}
 	
+	/*----------------------------UPDATE--------------------------*/
 	private PreparedStatement buildUpdate() throws SQLException {
 		StringBuilder sb = new StringBuilder("UPDATE ");
 		if(this.selectedFields.isEmpty()) {
@@ -184,5 +189,57 @@ public class QueryBuilder {
 
 	}
 	
+	
+	/*----------------------------INSERT--------------------------*/
+	private PreparedStatement buildInsert() throws SQLException {
+		StringBuilder sb = new StringBuilder("INSERT  INTO");
+		if(this.selectedFields.isEmpty()) {
+			throw new SQLException("can not update with no fields selected");
+		}
+		sb.append('`').append(tableName).append("` ( `");
+		sb.append(String.join("` , `", this.selectedFields)).append("` ) ");
+		sb.append(" VALUES").append(" ( ");
+		sb.append(String.join("` , `", "?,?,?,?" )).append(" ) ");	
+		
+		
+		
+		//isEMpty si il y en a 
+		if(!whereClauses.isEmpty()) {
+			List<String> clauses = this.whereClauses.stream()
+					.sorted((c1, c2) -> Integer.compare(c1.position, c2.position))
+					.map(c -> c.toString()).collect(Collectors.toList());
+		sb.append(" WHERE ").append(String.join( " AND ", clauses));
+		}
+		
+		
+		System.out.println("requette = " + sb.toString());
+		return base.prepareStatement(sb.toString());
+
+	}
+	
+	
+	/*----------------------------DELETE--------------------------*/
+	private PreparedStatement buildDelete() throws SQLException {
+		StringBuilder sb = new StringBuilder(" DELETE ");
+		if(this.selectedFields.isEmpty()) {
+			throw new SQLException("can not update with no fields selected");
+		}
+		sb.append("FROM `").append(tableName).append('`');
+		sb.append(" WHERE ").append("id=?");
+		
+		
+		//isEMpty si il y en a 
+		if(!whereClauses.isEmpty()) {
+			List<String> clauses = this.whereClauses.stream()
+					.sorted((c1, c2) -> Integer.compare(c1.position, c2.position))
+					.map(c -> c.toString()).collect(Collectors.toList());
+		sb.append(" WHERE ").append(String.join( " AND ", clauses));
+		}
+		
+		
+		System.out.println("requette = " + sb.toString());
+		return base.prepareStatement(sb.toString());
+
+	}
 	
 }
