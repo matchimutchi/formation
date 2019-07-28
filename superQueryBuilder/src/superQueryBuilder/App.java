@@ -49,10 +49,12 @@ public class App {
 			
 			/*----------------------------DELETE---------------------*/
 			PreparedStatement deleteStat = builder.addField("id").delete().build();
-											deleteStat.setInt(1, nbId);
 											
-			System.out.println(nbId);
-
+			deleteStat.setInt(1, 5);
+			deleteStat.executeUpdate();
+			
+//			System.out.println(nbId);
+			
 			/*ResultSet rs = deleteStat.executeQuery();*/
 			/*----------------------------UPDATE---------------------*/
 			/*PreparedStatement updateStat = builder.addField("longueur")

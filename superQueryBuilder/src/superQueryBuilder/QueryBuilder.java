@@ -220,12 +220,12 @@ public class QueryBuilder {
 	
 	/*----------------------------DELETE--------------------------*/
 	private PreparedStatement buildDelete() throws SQLException {
-		StringBuilder sb = new StringBuilder(" DELETE ");
+		StringBuilder sb = new StringBuilder(" DELETE FROM ");
 		if(this.selectedFields.isEmpty()) {
 			throw new SQLException("can not update with no fields selected");
 		}
-		sb.append("FROM `").append(tableName).append('`');
-		sb.append(" WHERE ").append("id=?");
+		sb.append('`').append(tableName).append('`');
+		sb.append(" WHERE ").append("`").append("id`").append(" =? ");
 		
 		
 		//isEMpty si il y en a 
@@ -233,7 +233,7 @@ public class QueryBuilder {
 			List<String> clauses = this.whereClauses.stream()
 					.sorted((c1, c2) -> Integer.compare(c1.position, c2.position))
 					.map(c -> c.toString()).collect(Collectors.toList());
-		sb.append(" WHERE ").append(String.join( " AND ", clauses));
+		sb.append(" WHERE ").append(clauses);
 		}
 		
 		
