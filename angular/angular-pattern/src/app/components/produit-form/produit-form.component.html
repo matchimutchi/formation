@@ -1,0 +1,37 @@
+<br>
+
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <h2>Mon formulaire</h2>
+        </div>
+    </div>
+    <br>
+    <form>
+        <div class="row">
+            <!-- --------------------------Id-------------------------- -->
+            <div class="col-md-7 offset-md-2">
+                    <label for="id">Id produit</label>
+                    <input type="number" class="form-control" id="id" aria-describedby="emailHelp" name="id"
+                         [(ngModel)]="id">
+            </div>
+            <!-- --------------------------Nom-------------------------- -->
+            <div class="col-md-7 offset-md-2">
+                        <label for="nom">Nom produit</label>
+                        <input type="text" class="form-control" id="nom" placeholder="Entrer un Nom" name="nom"  [(ngModel)]="nom">
+            </div>
+            <!-- --------------------------Prix-------------------------- -->
+            <div class="col-md-7 offset-md-2">
+                    <label for="prix">Prix produit</label>
+                    <input type="number" class="form-control" id="prix" name="prix"  [(ngModel)]="prix">
+            </div>
+
+            <!-- --------------------------Button-------------------------- -->
+            <div class="col-md-7 offset-md-2">
+                <br>
+                <button class="btn btn-primary" (click)="ajouterProduit()">Ajouter au panier</button>
+            </div>
+        </div>
+        <br>
+    </form>
+
+

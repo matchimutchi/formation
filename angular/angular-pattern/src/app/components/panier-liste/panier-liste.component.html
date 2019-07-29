@@ -1,0 +1,28 @@
+<br>
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <h3>Liste de mes produits</h3>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-10 offset-md-1" style="border:1px solid grey">
+                <table *ngFor="let p of produitsListe" class="table">
+                <!-- <thead class="thead-dark">
+                    <tr>
+                          <th scope="col">id</th>
+                          <th scope="col">Nom</th>
+                          <th scope="col">Prix</th>
+                    </tr>
+                </thead>
+                <tbody> -->
+                    <tr >
+                        <th scope="col">{{p.id}}</th>
+                        <th scope="col">{{p.nom}}</th>
+                        <th scope="col">{{p.prix}}</th>
+                    </tr>
+             <!-- </tbody> -->
+                </table>                
+            </div>
+        </div>
+
