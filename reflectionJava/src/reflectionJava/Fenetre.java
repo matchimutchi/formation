@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import com.edugroupe.premierwebmaven.metier.Produit;
+
 public class Fenetre extends JFrame implements ActionListener{
 	
 	//instancier l'objet
