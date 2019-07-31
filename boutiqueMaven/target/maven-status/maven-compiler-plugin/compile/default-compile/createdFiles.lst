@@ -1,0 +1,4 @@
+com\edugroupe\boutiqueMaven\util\DatabaseListener.class
+com\edugroupe\boutiqueMaven\metier\Film.class
+com\edugroupe\boutiqueMaven\servlets\IndexServlet.class
+com\edugroupe\boutiqueMaven\dao\FilmDao.class
