@@ -1,94 +1,174 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Mes films</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    </head>
-	<style>
-			table{
-				box-shadow:10px 5px 5px grey;
-			}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mes films</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	</style>
-    <body>
-	<div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Json</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-        
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Accueil
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-              </ul>
+  </head>
+
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Json</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Accueil
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
             </div>
-          </nav>
-          <br>
-          <br>
-          
-          <!-- TITRE -->
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <br>
+    <br>
+
+    <!-- TITRE -->
+    <div class="row">
+      <div class="col-md-6 col-sm-12 offset-md-4">
+        <h3>Mon premier projet JSON</h3>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-2 offset-md-1 ">
+        <button id="btShow" class="btn btn-warning">Ajouter un film</button>
+      </div>
+      <div class="col-md-4 offset-md-4 ">
+        <form>
           <div class="row">
-              <div class="col-md-6 col-sm-12 offset-md-4 shadow p-3 mb-5 bg-white rounded">
-                  <h3>Mon premier projet JSON</h3>
+            <div class="col-md-4">
+              <label for="search">Rechercher par titre </label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control shadow p-3 mb-5 bg-white rounded" name="search" id="search" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- TABLEAU -->
+    <div class="row">
+      <div class="col-md-9 col-sm-12 offset-md-1">
+        <table class="table border-dark shadow p-3 mb-5 bg-white rounded" id="tableFilms">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Titre</th>
+              <th scope="col">Durée</th>
+              <th scope="col">Année</th>
+              <th scope="col">Genre</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!--SEARCH-->
+    <div class="row">
+      <div class="col-md-10 offset-md-1 ">
+        <form id="createForm">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-4 text-right">
+                  <label for="titre"><b>Titre du film</b></label>
+                </div>
+                <div class="col-md-6 ">
+                  <input type="text" class="form-control shadow p-3 mb-5 bg-white rounded" name="titre" id="titre" />
+                </div>
               </div>
-          </div>
-          <br>
-          <br>
-          
-          <!--SEARCH-->
-          <div class="row">
-          	<div class="col-md-2 offset-md-2 ">
-                <form>
-                    <div class="form-group">
-          		        <label for="search">Rechercher par titre </label>
-                        <input type="text" class="form-control shadow p-3 mb-5 bg-white rounded" name="search" id="search"/>
-                    </div>
-                </form>
-          	</div>
-          </div>
-          <br>
-          <!-- TABLEAU -->
-          <div class="row">
-              <div class="col-md-7 col-sm-12 offset-md-2">
-                <table   class="table border-dark shadow p-3 mb-5 bg-white rounded" id="tableFilms">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Titre</th>
-                        <th scope="col">Durée</th>
-                        <th scope="col">Année</th>
-                        <th scope="col">Genre</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+              <div class="row">
+                <div class="col-md-4 text-right">
+                  <label for="genre"><b>Genre du film</b></label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control shadow p-3 mb-5 bg-white rounded" name="genre" id="genre" />
 
-                    </tbody>
-                  </table>
+                </div>
               </div>
+              <div class="row">
+                <div class="col-md-4 text-right">
+                  <label for="longueur"><b>Durée du film en min</b></label>
+                </div>
+                <div class="col-md-6">
+                  <input type="number" class="form-control shadow p-3 mb-5 bg-white rounded" name="longueur"
+                    id="longueur" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-right">
+                  <label for="annee"><b>Année du film</b></label>
+                </div>
+                <div class="col-md-6">
+                  <input type="number" class="form-control shadow p-3 mb-5 bg-white rounded" name="annee" id="annee" />
+                </div>
+              </div>
+            </div>
           </div>
-       </div>
-    </body>
+          <br>
+          <div class="row">
+            <div class="col-md-2">
+              <button type="submit" id="addFilm" class="btn btn-warning" data-toggle="modal"
+                data-target="#exampleModal">Ajouter film</button>
+            </div>
+          </div>
+          <br>
+          <br>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajout de votre film</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 

@@ -1,0 +1,6 @@
+com\edugroupe\exerciceMaven\metier\Livre.class
+com\edugroupe\exerciceMaven\dao\LivreDao.class
+com\edugroupe\exerciceMaven\servlets\ModifServlet.class
+com\edugroupe\exerciceMaven\servlets\SupprServlet.class
+com\edugroupe\exerciceMaven\util\DatabaseListener.class
+com\edugroupe\exerciceMaven\servlets\IndexServlet.class
