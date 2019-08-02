@@ -13,7 +13,10 @@ $(document).ready(function(){
         $("input#isbn").val("");
         $("input#nbPages").val(0);
         $("input#auteur").val("");
-        $("#createForm").slideToggle();
+        $("#createForm").show();
+        $("#editLivre").hide();
+        $("#supLivre").hide();
+        $("#addLivre").show();
     });
 
     $("#supLivre").hide();
@@ -22,21 +25,37 @@ $(document).ready(function(){
 
     $("#editLivre").click(saveLivre);
 
+    $("#editLivre").click(function(){
+        $('#exampleModal').modal('hide');
+        $('div.modal-backdrop').modal('hide');
+    });
 
     $("#supLivre").click(deleteLivre);
 
+    $("#supLivre").click(function(){
+        $('#exampleModal').modal('hide');
+        $('div.modal-backdrop').modal('hide');
+    });
+
     $("#swith").click(function(){
         if (typesearch == "titre") {
-            $(this).text("nbpages");
+            $(this).text("Recherche par Titre");
+            $("#recherche").text("Recherche NbPages ");
             typesearch= "filter";
         }
         else {
-            $(this).text("Titre"); 
+            $(this).text("Recherche NbPages"); 
+            $("#recherche").text("Recherche Titre ");
             typesearch="titre";
         }
         $("input#search").val("");
     });
 
+    
+    $("#addLivre").click(function(){
+        $('#exampleModal').modal('hide');
+        $('div.modal-backdrop').modal('hide');
+    });
 
 });
 
@@ -122,7 +141,7 @@ function fillLivreTable(data){
         tr.append("<td>" + livre.nbPages +"</td>");
         tr.append("<td>" + livre.auteur +"</td>");
 
-        var button = $("<button class=\"btn btn-warning \" >Editer</button>");
+        var button = $("<button class=\"btn btn-warning shadow rounded\" data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@mdo\"><ion-icon name=\"create\"></ion-icon><b>Editer</b></button>");
         var td = $("<td></td>");
         td.append(button);
         tr.append(td);

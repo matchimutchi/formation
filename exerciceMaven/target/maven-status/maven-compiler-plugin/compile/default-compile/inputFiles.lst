@@ -1,6 +1,6 @@
-C:\Users\Stagiaire\Documents\workspace-spring-tool-suite-4-4.3.0.RELEASE\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\servlets\IndexServlet.java
-C:\Users\Stagiaire\Documents\workspace-spring-tool-suite-4-4.3.0.RELEASE\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\dao\LivreDao.java
-C:\Users\Stagiaire\Documents\workspace-spring-tool-suite-4-4.3.0.RELEASE\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\servlets\ModifServlet.java
-C:\Users\Stagiaire\Documents\workspace-spring-tool-suite-4-4.3.0.RELEASE\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\util\DatabaseListener.java
-C:\Users\Stagiaire\Documents\workspace-spring-tool-suite-4-4.3.0.RELEASE\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\servlets\SupprServlet.java
-C:\Users\Stagiaire\Documents\workspace-spring-tool-suite-4-4.3.0.RELEASE\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\metier\Livre.java
+C:\travail\git\formation\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\util\DatabaseListener.java
+C:\travail\git\formation\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\dao\LivreDao.java
+C:\travail\git\formation\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\servlets\IndexServlet.java
+C:\travail\git\formation\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\servlets\SupprServlet.java
+C:\travail\git\formation\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\servlets\ModifServlet.java
+C:\travail\git\formation\exerciceMaven\src\main\java\com\edugroupe\exerciceMaven\metier\Livre.java
