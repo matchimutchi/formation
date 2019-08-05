@@ -1,5 +1,6 @@
 package com.edugroupe.associationsMapping.jpa;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.edugroupe.associationsMapping.beans.Categorie;
+import com.edugroupe.associationsMapping.beans.Commande;
 import com.edugroupe.associationsMapping.beans.Produit;
 
 
@@ -56,28 +58,48 @@ public class JpaTest {
 			Categorie c1 = new Categorie(0,"Boucherie");
 			Categorie c2 = new Categorie(0,"Epicerie");
 			Categorie c3 = new Categorie(0,"Céréales");
+			
 			em.persist(c1);
 			em.persist(c2);
 			em.persist(c3);
 			
+			Commande cmd1 = new Commande(0,"Bob Eponge",LocalDate.of(2017, 10, 10));
+			Commande cmd2 = new Commande(0,"Patrick Etoile",LocalDate.of(2018, 11, 11));
+			
+			em.persist(cmd1);
+			em.persist(cmd2);
+
 			
 			Produit p1 = new Produit(0,"Steack de lamas", 29.99,10);
 			p1.setCategorie(c1);
 			//c1.getProduits().add(p1);
 			
+			
 			Produit p2 = new Produit(0,"Tofu tofu", 8.99,4);
 			p2.setCategorie(c2);
 			//c2.getProduits().add(p2);
+
 			
 			Produit p3 = new Produit(0,"Escalope d'autruche", 24.99,25);
 			p3.setCategorie(c1);
 			//c1.getProduits().add(p3);
 			
+			
 			Produit p4 = new Produit(0,"Miel des carpathes", 5.99,7);
 			p4.setCategorie(c2);
 			//c2.getProduits().add(p4);
 			
+			
 			Produit p5 = new Produit(0,"Biéres aux algues", 4.99,12);
+
+			
+			cmd1.getProduits().add(p1);
+			cmd1.getProduits().add(p2);
+			cmd1.getProduits().add(p4);
+			cmd2.getProduits().add(p1);
+			cmd2.getProduits().add(p5);
+			cmd2.getProduits().add(p3);
+			
 
 			em.persist(p1);
 			em.persist(p2);
