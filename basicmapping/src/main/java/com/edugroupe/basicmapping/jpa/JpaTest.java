@@ -15,10 +15,7 @@ import com.edugroupe.basicmapping.beans.Client;
 
 public class JpaTest {
 
-	
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("testHibernate");
         Scanner input = new Scanner(System.in);

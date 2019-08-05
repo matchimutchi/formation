@@ -116,13 +116,16 @@ public class JpaTest {
 		for(Produit p : produits) {
 			System.out.println(p);
 		}
-
+		//Produit p1 = em.find(Produit.class, 2);
 		//----------------------------------------------------
 		tx.commit();
 		em.close();
+		//p1.setNom("quinao des ameriques");
+		//saveproduit = p1;
 		System.out.println("--------Fin partie 3--------------");
 	}
 	
+	static Produit saveproduit;
 	public static void test4(EntityManagerFactory emf)
 	{
 
@@ -131,6 +134,13 @@ public class JpaTest {
 		tx.begin();
 		
 		//-----------------------LECTURE-----------------------------
+		//sp est suivi par l'entity manager et a pris en compte
+		// les modifications précédente
+		//Produit sp = em.merge(saveproduit);
+		
+		//System.out.println(sp);
+		
+		System.out.println("---------------MODIFICATION HAUT------------------");
 		TypedQuery<Produit> q1 = em.createQuery("SELECT p FROM Produit as p WHERE p.stock <= :stock_min", Produit.class);
 
 		q1.setParameter("stock_min", 5);
