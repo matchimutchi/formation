@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreRemove;
 
 @Entity
 public class Produit {
@@ -68,9 +69,23 @@ public class Produit {
 	
 	
 	
+	//déclarer du coté maitre Commande
+	//juste un rappel de l'oppération du bon coté
+	public void addCommande(Commande cmd) {
+		cmd.addProduit(this);
+	}
 	
-	
-	
+	//@PreRemove indique a JPA d'appeler automatiquement
+	//cette méthode avant tout effacement de l'entité 
+	@PreRemove
+	public void cleanCommandeBeforeRemove() {
+		System.out.println("Passage par clean Commande");
+		for(Commande cmd : getCommandes()) {
+			cmd.getProduits().remove(this);
+		}
+		
+		getCommandes().clear();
+	}
 	
 	
 	

@@ -57,7 +57,17 @@ public class Commande {
 	}
 	
 	
-	
+	public void addProduit(Produit p) {
+		//si le produit n'est pas déjà dans la commande
+		if(!getProduits().contains(p)) {
+			//l'ajouter
+			getProduits().add(p);
+			//et l'ajouter dans la collection symmétrique coté
+			//cela n'a aucun effet dans la base, c'est juste pour l'aspect pratique
+			//le coté mettre est Commande
+			p.getCommandes().add(this);
+		}
+	}
 	
 	
 	

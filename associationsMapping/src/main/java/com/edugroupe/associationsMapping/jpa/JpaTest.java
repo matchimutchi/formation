@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import com.edugroupe.associationsMapping.beans.Categorie;
 import com.edugroupe.associationsMapping.beans.Commande;
@@ -32,9 +33,13 @@ public class JpaTest {
 //		System.out.println("--------------------------------------");
 //		test2(emf);
 		
+//        input.nextLine();
+//		System.out.println("--------------------------------------");
+//		test3(emf);
+		
         input.nextLine();
 		System.out.println("--------------------------------------");
-		test3(emf);
+		test4(emf);
 
         input.nextLine();
 		System.out.println("--------------------------------------");		
@@ -177,6 +182,56 @@ public class JpaTest {
 		tx.commit();
 		em.close();
 		System.out.println("-----------------FIN TEST3------------------");
+	}
+
+	
+	public static void test4(EntityManagerFactory emf)
+	{
+		System.out.println("-----------------DEBUT TEST4------------------");
+		// on recupere un entityManager
+		EntityManager em = emf.createEntityManager();
+		// et une transaction
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		//----------------------------------------------------
+		/*Commande cmd = new Commande(0,"Carlos poulpe", LocalDate.now());
+		em.persist(cmd);
+		
+		
+		Produit p1 = em.find(Produit.class, 1);
+		p1.addCommande(cmd);
+		//p1.getCommandes().add(cmd);
+
+		Produit p3 = em.find(Produit.class, 3);
+		p3.addCommande(cmd);
+		//p3.getCommandes().add(cmd);
+		//cmd.getProduits().add(em.find(Produit.class, 1));
+		//cmd.getProduits().add(em.find(Produit.class, 3));
+		
+		Produit p2 =em.find(Produit.class, 2);
+		//p2.cleanCommandeBeforeRemove();
+		em.remove(p2);
+		
+		//Commande cmd2 = em.find(Commande.class, 1);
+		//em.remove(cmd2);
+		
+		System.out.println(cmd);*/
+		
+		//requete pour many to many
+		TypedQuery<Commande> q1 = em.createQuery(
+				//LEFT JOIN FETCH permet de definir le EAGER par defaut il est lazy .
+				//FETCH EAGER =  signifie qu'il précharge par avance
+				"SELECT DISTINCT(cmd) FROM Commande as cmd LEFT JOIN fetch cmd.produits as p",
+				Commande.class);
+		List<Commande> commandes = q1.getResultList();
+		System.out.println("------------------------------RESULTAT----------------------------");
+		for(Commande cmd : commandes) {
+			System.out.println(cmd + " nb produits = " + cmd.getProduits().size());
+		}
+		//-------------------------------------
+		tx.commit();
+		em.close();
+		System.out.println("-----------------FIN TEST4------------------");
 	}
 
 }
