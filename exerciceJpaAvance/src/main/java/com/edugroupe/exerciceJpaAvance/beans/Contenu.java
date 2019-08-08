@@ -18,8 +18,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
+//lombok
 @NoArgsConstructor  @ToString(exclude = {"tags"})
+//JPA
 @Entity @Inheritance(strategy = InheritanceType.JOINED)
 public class Contenu {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

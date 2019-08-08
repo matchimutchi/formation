@@ -1,4 +1,4 @@
-package com.edugroupe.exerciceJpaAvance.beans;
+ package com.edugroupe.exerciceJpaAvance.beans;
 
 import java.time.LocalDate;
 import java.util.HashSet;
