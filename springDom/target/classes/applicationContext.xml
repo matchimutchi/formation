@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+          http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd
+            http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+           http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
+			default-autowire="byName">
+
+<bean id="dbf" class="javax.xml.parsers.DocumentBuilderFactory" factory-method="newInstance"/>
+<bean id="db" class="javax.xml.parsers.DocumentBuilder" factory-bean="dbf" factory-method="newDocumentBuilder"/>
+<bean id="doc" class="org.w3c.dom.Document" factory-bean="db" factory-method="parse">
+	<constructor-arg value="repertoire.xml"></constructor-arg>
+</bean>
+<bean id="list" class="org.w3c.dom.NodeList" factory-bean="doc"  factory-method="getElementsByTagName">
+	<constructor-arg value="nom"></constructor-arg>
+</bean>
+
+<bean id="xpf" class="javax.xml.xpath.XPathFactory" factory-method="newInstance"/>
+<bean id="xp" class="javax.xml.xpath.XPath" factory-bean="xpf" factory-method="newXPath"/>
+<bean id="xpe" class="javax.xml.xpath.XPathExpression" factory-bean="xp" factory-method="compile">
+	<constructor-arg value="//adresse[@codePays='2']/rue/text()"></constructor-arg>
+
+</bean>
+</beans>
