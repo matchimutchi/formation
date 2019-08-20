@@ -1,4 +1,4 @@
-package com.edugroupe.springjdbc.beans;
+ package com.edugroupe.springjdbc.beans;
 
 import java.util.Arrays;
 import java.util.HashMap;
