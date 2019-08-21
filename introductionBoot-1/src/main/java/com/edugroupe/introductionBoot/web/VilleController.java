@@ -25,7 +25,7 @@ public class VilleController {
 	@GetMapping("/bonjour")
 	public String bonjour(Model model) 
 	{
-		Ville v = villeDAO.findById(1);
+		Ville v = villeDAO.findById(4);
 		model.addAttribute("titre", v.getNom());
 		model.addAttribute("population","Population : " + v.getPopulation());
 		model.addAttribute("surface","Surface : " + v.getSurface());

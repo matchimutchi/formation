@@ -53,13 +53,15 @@
 				<form id="searchform" action="search">
 					<div class="row">
 						<div class="col-md-2 ">
-							<label for="search">Recherche par ville</label> <input
-								type="text" class="shadow rounded" id="search" name="search">
+							<label for="search">Recherche par ville</label> 
+							<input type="text" class="shadow rounded" id="search" name="search">
 
 						</div>
-						<div class="col-md-2 mt-4">
-							<input type="submit" class="btn btn-warning shadow  rounded"
-								value="search">
+						<div class="col-md-1 mt-4">
+							<input type="submit" class="btn btn-warning shadow  rounded" value="Search">
+						</div>
+						<div class="col-md-1 mt-4">
+							<a href="/liste" class="btn btn-danger shadow  rounded">Retour</a>
 						</div>
 						<div class="col-md-2 offset-md-6 mt-4">
 							<a class="btn btn-primary shadow  rounded" href="/create"
@@ -88,8 +90,8 @@
 								<td>${v.surface}</td>
 								<td>${v.pays}</td>
 								<td>
-								<a class="btn btn-warning" href="/edit/${v.id}"role="button">Edition</a> 									
-									<form action="/delete" id="delete" method="post">
+								<a style="float:left;margin-right:5px" class="btn btn-warning" href="/edit/${v.id}"role="button">Edition</a> 									
+									<form action="/delete" id="delete" method="post" style="float:left">
 										<input type="hidden" name="delete" value="${v.id}">
 										<input  class="btn btn-danger" type="submit" id="delete" value="Supprimer" />
 									</form>

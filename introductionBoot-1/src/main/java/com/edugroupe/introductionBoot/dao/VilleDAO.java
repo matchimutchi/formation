@@ -27,7 +27,7 @@ public class VilleDAO {
 	private JdbcTemplate jdbcTemplate;
 	
 	
-	private static class ProduitMapper implements RowMapper<Ville>{
+	private static class VilleMapper implements RowMapper<Ville>{
 		@Override
 		public Ville mapRow(ResultSet rs,int rowNum) throws SQLException{
 			return new Ville(rs.getInt("id"),
@@ -40,13 +40,13 @@ public class VilleDAO {
 	
 	
 	public List<Ville> findAll(){
-		return jdbcTemplate.query(FIND_ALL_SQL, new ProduitMapper());
+		return jdbcTemplate.query(FIND_ALL_SQL, new VilleMapper());
 	}
 	
 
 	public Ville findById(int id) {
 		try {
-		return jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[] {id}, new ProduitMapper());
+		return jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[] {id}, new VilleMapper());
 		}catch(EmptyResultDataAccessException ex) {
 			return null;
 		}
@@ -62,7 +62,7 @@ public class VilleDAO {
 	}
 	
 	public List<Ville> search(String nom) {
-		return jdbcTemplate.query(SEARCH_BY_VILLE_SQL,new Object[] {"%" + nom + "%"}, new ProduitMapper());
+		return jdbcTemplate.query(SEARCH_BY_VILLE_SQL,new Object[] {"%" + nom + "%"}, new VilleMapper());
 	}
 	
 	public int deleteById(int id) {
