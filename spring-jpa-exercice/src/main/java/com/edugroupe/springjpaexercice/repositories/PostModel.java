@@ -21,4 +21,5 @@ public interface PostModel {
 
 	List<Post> searchDate(LocalDate date);
 
+
 }

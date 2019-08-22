@@ -31,6 +31,7 @@ public class PostModelImpl implements PostModel {
 		return em.find(Post.class,id);
 	}
 	
+	
 	@Override
 	@Transactional
 	public Post save(Post p) {

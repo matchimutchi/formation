@@ -38,6 +38,7 @@
 			</div>
 		</div>
 		<br> <br>
+
 		<div class="row">
 			<div class="col-md-10 offset-md-1">
 				<form id="searchform" action="search">
@@ -51,18 +52,19 @@
 							<input type="submit" class="btn btn-warning shadow  rounded"
 								value="Search">
 						</div>
-						
+
 						<div class="col-md-2 ">
-							<label for="searchDate">Recherche par date > </label> <input type="date"
-								class="shadow rounded" id="searchDate" name="search Date">
+							<label for="searchDate">Recherche par date > </label> <input
+								type="date" class="shadow rounded" id="searchDate"
+								name="search Date">
 
 						</div>
 						<div class="col-md-1 mt-4">
 							<input type="submit" class="btn btn-warning shadow  rounded"
 								value="SearchDate">
 						</div>
-						
-						
+
+
 						<div class="col-md-1 mt-4 ml-1">
 							<a href="/home" class="btn btn-danger shadow  rounded">Retour</a>
 						</div>
@@ -87,13 +89,13 @@
 						<div class="card-body">
 							<h3 class="card-title">${p.titre}</h3>
 							<hr style="border: 1px solid white">
-								<textarea rows="5" cols="33"  readonly>${p.corps}</textarea>
-								<p class="card-text">
-									<b>Posté le </b>  ${p.formatedDateCreation}
-								</p>
-								<p class="card-text">
-									<b>Ecrit par </b> ${p.auteur}
-								</p>
+							<textarea rows="5" cols="33" readonly>${p.corps}</textarea>
+							<p class="card-text">
+								<b>Posté le </b> ${p.formatedDateCreation}
+							</p>
+							<p class="card-text">
+								<b>Ecrit par </b> ${p.auteur}
+							</p>
 
 							<hr style="border: 1px solid white">
 							<a style="float: left; margin-right: 5px" class="btn btn-warning"
