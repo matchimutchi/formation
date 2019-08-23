@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Films jpa</title>
+<title>Realisateur jpa</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar  navbar-dark bg-dark">
-					<a class="navbar-brand" href="#">Films jpa</a>
+					<a class="navbar-brand" href="#">Realisateur jpa</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -28,10 +28,10 @@
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
+							<li class="nav-item active"><a class="nav-link"
+								href="http://localhost:8080/">Liste des films</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="http://localhost:8080/home">Liste des acteur</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="http://localhost:8080/">Liste des Films</a></li>
+								href="http://localhost:8080/home">Liste des acteurs</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="http://localhost:8080/accueil">Liste des réalisateurs</a></li>
 
@@ -46,8 +46,8 @@
 				<form id="searchform" action="search">
 					<div class="row">
 						<div class="col-md-2 offset-md-10 mt-4">
-							<a class="btn btn-primary shadow  rounded" href="/create"
-								role="button">Créer un film</a>
+							<a class="btn btn-primary shadow  rounded" href="/createRealisateur"
+								role="button">Créer un realisateur</a>
 						</div>
 					</div>
 				</form>
@@ -57,40 +57,37 @@
 						<tr>
 							<th scope="col">Id</th>
 							<th scope="col">Nom</th>
-							<th scope="col">Duree</th>
-							<th scope="col">Annee</th>
-							<th scope="col">Acteur</th>
-							<th scope="col">Réalisateur</th>
+							<th scope="col">Prenom</th>
+							<th scope="col">Societe</th>
+							<th scope="col">Film</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${films}" var="f">
+						<c:forEach items="${realisateurs}" var="r">
 							<tr>
-								<td>${f.id}</td>
-								<td>${f.nom}</td>
-								<td>${f.duree}</td>
-								<td>${f.annee}</td>
+								<td>${r.id}</td>
+								<td>${r.nom}</td>
+								<td>${r.prenom}</td>
+								<td>${r.societe}</td>
 								<td>
-									<c:forEach items="${f.acteurs}" var="acteur" varStatus="a">
+									<c:forEach items="${r.films}" var="film" varStatus="f">
 
-										<c:if test="${a.last}">
-											${acteur.nom} ${acteur.prenom} 
+										<c:if test="${f.last}">
+											${film.nom} 
 										</c:if>
-										<c:if test="${not a.last}">
-											 ${acteur.nom} ${acteur.prenom}   -
+										<c:if test="${not f.last}">
+											 ${film.nom} -
 										</c:if>
 									</c:forEach>
 								</td>
-								<td>${f.realisateur.nom} ${f.realisateur.prenom}</td>
 								<td>
+
 									<a style="float: left; margin-right: 5px"
-									class="btn btn-primary" href="/film/${f.id}/editActeurs" role="button">Ajouter</a>
-									<a style="float: left; margin-right: 5px"
-									class="btn btn-warning" href="/edit/${f.id}" role="button">Edition</a>
-									<form action="/delete" id="delete" method="post"
+									class="btn btn-warning" href="/editRealisateur/${r.id}" role="button">Edition</a>
+									<form action="/deleteRealisateur" id="delete" method="post"
 										style="float: left">
-										<input type="hidden" name="delete" value="${f.id}"> <input
+										<input type="hidden" name="delete" value="${r.id}"> <input
 											class="btn btn-danger" type="submit" id="delete"
 											value="Supprimer" />
 									</form>

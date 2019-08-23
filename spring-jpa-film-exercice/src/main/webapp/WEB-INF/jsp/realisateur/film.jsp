@@ -29,12 +29,12 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item active"><a class="nav-link"
-								href="http://localhost:8080/create">Creation d'un film</a></li>
+								href="http://localhost:8080/home">Liste des acteurs</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="http://localhost:8080/">Liste des films</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="http://localhost:8080/{acteur.id}/acteurs">Liste des
-									acteurs</a></li>
+								href="http://localhost:8080/accueil">Liste des
+									realisateurs</a></li>
 
 						</ul>
 					</div>
@@ -44,7 +44,7 @@
 		<br>
 				<div class="row">
 			<div class="col-md-2">
-				<a href="/"  class="btn btn-warning" class="ml-3"><img src="/image/reply.png" /></a>
+				<a href="/accueil"  class="btn btn-warning" class="ml-3"><img src="/image/reply.png" /></a>
 			</div>
 		</div>
 		<br>
@@ -52,9 +52,9 @@
 			<div class="col-md-12 ">
 				<div class="card shadow rounded" style="width: 90rem;">
 					<div class="card-body">
-						<h2 class="card-title text-center"><b> ${film.nom}</b></h2>
-						<p class="card-text text-center">Realiser par :<b> ${film.realisateur.prenom }
-							${film.realisateur.nom }</b></p>
+						<h2 class="card-title text-center">Realiser par : <b> ${realisateur.nom}</b></h2>
+						<p class="card-text text-center"><b> ${realisateur.film.prenom }
+							${realisteur.film.nom }</b></p>
 					</div>
 				</div>
 			</div>
@@ -66,15 +66,15 @@
 			<div class="col-md-3">
 				<div class="card shadow rounded" style="width: 42rem;">
 					<div class="card-body">
-						<h5 class="card-title text-center">Acteur déjà associés :</h5>
-						<h3 class="card-title text-center">${film.nom}</h3>
+						<h5 class="card-title text-center">Film déjà associés :</h5>
+						<h3 class="card-title text-center">${realisateur.nom}</h3>
 						<hr>
 						<p class="card-text text-center">Cliquer pour retirer</p>
 						<div class="card-text">
-							<c:forEach items="${selected_acteurs}" var="sg">
-								<form action="/film/removeActeur" method="post">
-									<input type="hidden" name="filmId" value="${film.id}" />
-									<input type="hidden" name="acteurId" value="${sg.id}" />
+							<c:forEach items="${selected_realisateurs}" var="sg">
+								<form action="/realisateur/removeFilm" method="post">
+									<input type="hidden" name="realisateurId" value="${realisateur.id}" />
+									<input type="hidden" name="filmId" value="${sg.id}" />
 									<input type="submit"class="mb-2 btn-block btn btn-sm btn-primary" value="${sg.nom}">
 								</form>
 							</c:forEach>
@@ -85,15 +85,15 @@
 			<div class="col-md-3 offset-md-3">
 				<div class="card shadow rounded" style="width: 42rem;">
 					<div class="card-body">
-						<h5 class="card-title text-center">Acteur non associés :</h5>
-						 <h3 class="card-title text-center">${film.nom}</h3>
+						<h5 class="card-title text-center">Film non associés :</h5>
+						 <h3 class="card-title text-center">${realisateur.nom}</h3>
 						<hr>
 						<p class="card-text text-center">Cliquer pour retirer</p>
 						<div class="card-text">
-							<c:forEach items="${unselected_acteurs}" var="usg">
-								<form action="/film/addActeur" method="post">
-									<input type="hidden" name="filmId" value="${film.id}" />
-									<input type="hidden" name="acteurId" value="${usg.id}" />
+							<c:forEach items="${unselected_realisateurs}" var="usg">
+								<form action="/realisateur/addFilm" method="post">
+									<input type="hidden" name="realisateurId" value="${realisateur.id}" />
+									<input type="hidden" name="filmId" value="${usg.id}" />
 									<input type="submit"class="mb-2 btn-block btn btn-sm btn-primary" value="${usg.nom}">
 								</form>
 							</c:forEach>

@@ -14,6 +14,7 @@ import com.edugroupe.springjpafilmexercice.metier.Film;
 import com.edugroupe.springjpafilmexercice.metier.Realisateur;
 
 
+
 @Service
 public class FilmModelImpl implements FilmModel {
 
@@ -23,9 +24,13 @@ public class FilmModelImpl implements FilmModel {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Film> findAll(){
-
-		return em.createQuery("FROM Film",Film.class).getResultList();
+	public List<Film> findAll(boolean withGenre){
+			if(withGenre) {
+				return em.createQuery("SELECT DISTINCT(f) FROM Film as f LEFT JOIN fetch f.acteurs",Film.class).getResultList();
+			}else{
+				return em.createQuery("FROM Film",Film.class).getResultList();
+			}
+		
 
 	}
 
@@ -68,7 +73,7 @@ public class FilmModelImpl implements FilmModel {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Acteur> findFilmActeur(int filmId){
-		TypedQuery<Acteur> q = em.createQuery("SELECT g FROM Genre as g JOIN g.livres as li WHERE li.id = :livreId",Acteur.class);
+		TypedQuery<Acteur> q = em.createQuery("SELECT a FROM Acteur as a JOIN a.films as f WHERE f.id = :filmId",Acteur.class);
 		q.setParameter("filmId", filmId);
 		return q.getResultList();
 	}
@@ -107,6 +112,8 @@ public class FilmModelImpl implements FilmModel {
 		film.getActeurs().remove(acteur);
 		return true;
 	}
+
+
 
 
 
