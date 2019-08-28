@@ -1,32 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <!--<h1>
-    Bienvenue {{ title }}!
-  </h1>-->
+
+
+  <app-nav-bar></app-nav-bar>
+
 <br>
-<div class="row">
-  <div class="col-md-10 offset-md-1">
-  <table class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Nom</th>
-          <th scope="col">Duree</th>
-          <th scope="col">Date Sortie</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let f of films">
-          <td>{{f.id}}</td>
-          <td>{{f.nom}}</td>
-          <td>{{f.duree}}</td>
-          <td>{{f.dateSortie | date : 'medium'}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
-</div>
+<br>
+
+  <router-outlet></router-outlet>
 
 
-<router-outlet></router-outlet>
+

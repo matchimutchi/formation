@@ -1,0 +1,48 @@
+
+
+<!--////////////////////TITRE////////////////////////////////////-->
+
+<div class="row">
+        <div class="col-md-6 offset-md-4">
+            <h3>Le livre en cours d'édition : <b> {{editLivre.titre}} </b></h3>
+        </div>
+    </div>
+    <br>
+    <br>
+    
+    <!--////////////////////FORMULAIRE////////////////////////////////////-->
+    <div class="">
+    <form (ngSubmit)="sauverLivre()">
+        <div class="row ">
+            <div class="col-md-7 offset-md-3 shadow rounded border border-secondary">
+                <div class="form-group mt-3">
+                    <label for="titre"><b>Titre : </b></label>
+                    <input type="text" class="form-control" id="titre" name="titre" [(ngModel)]="editLivre.titre">
+                </div>
+                <div class="form-group">
+                    <label for="nbPages"><b>nbPages : </b></label>
+                    <input type="text" class="form-control " id="nbPages" name="nbPages" [(ngModel)]="editLivre.nbPages">
+                </div>
+                <div class="form-group">
+                    <label for="isbn"><b>ISBN : </b> </label>
+                    <input type="text" class="form-control" id="isbn" name="isbn" [(ngModel)]="editLivre.isbn">
+                </div>
+                <div class="form-group">
+                    <label for="dateSortie"><b>Date sortie : </b></label>
+                    <input type="date" class="form-control" id="dateSortie" name="dateSortie"
+                        [(ngModel)]="editLivre.dateSortie">
+                </div>
+                <div class="form-group">
+						<label for="auteur"><b>Auteur : </b></label> 						
+						<select class="form-control" id="auteur" name="auteur" [(ngModel)]="editLivre.auteur.id">
+							<option *ngFor="let a of auteurs"  [ngValue]="a.id">{{a.nom}} {{a.prenom}}</option>
+						</select>						
+				</div>
+                <button type="submit" class="btn btn-warning mb-3 shadow rounded">Enregistrer</button>
+                <a routerLink="/liste"  class="btn btn-danger ml-3 mb-3 shadow rounded">Retour</a>
+            </div>
+
+        </div>
+    </form>
+    <br>
+</div>

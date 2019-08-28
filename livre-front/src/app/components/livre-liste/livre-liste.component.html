@@ -1,0 +1,60 @@
+<!--////////////////////BOUTON////////////////////////////////////-->
+<div class="row">
+    
+   <div class="col-md-5 offset-md-1">
+        <form>
+            <label for="recherche">Recherche  par titre</label>
+            <input type="text" class="ml-3" id="recherche" name="recherche" [ngModel]="recherche" (ngModelChange)="searchTitre($event)"/>  
+        </form>        
+        </div>
+
+    <div class="col-md-2 offset-md-4">
+        <a routerLink='/edit/0' class='btn btn-primary shadow  rounded'>Création</a>
+    </div>
+</div>
+<br>
+
+<!--////////////////////TABLEAU////////////////////////////////////-->
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <table class="table table-hover shadow  rounded">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Nb Pages</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Date Sortie</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let l of livres.content">
+                    <!---| async-->
+                    <td>{{l.id}}</td>
+                    <td>{{l.titre}}</td>
+                    <td>{{l.nbPages}}</td>
+                    <td>{{l.isbn}}</td>
+                    <td>{{l.dateSortie | date : 'dd-MM-yyyy'}}</td>
+                    <td><a href="https://fr.wikipedia.org/wiki/{{l.auteur.nom}}_{{l.auteur.prenom}}" target="_blanck">{{l.auteur.nom}} {{l.auteur.prenom}}</a></td>
+                    <td>
+                        <a routerLink='/edit/{{l.id}}' class='btn btn-warning shadow  rounded'>Edition</a>
+                        <button (click)="effacerLivre(l.id)"
+                            class="btn btn-danger shadow  rounded ml-3">Suppression</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<!--////////////////////PAGINATION////////////////////////////////////-->
+<div class="row">
+    <div class="col-md offset-md-4 ">
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="taillePage" [ngModel]="currentPage"
+            (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</div>

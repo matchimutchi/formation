@@ -1,0 +1,47 @@
+<!--////////////////////BOUTON////////////////////////////////////-->
+<div class="row">
+        <div class="col-md-2 offset-md-10">
+            <a routerLink='/editAuteur/0' class='btn btn-primary shadow  rounded'>Création</a>
+        </div>
+    </div>
+    <br>
+    
+    <!--////////////////////TABLEAU////////////////////////////////////-->
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <table class="table table-hover shadow  rounded">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of auteurs.content"> <!---| async-->
+                        <td>{{a.id}}</td>
+                        <td>{{a.nom}}</td>
+                        <td>{{a.prenom}}</td>
+                        <td>
+                            <a routerLink='/editAuteur/{{a.id}}' class='btn btn-warning shadow  rounded'>Edition</a>
+                            <button (click)="effacerAuteur(a.id)" class="btn btn-danger shadow  rounded ml-3">Suppression</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+    
+    <!--////////////////////PAGINATION////////////////////////////////////-->
+    <div class="row">       
+        <div class="col-md offset-md-4 ">
+               <pagination [boundaryLinks]="true" 
+                            [totalItems]="totalItems" 
+                            [itemsPerPage]="taillePage" 
+                            [ngModel]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
+

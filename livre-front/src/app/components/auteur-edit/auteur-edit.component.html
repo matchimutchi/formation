@@ -1,0 +1,37 @@
+
+
+<!--////////////////////Nom////////////////////////////////////-->
+<div class="row">
+        <div class="col-md-6 offset-md-4">
+            <h3>L'auteur en cours d'édition : <b> {{editAuteur.nom}} </b></h3>
+        </div>
+    </div>
+    <br>
+    <br>
+    
+    <!--////////////////////FORMULAIRE////////////////////////////////////-->
+    <form (ngSubmit)="sauverAuteur()">
+        <div class="row">
+            <div class="col-md-5 offset-md-1">
+                <div class="form-group">
+                    <label for="nom">Nom : </label>
+                    <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="editAuteur.nom">
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom : </label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="editAuteur.prenom">
+                </div>
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="hidden">
+                </div>
+    
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 offset-md-1">
+                <button type="submit" class="btn btn-warning">Enregistrer</button>
+            </div>
+        </div>
+    </form>
+
