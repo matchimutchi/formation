@@ -1,0 +1,39 @@
+<div class="row mt-5">
+    <div class="col-md-6 offset-md-5">
+        <pagination [boundaryLinks]="true"
+            [totalItems]="totalItems"
+            [itemsPerPage]="taillePage"
+            [ngModel]="noPage"
+            (pageChanged)="pageChanged($event)">
+        </pagination> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3  col-xs-12 mt-4" *ngFor="let p of pictures.content">       
+            <div class="card"  >
+                <a [href]="getImageUrl(p.id)" data-lightbox="roadtrip" data-title="{{p.titre}}">
+                    <img [src]="getThumbnailUrl(p.id)" class="card-img-top" >
+                </a>
+                <div class="card-body">                   
+                    <p class="card-text">{{p.titre | truncate : 20: '&hellip;'}}</p>
+                    <!--<p class="card-text">{{p.width}} * {{p.height}}</p>-->
+                    <br>
+                    <small class="text-muted">Dernière mise à jour {{p.dateAdded}}</small>
+                </div>
+                <div class="card-footer">
+                    
+                    <div class="row">
+                            <div class="col-md-2 offset-md-1">
+                                <a [href]="getImageUrl(p.id)" class="btn btn-warning "><fa-icon [icon]="faEdit"></fa-icon></a>
+                            </div>
+                            <div class="col-md-2 offset-md-1">
+                                <a [href]="getImageUrl(p.id)" class="btn btn-primary"><fa-icon [icon]="faDownload"></fa-icon></a>
+                            </div>
+                            <div class="col-md-2 offset-md-1">
+                                <a [href]="getImageUrl(p.id)" class="btn btn-danger"><fa-icon [icon]="faTrash"></fa-icon></a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+    </div>
+</div>
