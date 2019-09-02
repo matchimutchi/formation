@@ -32,7 +32,7 @@ import { AuteurEditComponent } from './components/auteur-edit/auteur-edit.compon
     FormsModule,
     PaginationModule.forRoot()
   ],
-  providers: [
+  providers: [ 
     LivreRepositoryService,
    AuteurRepositoryService
   ],

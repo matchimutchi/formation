@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<comptes>
+    <comptes id="1">
+        <solde>3.9364572259846797</solde>
+        <proprietaire>Bob 0</proprietaire>
+    </comptes>
+    <comptes id="2">
+        <solde>210.03230074706903</solde>
+        <proprietaire>Bob 1</proprietaire>
+    </comptes>
+    <comptes id="3">
+        <solde>329.3341225761688</solde>
+        <proprietaire>Bob 2</proprietaire>
+    </comptes>
+    <comptes id="4">
+        <solde>337.395833728269</solde>
+        <proprietaire>Bob 3</proprietaire>
+    </comptes>
+    <comptes id="5">
+        <solde>381.12617352709754</solde>
+        <proprietaire>Bob 4</proprietaire>
+    </comptes>
+    <comptes id="6">
+        <solde>10.4105100634444</solde>
+        <proprietaire>Bob 5</proprietaire>
+    </comptes>
+    <comptes id="7">
+        <solde>349.292081892025</solde>
+        <proprietaire>Bob 6</proprietaire>
+    </comptes>
+    <comptes id="8">
+        <solde>768.2661435655405</solde>
+        <proprietaire>Bob 7</proprietaire>
+    </comptes>
+    <comptes id="9">
+        <solde>219.8581575131634</solde>
+        <proprietaire>Bob 8</proprietaire>
+    </comptes>
+    <comptes id="10">
+        <solde>636.9337835894565</solde>
+        <proprietaire>Bob 9</proprietaire>
+    </comptes>
+</comptes>
