@@ -4,6 +4,7 @@ package com.edugroupe.springproduituploadrep.web;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,11 +31,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.edugroupe.springlivrerestexercice.metier.Livre;
+
 import com.edugroupe.springproduituploadrep.metier.Produit;
+import com.edugroupe.springproduituploadrep.repositories.CategorieRepository;
 import com.edugroupe.springproduituploadrep.repositories.ImageRepository;
 import com.edugroupe.springproduituploadrep.repositories.ProduitRepository;
-import com.edugroupe.springuploadrepbase.metier.Picture;
+
 
 
 
@@ -47,6 +49,9 @@ public class ProduitController {
 	
 	@Autowired
 	private ImageRepository imageRepository;
+	
+	@Autowired
+	private CategorieRepository categorieRepository;
 	
 	//----------------------------------RECHERCHER TTES LES IMAGES-----------------------
 	@GetMapping(value="", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -71,138 +76,71 @@ public class ProduitController {
 
 
 	
-	//----------------------------------INJECTER UNE IMAGE-----------------------
-	@PostMapping(value="/upload",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	//-----------------------INSERER UN ELEMENT PAR L ID-------------------------
+	@PostMapping(value="",
+			//produce signifie qu'on envoie du json
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+			//consume signifie qu'on recoit du json
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@CrossOrigin("http://localhost:4200")	
-	public ResponseEntity<Produit> upload(@RequestParam("file") MultipartFile file,
-			@RequestParam("titre") Optional<String> titre) {
-		
-		try {
-			Produit p = new Produit(0, "", 0.0, 0.0);		
-			
-			//----------------------sauvegarde et generation thumbnail-------------------
-			produitRepository.saveImageFile(p, file.getInputStream());
-			p = produitRepository.save(p);
-			return new ResponseEntity<Produit>(p,HttpStatus.CREATED);
-		} catch (IOException e) {e.printStackTrace();}
-		
-		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		
-				
-		
+	@CrossOrigin(origins = {"http://localhost:4200"})
+	public ResponseEntity<Produit> insertProduit(@RequestBody Produit produit){
+		if(produit.getId() != 0) {
+			return new ResponseEntity<Produit>(HttpStatus.BAD_REQUEST);
+		}
+		//requestBody le corp de la requete va contenir en json ici notre objet
+		produit = produitRepository.save(produit);
+		return new ResponseEntity<Produit>(produit, HttpStatus.CREATED);
 	}
 	
 	
 	
 	
-	
-	
-	//----------------------------------GERER LES IMAGES-----------------------
-	@GetMapping(value="/{id:[0-9]+}/data")
+	//-----------------------MODIFIER UN ELEMENT PAR L ID-------------------------
+	@PutMapping(value="",
+			//produce signifie qu'on envoie du json
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+			//consume signifie qu'on recoit du json
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@CrossOrigin("http://localhost:4200")	
-	public ResponseEntity<FileSystemResource> pictureData(@PathVariable("id") int id){
-		Optional<Produit> op = produitRepository.findById(id);
-		
-		if(!op.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		
-		Optional<File> ofile = produitRepository.getPictureFile(op.get().getStorageid());
-		
-		if(!ofile.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		
-		
-		//entet de la reponse
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.parseMediaType(op.get().getContentType()));
-		headers.setContentLength(ofile.get().length());
-		headers.setContentDispositionFormData("attachment", op.get().getFileName());
-		
-		//on retourne les 3 declarations
-		ResponseEntity<FileSystemResource> re = new ResponseEntity<FileSystemResource>(new FileSystemResource(ofile.get()),headers,HttpStatus.OK);
-				
-		
-		return re;
-				
-		
-	}
-	
-	
-	
-	
-	
-	
-	//----------------------------------GERER LES IMAGES MINIATURES-----------------------
-	@GetMapping(value="/{id:[0-9]+}/thumbdata")
-	@ResponseBody
-	@CrossOrigin("http://localhost:4200")	
-	public ResponseEntity<FileSystemResource> pictureThumbData(@PathVariable("id") int id){
-		Optional<Produit> op = produitRepository.findById(id);
-		
-		if(!op.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		
-		Optional<File> ofile = produitRepository.getPictureFile(op.get().getThumbStorageId());
-		
-		if(!ofile.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		
-		
-		//entet de la reponse
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_JPEG);
-		headers.setContentLength(ofile.get().length());
-		headers.setContentDispositionFormData("attachment", op.get().getFileName());
-		
-		//on retourne les 3 declarations
-		ResponseEntity<FileSystemResource> re = new ResponseEntity<FileSystemResource>(new FileSystemResource(ofile.get()),headers,HttpStatus.OK);
-				
-		
-		return re;
-						
-	}
-	
-	
-	
-	@DeleteMapping(value="/{id:[0-9]+}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	@CrossOrigin("http://localhost:4200")
-	public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") int id){
-		
-		return produitRepository.findById(id)
-				.map(p -> {
-				produitRepository.delete(p);
-				return new ResponseEntity<Map<String, Object>>(
-						Collections.singletonMap("nbdeleted", 1),
-						HttpStatus.ACCEPTED);
-			})
-			.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-	}
-	
-	
-	//----------------------------------UPDATE--------------------------------------
-	@PutMapping(value="/{id:[0-9]+}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	@CrossOrigin("http://localhost:4200")
-	public ResponseEntity<Produit> updatePicture(@RequestBody Produit produit ,@PathVariable("id") int id){
+	@CrossOrigin(origins = {"http://localhost:4200"})
+	public ResponseEntity<Produit> updateProduit(@RequestBody Produit produit){
 		Optional<Produit> p = produitRepository.findById(produit.getId());
-		if(!p.isPresent()) {
+		if (!p.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		Produit p1 = p.get();
-		p1.setNom(produit.getNom());
-		p1.setPoids(produit.getPoids());
-		p1.setPrix(produit.getPrix());
-
-		p1 = produitRepository.save(p1);//sauvegarde
-		return new ResponseEntity<Produit>(p1, HttpStatus.ACCEPTED);
+		
+		Produit p2 = p.get();
+		//f2.setId(film.getId());
+		p2.setNom(produit.getNom());
+		p2.setPrix(produit.getPrix());
+		p2.setPoids(produit.getPoids());
+		
+		p2 = produitRepository.save(p2);
+		return new ResponseEntity<Produit>(p2, HttpStatus.OK);
 	}
+	
+	
+	
+	
+	//-----------------------SUPPRIMER UN ELEMENT PAR L ID-------------------------
+	@DeleteMapping(value="/{id:[0-9]+}",
+			//produce signifie qu'on envoie du json
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	@CrossOrigin(origins = {"http://localhost:4200"})
+	public ResponseEntity<Map<String, Object>> deleteFilm(@PathVariable("id") int id){
+		Optional<Produit> p = produitRepository.findById(id);
+		if(!p.isPresent()) {
+			return new ResponseEntity<Map<String,Object>>(HttpStatus.NOT_FOUND);
+		}else {
+			produitRepository.delete(p.get());
+			return new ResponseEntity<Map<String,Object>>(Collections.singletonMap("Ligne effacée", 1), HttpStatus.ACCEPTED);
+		}
+	}
+	
+	
+	
 	
 
 	

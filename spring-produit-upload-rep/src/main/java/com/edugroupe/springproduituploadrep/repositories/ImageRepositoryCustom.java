@@ -9,9 +9,7 @@ import com.edugroupe.springproduituploadrep.metier.Image;
 public interface ImageRepositoryCustom {
 
 	boolean saveImageFile(Image image, InputStream file);
-
 	Optional<File> getImageFile(String storageid);
-
-	boolean deletePictureFile(Image image);
+	boolean deleteImageFile(Image image);
 
 }

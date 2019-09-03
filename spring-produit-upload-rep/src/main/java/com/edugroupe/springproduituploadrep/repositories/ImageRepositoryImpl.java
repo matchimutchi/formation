@@ -62,7 +62,7 @@ public class ImageRepositoryImpl implements ImageRepositoryCustom {
 	
 	//----------------effacement image et thumbnail------------------------
 	@Override
-	public boolean deletePictureFile(Image image) {
+	public boolean deleteImageFile(Image image) {
 			
 		boolean successA = fileStorageManager.deleteFile(image.getStorageid());
 		boolean successB = fileStorageManager.deleteFile(image.getThumbStorageId());

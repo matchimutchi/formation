@@ -23,7 +23,6 @@ public class FileStorageManager {
 	private Random rd = new Random();
 	
 	
-
 	
 	//--------------CREATION D UN NOM DE FICHIER ALEATOIRE DANS UN REPERTOIRE---------------
 	public String saveNewFile(String collection, InputStream data) {
