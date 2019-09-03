@@ -1,0 +1,48 @@
+
+
+<!--////////////////////BOUTON////////////////////////////////////-->
+<div class="row">
+    <div class="col-md-2 offset-md-10">
+        <a routerLink='/edit/0' class='btn btn-primary shadow  rounded'>Création</a>
+    </div>
+</div>
+<br>
+
+<!--////////////////////TABLEAU////////////////////////////////////-->
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <table class="table table-hover shadow  rounded">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Poids</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of produits.content"> <!---| async-->
+                    <td>{{p.id}}</td>
+                    <td>{{p.nom}}</td>
+                    <td>{{p.prix}}</td>
+                    <td>{{p.poids}}</td>
+                    <td>
+                        <a routerLink='/edit/{{p.id}}' class='btn btn-warning shadow  rounded'>Edition</a>
+                        <button (click)="effacerFilm(p.id)" class="btn btn-danger shadow  rounded ml-3">Suppression</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-4 ">
+    <pagination [boundaryLinks]="true"
+        [totalItems]="totalItems"
+        [itemsPerPage]="taillePage"
+        [ngModel]="noPage"
+        (pageChanged)="pageChanged($event)" class="shadow rounded">
+    </pagination> 
+</div>
+

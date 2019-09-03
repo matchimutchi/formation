@@ -20,12 +20,16 @@ public class PictureRepositoryImpl implements PictureRepositoryCustom {
 	@Autowired
 	private FileStorageManager fileStorageManager;
 	
-	
+	//STOKAGE DES FUNCTION DANS L INTERFACE PictureRepositoryCustom
 	//----------------------------------CONSTANTE-------------------------
 	//taille des miniature
 	public static final int THUMB_WIDTH = 224;
 	public static final int THUMB_HEIGHT = 224;
 	
+	
+	
+	
+	//-------------SAVE image et thumbnail---------------------
 	@Override
 	public boolean savePictureFile(Picture picture, InputStream file) {
 		//------------------------sauvegarder de l'image original-----------------------
@@ -51,9 +55,26 @@ public class PictureRepositoryImpl implements PictureRepositoryCustom {
 		return true;
 	}
 
+	
+	
+	//------------- image  ---------------------
 	@Override
 	public Optional<File> getPictureFile(String storageid) {
 		return fileStorageManager.getImageFile(storageid);
 	}
 
+	
+	
+	
+	//----------------effacement image et thumbnail------------------------
+	@Override
+	public boolean deletePictureFile(Picture picture) {
+		
+		
+		
+		boolean successA = fileStorageManager.deleteFile(picture.getStorageid());
+		boolean successB = fileStorageManager.deleteFile(picture.getThumbStorageId());
+		return successA && successB;
+		
+	}
 }

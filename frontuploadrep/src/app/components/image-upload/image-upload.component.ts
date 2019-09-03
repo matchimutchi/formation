@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { PictureRepositoryService } from 'src/app/services/picture-repository.service';
+import {faEdit,faDownload,faTrash, faEye} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-image-upload',
@@ -9,6 +10,7 @@ import { PictureRepositoryService } from 'src/app/services/picture-repository.se
 })
 export class ImageUploadComponent implements OnInit {
 
+  faEye=faEye;
   // objet qui gere l'upload de fichier en ajax
   public uploader: FileUploader;
   public hasBaseDropZoneOver : boolean = false;
@@ -32,8 +34,8 @@ export class ImageUploadComponent implements OnInit {
   }
 
   public fileOverDrop(event) {
-    console.log("file over");
-    console.log(event);
+    //console.log("file over");
+    //console.log(event);
     this.hasBaseDropZoneOver = event;
   }
 }

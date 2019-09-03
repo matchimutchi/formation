@@ -16,6 +16,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 //import { TruncatePipe } from 'angular-pipes';
 import { NgStringPipesModule } from 'angular-pipes';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     FormsModule,
     ProgressbarModule.forRoot(),
     NgStringPipesModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

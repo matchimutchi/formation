@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PictureRepositoryService } from 'src/app/services/picture-repository.service';
+import { Picture } from 'src/app/metier/picture';
 
 @Component({
   selector: 'app-image-detail',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageDetailComponent implements OnInit {
 
-  constructor() { }
+  //l'image en cours d'edition
+  editPicture : Picture;
+
+  constructor(private activeRoute : ActivatedRoute,
+              private router : Router,
+              private pictureRepository : PictureRepositoryService) { }
 
   ngOnInit() {
+    this.editPicture = null;
+    //recuperation de l'id
+    this.activeRoute.params.subscribe(params =>{
+      let id: number = Number(params['id']);
+      this.pictureRepository.findById(id).then(p => {
+        this.editPicture = p;
+      })
+    })
+
+
+  }
+
+
+  public getImageUrl(id: number) : string {
+    return this.pictureRepository.getImageUrl(id);
+  }
+
+
+  
+  public savePicture() : void{
+    this.pictureRepository.updatePicture(this.editPicture.id,this.editPicture.titre);
+    this.router.navigateByUrl("/");
   }
 
 }

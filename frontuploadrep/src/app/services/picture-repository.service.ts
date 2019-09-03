@@ -9,13 +9,13 @@ import { Picture } from '../metier/picture';
 })
 export class PictureRepositoryService {
   private serviceUrl : string = 'http://localhost:8080/pictures';
-  // pagination
+  // ---------------------------------pagination------------------------------
   private noPage: number;
   private taillePage: number;
 
   private picturesSubject : BehaviorSubject<Page<Picture>>;
 
-  // injection du requetteur
+  //-----------------------injection du requetteur---------------------------------
   constructor(private http : HttpClient) {
     this.noPage = 0;
     this.taillePage = 8;
@@ -27,6 +27,9 @@ export class PictureRepositoryService {
     return this.picturesSubject.asObservable();
   }
 
+
+
+  //---------------------------REFRECH---------------------------------------
   public refreshListe() :void  {
     let urlParams : HttpParams = new HttpParams().set('page', "" + this.noPage)
                                                  .set('size', "" + this.taillePage);
@@ -36,24 +39,54 @@ export class PictureRepositoryService {
              .subscribe(p => this.picturesSubject.next(p));
   }
 
+
+  //---------------------------------Nopages----------------------------------
   public setNopage(noPage : number) : void {
     this.noPage = noPage;
     this.refreshListe();
   }
 
-  // genere l'url correcte pour afficher une image
+
+
+
+  // -----------------------genere l'url correcte pour afficher une image--------------------
   public getImageUrl(id : number) : string {
     return `${this.serviceUrl}/${id}/data`;
   }
 
 
-    // genere l'url correcte pour afficher une image miniature
+
+
+    //----------------------- genere l'url correcte pour afficher une image miniature--------------------------
     public getThumbnailUrl(id : number) : string {
       return `${this.serviceUrl}/${id}/thumbdata`;
     }
 
-  // url pour l'upload
+
+
+
+  // -------------------url pour l'upload--------------------------
   public getUploadUrl() : string {
     return `${this.serviceUrl}/upload`;
   }
+
+    //-----------------FINDBYID------------------
+    public findById(id : number) : Promise<Picture>{
+      return this.http.get<Picture>(`${this.serviceUrl}/${id}`).toPromise();
+    }
+
+    public updatePicture(id: number, titre:string):void{
+      let urlParams : HttpParams = new HttpParams().set('titre',titre);
+      //put angular me force a mettre un objet dans le corp de la requette
+      //comme je n'en ai pas ici (juste un titre) je passe un objet vide
+      this.http.put(`${this.serviceUrl}/${id}`,{},{params : urlParams})
+              .subscribe( r => this.refreshListe());
+    }
+
+  //-----------------------DELETE----------------------------------
+  public deletePicture(id:number) : void{
+    this.http.delete<any>(`${this.serviceUrl}/${id}`).subscribe(r => this.refreshListe());
+  }
+
+
 }

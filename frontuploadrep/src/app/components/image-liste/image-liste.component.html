@@ -1,21 +1,16 @@
 <div class="row mt-5">
-    <div class="col-md-6 offset-md-5">
-        <pagination [boundaryLinks]="true"
-            [totalItems]="totalItems"
-            [itemsPerPage]="taillePage"
-            [ngModel]="noPage"
-            (pageChanged)="pageChanged($event)">
-        </pagination> 
+    <div class="col-md-1 offset-md-10 ">
+        <button  routerLink='/upload' class="btn btn-primary shadow rounded"><b>+ </b>Ajouter une image</button>
     </div>
 </div>
 <div class="row">
     <div class="col-md-3  col-xs-12 mt-4" *ngFor="let p of pictures.content">       
-            <div class="card"  >
+            <div class="card shadow rounded"  >
                 <a [href]="getImageUrl(p.id)" data-lightbox="roadtrip" data-title="{{p.titre}}">
                     <img [src]="getThumbnailUrl(p.id)" class="card-img-top" >
                 </a>
                 <div class="card-body">                   
-                    <p class="card-text">{{p.titre | truncate : 20: '&hellip;'}}</p>
+                    <p class="card-text text-center"><b>{{p.titre | truncate : 20: '&hellip;'}}</b></p>
                     <!--<p class="card-text">{{p.width}} * {{p.height}}</p>-->
                     <br>
                     <small class="text-muted">Dernière mise à jour {{p.dateAdded}}</small>
@@ -24,16 +19,41 @@
                     
                     <div class="row">
                             <div class="col-md-2 offset-md-1">
-                                <a [href]="getImageUrl(p.id)" class="btn btn-warning "><fa-icon [icon]="faEdit"></fa-icon></a>
+                                <a routerLink="/details/{{p.id}}" class="btn btn-warning shadow rounded"><fa-icon [icon]="faEdit"></fa-icon></a>
                             </div>
                             <div class="col-md-2 offset-md-1">
-                                <a [href]="getImageUrl(p.id)" class="btn btn-primary"><fa-icon [icon]="faDownload"></fa-icon></a>
+                                <a [href]="getImageUrl(p.id)" class="btn btn-primary shadow rounded"><fa-icon [icon]="faDownload"></fa-icon></a>
                             </div>
                             <div class="col-md-2 offset-md-1">
-                                <a [href]="getImageUrl(p.id)" class="btn btn-danger"><fa-icon [icon]="faTrash"></fa-icon></a>
+                                <button class="btn btn-danger shadow rounded" (click)="openDeleteModal(template,p)"><fa-icon [icon]="faTrash"></fa-icon></button>
                             </div>
                         </div>
                 </div>
             </div>
     </div>
 </div>
+
+        <div class="d-flex justify-content-center mt-4 ">
+            <pagination [boundaryLinks]="true"
+                [totalItems]="totalItems"
+                [itemsPerPage]="taillePage"
+                [ngModel]="noPage"
+                (pageChanged)="pageChanged($event)" class="shadow rounded">
+            </pagination> 
+        </div>
+
+
+    <ng-template #template>
+      <div class="modal-body text-center shadow rounded " >
+        <div class="modal-header">
+            <h5 class="modal-title pull-left"><b>{{toDelete?.titre | truncate : 15: '&hellip;'}}</b></h5>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <p class="mt-4"><img [src]="getThumbnailUrl(toDelete?.id)" class="card-img-top mb-3"> Voulez-vous supprimer l'image ?</p>    
+        <button type="button" class="btn btn-danger ml-2 shadow rounded" (click)="confirmDelete()" ><b>Yes</b></button>   
+        <button type="button" class="btn btn-warning ml-5 shadow rounded" (click)="declineDelete()" ><b>No</b></button>  
+         <br>   
+      </div>
+    </ng-template>

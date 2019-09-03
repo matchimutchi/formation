@@ -1,15 +1,23 @@
-<div class="row mt-4">
-    <div class="col-sm-4 my-drop-zone text-white"
+<div class="row mt-5">
+        <div class="col-md-4 offset-md-4 ">
+           <h4>Uploader vos images facilement</h4>
+           <h6 style="color: red" class="ml-5">La glissée dans le carré ci-dessous</h6>
+        </div>
+            
+    </div>
+
+<div class="row mt-5">
+    <div class="col-sm-4 my-drop-zone text-center shadow rounded "
          (fileOver)="fileOverDrop($event)"
          [uploader]="uploader"
          [ngClass]="{'file-over' : hasBaseDropZoneOver}"
-         ng2FileDrop >
-       Ajouter votre image!!
+         ng2FileDrop ><b>
+       Ajouter votre image!!</b>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-7 ml-3">
         <div class="row mt-2" *ngFor="let item of uploader.queue">
 
-            <progressbar class="progress-striped active" [value]="item.progress">
+            <progressbar class="progress-striped active" [striped]="true" [value]="item.progress">
                     {{item?.file?.name}} - {{item?.progress}}%
             </progressbar>
         </div>
@@ -17,3 +25,10 @@
         
 </div>
 
+<div class="row mt-5">
+        <div class="col-sm-2">
+            <button class="btn btn-primary shadow rounded" routerLink='/images'><fa-icon [icon]="faEye"></fa-icon> Voir ma galerie d'image</button>
+        </div>
+
+            
+    </div>

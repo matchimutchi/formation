@@ -23,6 +23,8 @@ public class FileStorageManager {
 	private Random rd = new Random();
 	
 	
+
+	
 	//--------------CREATION D UN NOM DE FICHIER ALEATOIRE DANS UN REPERTOIRE---------------
 	public String saveNewFile(String collection, InputStream data) {
 		
@@ -63,7 +65,10 @@ public class FileStorageManager {
 		
 	}
 	
-	//---------------INSERER UNE IMAGE-------------------------
+	
+	
+	
+	//-----------------------------INSERER UNE IMAGE--------------------------------
 	public Optional<File> getImageFile(String storageId){
 		//---------------------si le repertoire n'est pas bon, sauf qui peut-----------
 		if(storageRoot == null || !storageRoot.exists() || !storageRoot.isDirectory()) {
@@ -86,6 +91,39 @@ public class FileStorageManager {
 		}else {
 			return Optional.empty();
 		}
+	}
+	
+	
+	
+	//------------------------SUPPRESION------------------------------
+	public boolean deleteFile(String storageId) {
+		
+		if(storageRoot == null || !storageRoot.exists() || !storageRoot.isDirectory()) {
+			return false;
+		}
+		
+		
+		//--------------------RECUPERER SOUS REPERTOIRE-----------------------
+		//repertoire de base / deux numero
+		
+		File rep = Paths.get(storageRoot.getAbsolutePath(),storageId.substring(0,2)).toFile();
+	
+		if(!rep.exists() || !rep.isDirectory()) {
+			return false; //empty = pas de fichier
+		}
+		
+		
+		//-----------------chemin du fichier complet-----------------------
+		File f = Paths.get(rep.getAbsolutePath(),storageId).toFile();
+		if(f!= null && f.exists() && f.isFile()) {
+			return f.delete();
+			
+		}else {
+			return false;
+		}
+		
+		
+		
 	}
 	
 	
