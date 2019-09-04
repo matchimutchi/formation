@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import com.edugroupe.springproduituploadrep.metier.Categorie;
 import com.edugroupe.springproduituploadrep.metier.Produit;
 import com.edugroupe.springproduituploadrep.repositories.CategorieRepository;
 import com.edugroupe.springproduituploadrep.repositories.ImageRepository;
@@ -53,11 +54,14 @@ public class ProduitController {
 	@Autowired
 	private CategorieRepository categorieRepository;
 	
+	
+	
+	
 	//----------------------------------RECHERCHER TTES LES IMAGES-----------------------
 	@GetMapping(value="", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin("http://localhost:4200")
-	public Page<Produit> findAll(@PageableDefault(page = 0,size = 10) Pageable page){
+	public Page<Produit> findAll(@PageableDefault(page = 0,size =12) Pageable page){
 		return produitRepository.findAll(page);		
 	}
 	
@@ -84,11 +88,18 @@ public class ProduitController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
-	public ResponseEntity<Produit> insertProduit(@RequestBody Produit produit){
-		if(produit.getId() != 0) {
+	public ResponseEntity<Produit> insertProduit(@RequestBody Produit produit,@RequestParam("categorieId") int categorieId){
+			
+		if(produit.getId() != 0 || categorieId == 0) {
 			return new ResponseEntity<Produit>(HttpStatus.BAD_REQUEST);
 		}
+		Optional<Categorie>  cat = categorieRepository.findById(categorieId);
+		
+		if(!cat.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		//requestBody le corp de la requete va contenir en json ici notre objet
+		produit.setCategorie(cat.get());
 		produit = produitRepository.save(produit);
 		return new ResponseEntity<Produit>(produit, HttpStatus.CREATED);
 	}
@@ -104,20 +115,45 @@ public class ProduitController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
-	public ResponseEntity<Produit> updateProduit(@RequestBody Produit produit){
-		Optional<Produit> p = produitRepository.findById(produit.getId());
-		if (!p.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<Produit> updateProduit(@RequestBody Produit produit,@RequestParam("categorieId") int categorieId){
+		Optional<Produit> originalProduit = produitRepository.findById(produit.getId());
+		
+		if(produit.getId() == 0 || categorieId == 0) {
+			return new ResponseEntity<Produit>(HttpStatus.BAD_REQUEST);
+		}
+		Optional<Categorie>  cat = categorieRepository.findById(categorieId);
+		
+		if(!cat.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		produit.setCategorie(cat.get());
+
+		if(!originalProduit.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		Produit p2 = p.get();
-		//f2.setId(film.getId());
-		p2.setNom(produit.getNom());
-		p2.setPrix(produit.getPrix());
-		p2.setPoids(produit.getPoids());
+		produit.setImages(originalProduit.get().getImages());
 		
-		p2 = produitRepository.save(p2);
-		return new ResponseEntity<Produit>(p2, HttpStatus.OK);
+		produit = produitRepository.save(produit);
+		return new ResponseEntity<Produit>(produit, HttpStatus.OK);
+		
+//		Categorie c = categorieRepository.findById(categorieId).orElse(null);
+//		if ( c == null) {
+//			return new ResponseEntity<Produit>(HttpStatus.NOT_ACCEPTABLE);
+//		}
+//		
+//		if (!p.isPresent()) {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//		
+//		Produit p2 = produit.get();		
+//		p2.setNom(produit.getNom());
+//		p2.setPrix(produit.getPrix());
+//		p2.setPoids(produit.getPoids());
+//		p2.setCategorie(c);
+		
+
 	}
 	
 	
@@ -129,8 +165,10 @@ public class ProduitController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
-	public ResponseEntity<Map<String, Object>> deleteFilm(@PathVariable("id") int id){
+	public ResponseEntity<Map<String, Object>> deleteFilm(@PathVariable("id") int id,@RequestParam("categorieId") int categorieId){
 		Optional<Produit> p = produitRepository.findById(id);
+
+		
 		if(!p.isPresent()) {
 			return new ResponseEntity<Map<String,Object>>(HttpStatus.NOT_FOUND);
 		}else {

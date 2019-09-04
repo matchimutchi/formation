@@ -3,6 +3,7 @@ package com.edugroupe.springproduituploadrep.metier;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +26,9 @@ public class Produit {
 	private double prix;
 	private double poids;
 	
-	@JsonIgnore @ManyToOne
+	@ManyToOne
 	private Categorie categorie;
-	@JsonIgnore @OneToMany(mappedBy = "produit")
+	@OneToMany(mappedBy = "produit",fetch = FetchType.EAGER)
 	private Set<Image> images;
 	
 	

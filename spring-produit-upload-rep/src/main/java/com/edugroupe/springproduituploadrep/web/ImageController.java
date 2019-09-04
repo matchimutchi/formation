@@ -29,7 +29,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edugroupe.springproduituploadrep.metier.Image;
+import com.edugroupe.springproduituploadrep.metier.Produit;
 import com.edugroupe.springproduituploadrep.repositories.ImageRepository;
+import com.edugroupe.springproduituploadrep.repositories.ProduitRepository;
 
 
 @Controller
@@ -40,6 +42,8 @@ public class ImageController {
 	@Autowired
 	private ImageRepository imageRepository;
 	
+	@Autowired
+	private ProduitRepository produitRepository;
 	
 	//----------------------------------RECHERCHER TTES LES IMAGES-----------------------
 	@GetMapping(value="", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -71,7 +75,8 @@ public class ImageController {
 	@ResponseBody
 	@CrossOrigin("http://localhost:4200")	
 	public ResponseEntity<Image> upload(@RequestParam("file") MultipartFile file,
-			@RequestParam("nom") Optional<String> nom) {
+			@RequestParam("nom") Optional<String> nom, 
+			@RequestParam("produitId") Optional<Integer> produitId) {
 		
 		try {
 			Image i = new Image(0, 
@@ -81,8 +86,12 @@ public class ImageController {
 								DigestUtils.sha1Hex(file.getInputStream()), 
 								"");		
 			
+			if(produitId.isPresent()) {
+				i.setProduit(produitRepository.findById(produitId.get()).orElse(null));
+			}
 			//----------------------sauvegarde et generation thumbnail-------------------
 			imageRepository.saveImageFile(i, file.getInputStream());
+			
 			i = imageRepository.save(i);
 			return new ResponseEntity<Image>(i,HttpStatus.CREATED);
 		} catch (IOException e) {e.printStackTrace();}

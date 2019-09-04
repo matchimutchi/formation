@@ -3,6 +3,7 @@ package com.edugroupe.springproduituploadrep.metier;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,8 @@ public class Categorie {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String libelle;
-	@JsonIgnore @OneToMany(mappedBy = "categorie")
+	@JsonIgnore
+	@OneToMany(mappedBy = "categorie")
 	private Set<Produit> produits;
 	
 	
