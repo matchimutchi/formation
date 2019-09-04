@@ -1,1 +1,39 @@
-<p>image-detail works!</p>
+<div class="row mt-5" *ngIf="editImage">
+    <div class="col-sm-6">
+            <img [src]="getImageUrl(editImage.id)" class="card-img-top shadow rounded" />
+    </div>
+    <div class="col-sm-6">
+        <table  class="table table-bordered shadow rounded">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nom</th>
+                    <th>Détail</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Filename </td>
+                <td>{{editImage.fileName}}</td>
+            </tr>
+            <tr>
+                <td>Content type </td>
+                <td>{{editImage.contentType}}</td>
+            </tr>
+            <tr>
+                <td for="nom">Nom de l'image</td>
+                <td> <input type="text"  class="form-control" name="nom" [(ngModel)]="editImage.nom"/></td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-sm-6">
+                <p style="font-size: 0.7em">Vous pouvez modifier votre nom!!!!</p>
+            </div>
+            <div class="col-sm-4 offset-sm-2">
+                <a routerLink='/images' class="btn btn-primary shadow rounded ml-2" >Retour</a>
+                <button type="submit" (click)="saveImage()" class="btn btn-warning shadow rounded ml-2" >Modifier</button>
+            </div>                  
+        </div>
+
+        
+    </div>
+</div>
+

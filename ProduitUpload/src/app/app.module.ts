@@ -16,6 +16,10 @@ import { ProduitDetailComponent } from './components/produit/produit-detail/prod
 import { ImageDetailComponent } from './components/image/image-detail/image-detail.component';
 import { ImageListeComponent } from './components/image/image-liste/image-liste.component';
 import { ImageUploadComponent } from './components/image/image-upload/image-upload.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
+
 
 
 @NgModule({
@@ -29,15 +33,17 @@ import { ImageUploadComponent } from './components/image/image-upload/image-uplo
     ImageUploadComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FileUploadModule,
-    HttpClientModule,
+    FileUploadModule, 
     PaginationModule.forRoot(),
     NgStringPipesModule,
     FontAwesomeModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule,
+    ProgressbarModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

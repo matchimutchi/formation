@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FileUploader } from 'ng2-file-upload';
+import { ImageRepositoryService } from 'src/app/services/image-repository.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageUploadComponent implements OnInit {
 
-  constructor() { }
+ // objet qui gere l'upload de fichier en ajax
+ public uploader: FileUploader;
+ public hasBaseDropZoneOver : boolean = false;
 
-  ngOnInit() {
-  }
+ constructor(private imageRepository: ImageRepositoryService) { 
+   // objet responsable de l'upload
+   // il va surveiller tous les ng2FileDrop du html
+   // auquel il est lié
+   this.uploader = new FileUploader({
+     autoUpload : true,
+     url: this.imageRepository.getUploadUrl()
+   });
+   // j'empeche l'uploader de mettre 'withCredential' dans
+   // la requette ajax, car cela pose probleme avec cors
+   this.uploader.onBeforeUploadItem = item => {
+     item.withCredentials = false;
+   };
+ }
 
+ ngOnInit() {
+ }
+
+ public fileOverDrop(event) {
+   //console.log("file over");
+   //console.log(event);
+   this.hasBaseDropZoneOver = event;
+ }
 }

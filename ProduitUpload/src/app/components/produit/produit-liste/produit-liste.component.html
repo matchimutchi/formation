@@ -1,48 +1,84 @@
-
-
-<!--////////////////////BOUTON////////////////////////////////////-->
-<div class="row">
+<div class="row mt-3">
     <div class="col-md-2 offset-md-10">
-        <a routerLink='/edit/0' class='btn btn-primary shadow  rounded'>Création</a>
+        <a routerLink='/edit/0' class='btn btn-primary shadow  rounded'>Création d'un produit</a>
     </div>
 </div>
-<br>
-
-<!--////////////////////TABLEAU////////////////////////////////////-->
 <div class="row">
-    <div class="col-md-10 offset-md-1">
-        <table class="table table-hover shadow  rounded">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Poids</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let p of produits.content"> <!---| async-->
-                    <td>{{p.id}}</td>
-                    <td>{{p.nom}}</td>
-                    <td>{{p.prix}}</td>
-                    <td>{{p.poids}}</td>
-                    <td>
-                        <a routerLink='/edit/{{p.id}}' class='btn btn-warning shadow  rounded'>Edition</a>
-                        <button (click)="effacerFilm(p.id)" class="btn btn-danger shadow  rounded ml-3">Suppression</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-md-2  col-xs-12 mt-5" *ngFor="let p of produits.content">       
+            <div class="card shadow rounded" >
+                    <div class="card-header" style="background-color: floralwhite">                   
+                            <p class="card-text text-center" style="font-size: 1.2em"  data-toggle="tooltip" data-placement="top" title="{{p.nom}}"><b> {{p.nom | truncate : 10: '&hellip;'}}</b></p>
+    
+                        </div>
+                <a [href]="getImageUrl(p)" data-lightbox="roadtrip" data-title="image">
+                    <img [src]="getThumbnailUrl(p)" class="card-img-top" >
+                </a> 
+                <div class="card-body">     
+                    <table>
+                        <tr class="mb-5">
+                            <td class="card-text text-right">Cat :</td>
+                            <td class="text-left"><b> {{p.categorie.libelle | truncate : 10: '&hellip;'}}</b></td>
+                        </tr>
+                        <tr  class="mb-5 mt-5">
+                            <td class="card-text text-right">Prix :</td>
+                            <td class="text-left"><b> {{p.prix}}€</b></td>
+                        </tr>
+                        <tr  class="mb-5 mt-5">
+                            <td class="card-text text-right">Poids :</td>
+                            <td class="text-left"><b> {{p.poids}} kg</b></td>
+                        </tr>
+
+                    </table>              
+<!-- 
+                    <p class="card-text text-center">Poids :<b> {{p.poids }} kg</b></p>
+                    <p class="card-text text-center">Cat :<b> {{p.categorie.libelle}}</b></p>  -->
+                </div>
+                <div class="card-footer">
+                    
+                    <div class="row">
+                            <div class="col-md-2 ">
+                                <a routerLink="/edit/{{p.id}}" class="btn btn-warning shadow rounded"><fa-icon [icon]="faEdit" style="color:white"></fa-icon></a>
+                            </div>
+                            <div class="col-md-2 ml-4">
+                                <a [href]="" class="btn btn-primary shadow rounded"><fa-icon [icon]="faShoppingBasket" style="color:white"></fa-icon></a>
+                            </div>
+                            <div class="col-md-2 ml-4">
+                                <button class="btn btn-danger shadow rounded" (click)="openDeleteModal(template,p)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                            </div>
+                        </div>
+                </div>
+            </div>
     </div>
-</div>
+</div> 
+
 
 <div class="d-flex justify-content-center mt-4 ">
-    <pagination [boundaryLinks]="true"
-        [totalItems]="totalItems"
-        [itemsPerPage]="taillePage"
-        [ngModel]="noPage"
-        (pageChanged)="pageChanged($event)" class="shadow rounded">
-    </pagination> 
-</div>
+        <pagination [boundaryLinks]="true"
+            [totalItems]="totalItems"
+            [itemsPerPage]="taillePage"
+            [ngModel]="noPage"
+            (pageChanged)="pageChanged($event)" class="shadow rounded">
+        </pagination> 
+    </div>
+    
+    
+
+
+<ng-template #template>
+        <div class="modal-body text-center shadow rounded " >
+          <div class="modal-header">
+              <h5 class="modal-title pull-left"><b>{{toDelete?.nom | truncate : 15: '&hellip;'}}</b></h5>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <p class="mt-4"><img [src]="getThumbnailUrl(toDelete)" class="card-img-top mb-3"> Voulez-vous supprimer le produit ?</p>    
+          <button type="button" class="btn btn-danger ml-2 shadow rounded" (click)="confirmDelete()" ><b>Yes</b></button>   
+          <button type="button" class="btn btn-warning ml-5 shadow rounded" (click)="declineDelete()" ><b>No</b></button>  
+           <br>   
+        </div>
+      </ng-template>
+
+
+
 

@@ -1,1 +1,68 @@
-<p>produit-detail works!</p>
+
+
+<!--////////////////////TITRE////////////////////////////////////-->
+<div class="row">
+    <div class="col-md-6 offset-md-4 mt-3">
+        <h3>Le Produit en cours d'édition : <b> {{editProduit.nom}} </b></h3>
+    </div>
+</div>
+<br>
+<br>
+
+<!--////////////////////FORMULAIRE////////////////////////////////////-->
+<form (ngSubmit)="sauverProduit()">
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <div class="form-group">
+                <label for="nom">Nom : </label>
+                <input type="text" class="form-control"  name="nom" [(ngModel)]="editProduit.nom">
+            </div>
+            <div class="form-group">
+                <label for="poids">Poids : </label>
+                <input type="text" class="form-control"  name="poids" [(ngModel)]="editProduit.poids">
+            </div>
+            <div class="form-group">
+                <label for="prix">Prix : </label>
+                <input type="text" class="form-control"  name="prix" [(ngModel)]="editProduit.prix">
+            </div>
+            <div class="form-group">
+                <label for="categorie">Categories : </label>
+                <select class="form-control"  name="categorie" [(ngModel)]="editProduit.categorie.id">
+                        <option *ngFor="let c of categories"  [ngValue]="c.id">{{c.libelle}}</option>
+                    </select>	
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+        <div class="row">
+            <div class="col-sm-12 shadow rounded">
+                <div *ngIf="uploader" class=" my-drop-zone text-center  "
+                     (fileOver)="fileOverDrop($event)"
+                     [uploader]="uploader"
+                     [ngClass]="{'file-over' : hasBaseDropZoneOver}"
+                     ng2FileDrop ><b>
+                   Ajouter votre image!!</b>
+                </div>
+            </div>
+        <div *ngIf="uploader" class="col-sm-12 offset-md-2 mt-3 mb-3">
+            <div class="mt-2" *ngFor="let item of uploader.queue">
+                
+             <progressbar class="progress-striped active" [striped]="true" [value]="item.progress">
+                                {{item?.file?.name}} - {{item?.progress}}%
+            </progressbar>
+        </div>
+        </div>
+    </div>
+    </div>
+                    
+     
+    </div>
+    <div class="row">
+        <div class="col-md-1 offset-md-1">
+            <button type="submit" class="btn btn-warning">Enregistrer</button>
+        </div>
+        <div class="col-md-1 ">
+            <a href="/produit" class="btn btn-primary">Retour</a>
+        </div>
+    </div>
+</form>
