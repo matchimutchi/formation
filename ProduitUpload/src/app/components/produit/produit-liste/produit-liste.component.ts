@@ -75,21 +75,21 @@ public getThumbnailUrl(p:Produit) : string {
 
 //------------------Modal---------
 public openDeleteModal(template: TemplateRef<any>,p : Produit) {
-   //selection d'image a effacer
+   //selection du produit
   this.toDelete = p;
   //affichage du modal
   this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 }
 
 confirmDelete(): void {
-  console.log("Effacement de " + this.toDelete.id);
+  console.log("Effacement de " + this.toDelete.nom);
   this.modalRef.hide();
   this.produitRepository.deleteProduit(this.toDelete.id);
   this.toDelete = null;
 }
 
 declineDelete(): void {
-  console.log("Annulation de l'effacement de " + this.toDelete.id);
+  console.log("Annulation de l'effacement de " + this.toDelete.nom);
   this.modalRef.hide();
   this.toDelete = null;
 }

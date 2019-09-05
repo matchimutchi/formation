@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.edugroupe.springproduituploadrep.metier.Categorie;
+import com.edugroupe.springproduituploadrep.metier.Image;
 import com.edugroupe.springproduituploadrep.metier.Produit;
 import com.edugroupe.springproduituploadrep.repositories.CategorieRepository;
 import com.edugroupe.springproduituploadrep.repositories.ImageRepository;
@@ -165,16 +166,23 @@ public class ProduitController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
-	public ResponseEntity<Map<String, Object>> deleteFilm(@PathVariable("id") int id,@RequestParam("categorieId") int categorieId){
+	public ResponseEntity<Map<String, Object>> deleteProduit(@PathVariable("id") int id,@RequestParam("categorieId") int categorieId){
 		Optional<Produit> p = produitRepository.findById(id);
 
 		
 		if(!p.isPresent()) {
 			return new ResponseEntity<Map<String,Object>>(HttpStatus.NOT_FOUND);
-		}else {
-			produitRepository.delete(p.get());
-			return new ResponseEntity<Map<String,Object>>(Collections.singletonMap("Ligne effacée", 1), HttpStatus.ACCEPTED);
 		}
+		Produit produit = p.get();
+		//effacement des images associées
+		for(Image img : produit.getImages()) {
+			imageRepository.delete(img);
+			imageRepository.deleteImageFile(img);
+		}
+		
+		produit.getImages().clear();
+		produitRepository.delete(p.get());
+		return new ResponseEntity<Map<String,Object>>(Collections.singletonMap("Ligne effacée", 1), HttpStatus.ACCEPTED);
 	}
 	
 	

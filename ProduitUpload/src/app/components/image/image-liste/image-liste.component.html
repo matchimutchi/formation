@@ -9,6 +9,7 @@
                 <div class="card-header" style="background-color: floralwhite">                   
                     <p class="card-text text-center" data-toggle="tooltip" data-placement="top" title="{{i.nom}}"><b>{{i.nom | truncate : 20: '&hellip;'}}</b></p>       
                 </div>
+                
                 <a [href]="getImageUrl(i.id)" data-lightbox="roadtrip" data-title="{{i.nom}}">
                     <img [src]="getThumbnailUrl(i.id)" class="card-img-top" >
                 </a>

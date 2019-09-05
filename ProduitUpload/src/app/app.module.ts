@@ -18,6 +18,7 @@ import { ImageListeComponent } from './components/image/image-liste/image-liste.
 import { ImageUploadComponent } from './components/image/image-upload/image-upload.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 
@@ -43,7 +44,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     FontAwesomeModule,
     ModalModule.forRoot(),
     BrowserAnimationsModule,
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    CarouselModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

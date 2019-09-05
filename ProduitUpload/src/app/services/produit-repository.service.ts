@@ -113,8 +113,10 @@ export class ProduitRepositoryService {
 
   //-----------------------DELETE----------------------------------
   public deleteProduit(id:number) : void{
-    this.http.delete<any>(`${this.serviceUrl}/${id}`).subscribe(r => this.refreshListe());
+    this.http.delete<any>(`${this.serviceUrl}/${id}`).toPromise().then(r => this.refreshListe());
+    //.subscribe(r => this.refreshListe());
   }
+
 
   public getListeProduits() : Promise<Page<Produit>>{
     return this.http.get<Page<Produit>>(this.serviceUrl).toPromise();
