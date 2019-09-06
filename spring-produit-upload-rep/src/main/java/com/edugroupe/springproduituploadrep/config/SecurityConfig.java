@@ -1,26 +1,30 @@
-package com.edugroupe.springsecurityjpa.config;
+package com.edugroupe.springproduituploadrep.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.edugroupe.springsecurityjpa.security.MyUserDetailsService;
+import com.edugroupe.springproduituploadrep.security.MyUserDetailsService;
+
+
 
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
-		//return NoOpPasswordEncoder.getInstance();
 		return new BCryptPasswordEncoder();
 	}
 
@@ -35,11 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/public").permitAll()
-		.and().authorizeRequests().antMatchers("/user").hasAnyRole("USER","ADMIN")//authenticated()
-		.and().authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN")
-		.and().formLogin()
-		.and().logout();
+		//pas de session 
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and()
+			.authorizeRequests()
+			.antMatchers("/produit","/produit/**","/images").permitAll()
+			.antMatchers("/**").hasAnyRole("USER","ADMIN")	
+			.and().httpBasic() //ne pas utliser de formulaire pour le login
+			.and().csrf().disable(); //desactif le jeton de protection csrf
+
 	}
 	
 	

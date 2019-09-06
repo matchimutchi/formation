@@ -1,4 +1,4 @@
-package com.edugroupe.springsecurityjpa.security;
+package com.edugroupe.springproduituploadrep.security;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -7,7 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.edugroupe.springsecurityjpa.metier.User;
+import com.edugroupe.springproduituploadrep.metier.User;
+
+
 
 public class MyUserDetails implements UserDetails {
 

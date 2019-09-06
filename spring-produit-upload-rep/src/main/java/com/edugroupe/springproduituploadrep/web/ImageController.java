@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.security.PermitAll;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -111,6 +114,7 @@ public class ImageController {
 	@GetMapping(value="/{id:[0-9]+}/data")
 	@ResponseBody
 	@CrossOrigin("http://localhost:4200")	
+	@PreAuthorize("permitAll")
 	public ResponseEntity<FileSystemResource> imageData(@PathVariable("id") int id){
 		Optional<Image> op = imageRepository.findById(id);
 		
@@ -149,6 +153,7 @@ public class ImageController {
 	@GetMapping(value="/{id:[0-9]+}/thumbdata")
 	@ResponseBody
 	@CrossOrigin("http://localhost:4200")	
+	@PreAuthorize("permitAll")
 	public ResponseEntity<FileSystemResource> imageThumbData(@PathVariable("id") int id){
 		Optional<Image> op = imageRepository.findById(id);
 		

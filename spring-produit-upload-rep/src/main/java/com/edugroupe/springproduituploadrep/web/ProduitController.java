@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,6 +63,7 @@ public class ProduitController {
 	@GetMapping(value="", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin("http://localhost:4200")
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public Page<Produit> findAll(@PageableDefault(page = 0,size =12) Pageable page){
 		return produitRepository.findAll(page);		
 	}
@@ -71,6 +73,7 @@ public class ProduitController {
 	@GetMapping(value="/{id:[0-9]+}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin("http://localhost:4200")
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public ResponseEntity<Produit> findById(@PathVariable("id") int id) {
 		return produitRepository.findById(id)
 								.map(p -> new ResponseEntity<>(p , HttpStatus.OK))
@@ -89,6 +92,7 @@ public class ProduitController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public ResponseEntity<Produit> insertProduit(@RequestBody Produit produit,@RequestParam("categorieId") int categorieId){
 			
 		if(produit.getId() != 0 || categorieId == 0) {
@@ -116,6 +120,7 @@ public class ProduitController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public ResponseEntity<Produit> updateProduit(@RequestBody Produit produit,@RequestParam("categorieId") int categorieId){
 		Optional<Produit> originalProduit = produitRepository.findById(produit.getId());
 		
@@ -166,7 +171,8 @@ public class ProduitController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
-	public ResponseEntity<Map<String, Object>> deleteProduit(@PathVariable("id") int id,@RequestParam("categorieId") int categorieId){
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	public ResponseEntity<Map<String, Object>> deleteProduit(@PathVariable("id") int id){
 		Optional<Produit> p = produitRepository.findById(id);
 
 		
