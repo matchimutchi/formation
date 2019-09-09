@@ -13,8 +13,19 @@
                 <a class="nav-link" routerLink='/images'>Mes images</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" style="margin-left: 70%">
-            <a routerLink='/login' class="text-white">Connecter<fa-icon [icon]="faUser" style="color:white;font-size: 1.4em"></fa-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <form class="form-inline my-2 my-lg-0" style="margin-left: 65%">
+            <a *ngIf="currentUser[0]" (click)="logout()" class="text-white mt-2 ">               
+                Déconnexion
+             </a>
+            <a *ngIf="currentUser[0] "  class="text-white ml-2">
+                <fa-icon [icon]="faUser" style="color:white;font-size: 1.4em"></fa-icon>
+                {{currentUser[1].username}}
+            </a>
+            <a *ngIf="currentUser[0] == false" routerLink='/login' class="text-white">
+                <fa-icon [icon]="faUser" style="color:white;font-size: 1.4em"></fa-icon>
+               Login
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" class="text-white">0 <fa-icon [icon]="faShoppingBasket" style="color:white;font-size: 1.4em"></fa-icon> </a>
             
         </form>

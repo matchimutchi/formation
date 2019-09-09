@@ -4,6 +4,9 @@ import { LivreRepositoryService } from 'src/app/services/livre-repository.servic
 import { Page } from 'src/app/metier/page';
 import { Subscription, Subject } from 'rxjs';
 import {debounceTime} from "rxjs/operators";
+import { User } from 'src/app/metier/user';
+import { AuthManagerService } from 'src/app/services/auth-manager.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-livre-liste',
   templateUrl: './livre-liste.component.html',
@@ -12,7 +15,8 @@ import {debounceTime} from "rxjs/operators";
 export class LivreListeComponent implements OnInit,OnDestroy {
 
 
-  
+  currentUser : [boolean,User];
+
   //-----------------------PREPARATION DES COMPOSANT DE PAGINATION-------------------------
   public totalItems : number;
   public currentPage:number;
@@ -28,18 +32,27 @@ export class LivreListeComponent implements OnInit,OnDestroy {
     public livreSouscription : Subscription;
     recherche : string;
 
-  constructor(private livreRepository:LivreRepositoryService) {
+  constructor(private livreRepository:LivreRepositoryService,private authManager : AuthManagerService,private router : Router) {
     this.totalItems=30;
     this.currentPage=1;
     this.taillePage=5;
-   
+    this.currentUser = [false,null];
 
    }
 
+   public logout() : void{
+    this.authManager.logout();
+    this.router.navigateByUrl("/login");
+  }
 
 
   ngOnInit() :void {
+    this.authManager.getUserSubjectAsObservable()
+    .subscribe( u => {
+      this.currentUser = u;
+    });
 
+    
     this.livres = Page.emptyPage<Livre>();
 
     this.livreSouscription = this.livreRepository
@@ -83,7 +96,7 @@ export class LivreListeComponent implements OnInit,OnDestroy {
   
 
 
-    public recherche : string;
+    //public recherche : string;
 
     public searchTitre(event){
       

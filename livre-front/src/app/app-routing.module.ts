@@ -4,6 +4,7 @@ import { LivreListeComponent } from './components/livre-liste/livre-liste.compon
 import { LivreEditComponent } from './components/livre-edit/livre-edit.component';
 import { AuteurListeComponent } from './components/auteur-liste/auteur-liste.component';
 import { AuteurEditComponent } from './components/auteur-edit/auteur-edit.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
 {path: 'edit/:id', component: LivreEditComponent},
 {path:"listeauteur",component : AuteurListeComponent},
 {path: 'editAuteur/:id', component: AuteurEditComponent},
+{path:'login', component:LoginComponent},
 {path: '', redirectTo: '/liste',pathMatch:'full'} 
   
   ];

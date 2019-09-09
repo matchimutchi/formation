@@ -7,13 +7,16 @@ import { LivreListeComponent } from './components/livre-liste/livre-liste.compon
 import { LivreEditComponent } from './components/livre-edit/livre-edit.component';
 import { NavBarLivreComponent } from './components/nav-bar-livre/nav-bar-livre.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule} from "@angular/forms";
 import { LivreRepositoryService } from './services/livre-repository.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AuteurListeComponent } from './components/auteur-liste/auteur-liste.component';
 import { AuteurRepositoryService } from './services/auteur-repository.service';
 import { AuteurEditComponent } from './components/auteur-edit/auteur-edit.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,19 +25,24 @@ import { AuteurEditComponent } from './components/auteur-edit/auteur-edit.compon
     LivreEditComponent,
     NavBarLivreComponent,
     AuteurListeComponent,
-    AuteurEditComponent
+    AuteurEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FontAwesomeModule,
     BrowserAnimationsModule,
     FormsModule,
     PaginationModule.forRoot()
   ],
   providers: [ 
-    LivreRepositoryService,
-   AuteurRepositoryService
+    {
+   provide: HTTP_INTERCEPTORS,
+   useClass: AuthInterceptorService,
+   multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

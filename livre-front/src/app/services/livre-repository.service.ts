@@ -56,7 +56,7 @@ export class LivreRepositoryService {
     if(this.searchTerm != null && this.searchTerm.length > 0){  
       urlParams = urlParams.set('searchTerm',this.searchTerm);
     }
-    this.http.get<Page<Livre>>(this.serviceUrl,{params : urlParams}).toPromise().then(p => this.livresSubject.next(p));
+    this.http.get<Page<Livre>>(this.serviceUrl,{params : urlParams}).toPromise().then(p => this.livresSubject.next(p), err => this.livresSubject.next(Page.emptyPage<Livre>()));
   }
 
   

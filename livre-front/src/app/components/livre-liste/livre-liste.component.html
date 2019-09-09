@@ -39,8 +39,8 @@
                     <td>{{l.dateSortie | date : 'dd-MM-yyyy'}}</td>
                     <td><a href="https://fr.wikipedia.org/wiki/{{l.auteur.nom}}_{{l.auteur.prenom}}" target="_blanck">{{l.auteur.nom}} {{l.auteur.prenom}}</a></td>
                     <td>
-                        <a routerLink='/edit/{{l.id}}' class='btn btn-warning shadow  rounded'>Edition</a>
-                        <button (click)="effacerLivre(l.id)"
+                        <a routerLink='/edit/{{l.id}}'  class='btn btn-warning shadow  rounded'>Edition</a>
+                        <button (click)="effacerLivre(l.id)" 
                             class="btn btn-danger shadow  rounded ml-3">Suppression</button>
                     </td>
                 </tr>
