@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,6 +35,7 @@ import com.edugroupe.springlivrerestexercice.repositories.LivreRepository;
 
 
 @Controller
+@RequestMapping("/livres")
 public class LivreController {
 
 	@Autowired
@@ -47,15 +50,17 @@ public class LivreController {
 	@GetMapping(value="/nopagelivres",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public Iterable<Livre> liste(){
 		return livreRepository.findAll();
 	}
 	
 	
 	
-	@GetMapping(value="/livres",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value="",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public Page<Livre> pliste(@RequestParam("searchTerm") Optional<String> searchTerm,@PageableDefault(page = 0,size = 3) Pageable page){
 		if(searchTerm.isPresent()) {
 			return livreRepository.findByTitreContaining(searchTerm.get(), page);
@@ -69,9 +74,10 @@ public class LivreController {
 	
 	
 	//-----------------------UN SEUL ELEMENT PAR L ID-------------------------
-	@GetMapping(value = "/livres/{id:[0-9]+}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = "/{id:[0-9]+}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public ResponseEntity<Livre> findById(@PathVariable("id") int id) {
 		
 		return livreRepository.findById(id).map(f -> new ResponseEntity<>(f, HttpStatus.OK))
@@ -82,11 +88,12 @@ public class LivreController {
 	
 	
 	//-----------------------INSERER UN ELEMENT PAR L ID-------------------------
-	@PostMapping(value="/livres",
+	@PostMapping(value="",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN')")
 	public ResponseEntity<Livre> insertLivre(@RequestBody Livre livre,@RequestParam("auteurId") int auteurId){
 		Auteur a = auteurRepository.findById(auteurId).orElse(null);
 		if( a == null) {
@@ -103,11 +110,12 @@ public class LivreController {
 	
 	
 	//-----------------------MODIFIER UN ELEMENT PAR L ID-------------------------
-	@PutMapping(value="/livres",
+	@PutMapping(value="",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN')")
 	public ResponseEntity<Livre> updateLivre(@RequestBody Livre livre,@RequestParam("auteurId") int auteurId){
 		
 		Auteur a = auteurRepository.findById(auteurId).orElse(null);
@@ -137,10 +145,11 @@ public class LivreController {
 	
 	
 	//-----------------------SUPPRIMER UN ELEMENT PAR L ID-------------------------
-	@DeleteMapping(value="/livres/{id:[0-9]+}",
+	@DeleteMapping(value="/{id:[0-9]+}",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
+	@PreAuthorize(value="hasAnyRole('ROLE_ADMIN')")
 	public ResponseEntity<Map<String, Object>> deleteLivre(@PathVariable("id") int id){
 		Optional<Livre> l = livreRepository.findById(id);
 		if(!l.isPresent()) {

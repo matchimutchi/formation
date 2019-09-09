@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edugroupe.springlivrerestexercice.metier.Auteur;
@@ -26,6 +27,7 @@ import com.edugroupe.springlivrerestexercice.repositories.AuteurRepository;
 
 
 @Controller
+@RequestMapping("/auteurs")
 public class AuteurController {
 
 	@Autowired
@@ -43,7 +45,7 @@ public class AuteurController {
 	
 	
 	
-	@GetMapping(value="/auteurs",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value="",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
 	public Page<Auteur> pliste(@PageableDefault(page = 0,size = 10) Pageable page){
@@ -53,7 +55,7 @@ public class AuteurController {
 	
 	
 	//-----------------------UN SEUL ELEMENT PAR L ID-------------------------
-	@GetMapping(value = "/auteurs/{id:[0-9]+}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = "/{id:[0-9]+}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
 	public ResponseEntity<Auteur> findById(@PathVariable("id") int id) {
@@ -65,7 +67,7 @@ public class AuteurController {
 	
 	
 	//-----------------------INSERER UN ELEMENT PAR L ID-------------------------
-	@PostMapping(value="/auteurs",
+	@PostMapping(value="",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -82,7 +84,7 @@ public class AuteurController {
 	
 	
 	//-----------------------MODIFIER UN ELEMENT PAR L ID-------------------------
-	@PutMapping(value="/auteurs",
+	@PutMapping(value="",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -107,7 +109,7 @@ public class AuteurController {
 	
 	
 	//-----------------------SUPPRIMER UN ELEMENT PAR L ID-------------------------
-	@DeleteMapping(value="/auteurs/{id:[0-9]+}",
+	@DeleteMapping(value="/{id:[0-9]+}",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	@CrossOrigin(origins = {"http://localhost:4200"})
